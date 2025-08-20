@@ -26,15 +26,10 @@
   <link rel="stylesheet" href="/static/header/styles.css">
 
 
-<!-- bruh these header needs to be fixed -->
+
 
 
   <style>
-	/* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
-            visibility: hidden;
-            }
     :root {
       --primary: #4361ee;
       --primary-dark: #3a56d4;
@@ -250,7 +245,7 @@
 
     <div id="particle-background"></div>
 
-    <!-- <div class="info-bar">
+    <div class="info-bar">
 			<div class="info-container">
 				<div class="info-item">
 					<i class="fas fa-calendar-alt"></i>
@@ -277,7 +272,7 @@
 			</div>
 		</div>
 	
-		<header>https//almatypolytech.edu.kz/views/stud/obshaga/page1.html
+		<header>
 			<div class="header-container">
 				<div class="logo">
 					<button 
@@ -696,14 +691,7 @@
 					<span data-translate="menu_contacts">КОНТАКТЫ</span>
 				</a>
 			</div>
-		</nav>		 -->
-
-		
-    <div id="header-placeholder"></div>
-
-    <!-- CHANGED -->
-    <!-- now trying to load the header and the content all together -->
-     <script src="/static/loadLayout.js"></script>
+		</nav>		
 
 
   <div class="container">
@@ -715,16 +703,13 @@
       </div>
       
 
-    <div class="grid" id="vacancy-grid">
+<!--     <div class="grid" id="vacancy-grid">
       <div class="loading">Загрузка вакансий...</div>
     </div>
-  </div>
+  </div> -->
 
-  <script>
+<!-- <script>
     const API_URL = 'https://almatypolytech.edu.kz/api/items/vacancy';
-
-	/*kind of solves the 404 error with false routing but idk if it really does*/ 
-	// const API_URL = 'https://almatypolytech.edu.kz/items/vacancy';
 
     async function fetchVacancies() {
       try {
@@ -774,12 +759,249 @@
     }
 
     document.addEventListener('DOMContentLoaded', fetchVacancies);
-  </script>
+  </script> -->
+
+
+
+
+
+  		<!-- drop-in: просто вставь в свой HTML -->
+<style>
+  :root{
+    --radius: 18px;
+    --pad: 10px;
+  }
+  .photo-card{
+    /* градиентная рамка */
+    background: linear-gradient(135deg,#8ec5fc, #e0c3fc);
+    padding: 2px;
+	margin: 10px;
+    border-radius: var(--radius);
+    display:inline-block;
+    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  }
+  .photo-card:hover{ transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.18); }
+
+.photo-card .inner{
+  background:#0b0b0c;
+  border-radius: calc(var(--radius) - 2px);
+  overflow:hidden;
+  position:relative;
+  width:min(520px, 92vw);
+  aspect-ratio: 4 / 5; /* было 16/10, теперь под 1080x1350 */
+}
+
+
+  .photo-card img{
+    width:100%; height:100%;
+    object-fit:cover; object-position:center;
+    display:block;
+    filter: saturate(1.05);
+    transition: transform .35s ease, filter .35s ease;
+  }
+  .photo-card:hover img{ transform: scale(1.04); filter: saturate(1.15); }
+
+  .photo-card figcaption{
+    position:absolute; inset:auto 0 0 0;
+    padding: var(--pad) calc(var(--pad) + 4px);
+    color:#fff; font: 600 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+    opacity:0; transform: translateY(6px);
+    transition: opacity .25s ease, transform .25s ease;
+    letter-spacing:.2px;
+  }
+  .photo-card:hover figcaption{ opacity:1; transform: translateY(0); }
+
+  /* опционально: маленький бейджик в углу */
+  .badge{
+    position:absolute; top:10px; left:10px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter: blur(6px);
+    padding:6px 10px; border-radius:999px;
+    color:#fff; font:500 12px/1 system-ui, sans-serif;
+    border:1px solid rgba(255,255,255,.25);
+  }
+</style>
+
+<figure class="photo-card">
+  <div class="inner">
+    <img 
+      src="/static/images/vakanci/1kz.jpg" 
+      alt="Вакансия RU"
+      data-lang="ru"
+    >
+    <img 
+      src="/static/images/vakanci/1ru.jpg" 
+      alt="Вакансия KZ"
+      data-lang="kz"
+      style="display:none"
+    >
+    <img 
+      src="/static/images/vakanci/1en.jpg" 
+      alt="Vacancy EN"
+      data-lang="en"
+      style="display:none"
+    >
+    <div class="badge">NEW</div>
+<!--     <figcaption>Горячий кадр рассвета 🔆</figcaption> -->
+  </div>
+</figure>
+
+
+<figure class="photo-card">
+  <div class="inner">
+    <img 
+      src="/static/images/vakanci/2kz.jpg" 
+      alt="Вакансия RU"
+      data-lang="ru"
+    >
+    <img 
+      src="/static/images/vakanci/2ru.jpg" 
+      alt="Вакансия KZ"
+      data-lang="kz"
+      style="display:none"
+    >
+    <img 
+      src="/static/images/vakanci/2en.jpg" 
+      alt="Vacancy EN"
+      data-lang="en"
+      style="display:none"
+    >
+    <div class="badge">NEW</div>
+
+  </div>
+</figure>
+
+
+
+
+
+<figure class="photo-card">
+  <div class="inner">
+    <img 
+      src="/static/images/vakanci/3kz.jpg" 
+      alt="Вакансия RU"
+      data-lang="ru"
+    >
+    <img 
+      src="/static/images/vakanci/3ru.jpg" 
+      alt="Вакансия KZ"
+      data-lang="kz"
+      style="display:none"
+    >
+    <img 
+      src="/static/images/vakanci/3en.jpg" 
+      alt="Vacancy EN"
+      data-lang="en"
+      style="display:none"
+    >
+    <div class="badge">NEW</div>
+  </div>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  const langSelect = document.getElementById("language-select");
+
+  function switchPhoto(lang) {
+    document.querySelectorAll('.photo-card img').forEach(img => {
+      img.style.display = (img.dataset.lang === lang) ? "block" : "none";
+    });
+  }
+
+  // При загрузке страницы — показываем текущий язык
+  switchPhoto(langSelect.value);
+
+  // Когда выбирают в селекте — переключаем фотку
+  langSelect.addEventListener("change", (e) => {
+    switchPhoto(e.target.value);
+  });
+</script>
+
+
+
 
 
 
 </div>
-
+<footer class="footer">
+    <div class="footer-container">
+      <!-- О сайте -->
+      <div class="footer-section">
+        <h3 data-translate="about_site">Сайт туралы</h3>
+        <p id="copyright-year"></p>
+        <script>
+          const currentYear = new Date().getFullYear();
+          document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
+        </script>
+        <p data-translate="college_name">
+          Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
+        </p>
+  
+        <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
+            <img src="/static/images/flot/instagram.png" alt="Instagram" />
+          </a>
+          <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
+            <img src="/static/images/flot/facebook.png" alt="Facebook" />
+          </a>
+          <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
+            <img src="/static/images/flot/youtube.png" alt="YouTube" />
+          </a>
+          <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
+            <img src="/static/images/flot/tiktok.png" alt="TikTok" />
+          </a>
+        </div>
+      </div>
+  
+      <!-- Контакты -->
+      <div class="footer-section">
+        <h3 data-translate="contact_label">Байланыс</h3>
+        <p>
+          <span class="icon">📍</span>
+          <strong data-translate="address_label">Мекенжай:</strong><br />
+          <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
+        </p>
+        <p>
+          <span class="icon">📞</span>
+          <strong data-translate="contact_label">Байланыс:</strong><br />
+          <span data-translate="phone">Тел.: 396 71 39</span><br />
+          <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
+        </p>
+        <p>
+          <span class="icon">✉️</span>
+          <strong data-translate="email_label">Пошта:</strong><br />
+          <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
+        </p>
+      </div>
+  
+      <!-- Разработчики -->
+      <div class="footer-section">
+        <h3 data-translate="developers">Разработчики сайта</h3>
+        <p>
+          <span class="icon">👨‍💻</span>
+          <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
+          <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
+        </p>
+        
+        <a href="https://www.instagram.com/polytech_it_hub?igsh=MXFvd3I1enNxeHpoOA==" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
+      </div>
+    </div>
+  </footer>
+  
 <!-- Подключение скриптов -->
 <script src="/static/translations.js"></script>
 <script src="/static/languageSwitcher.js"></script>
@@ -793,121 +1015,43 @@
 <!-- <script src="/static/yearUpdater.js"></script> -->
 <script src="/static/modal-page/js/specialtyPopup.js"></script>
 
-<!--CHANGED new line for loadlayout-->
-        <div id="footer-placeholder"></div>
-      
-      <!-- <footer class="footer">
-        <div class="footer-container">
-          
-          <div class="footer-section">
-            <h3 data-translate="about_site">Сайт туралы</h3>
-            <p id="copyright-year"></p>
-            <script>
-              const currentYear = new Date().getFullYear();
-              document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-            </script>
-            <p data-translate="college_name">
-              Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-            </p>
-      
-            <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                <img src="/static/images/flot/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                <img src="/static/images/flot/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                <img src="/static/images/flot/youtube.png" alt="YouTube" />
-              </a>
-              <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-              </a>
-            </div>
-          </div>
-      
-          
-          <div class="footer-section">
-            <h3 data-translate="contact_label">Байланыс</h3>
-            <p>
-              <span class="icon">📍</span>
-              <strong data-translate="address_label">Мекенжай:</strong><br />
-              <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-            </p>
-            <p>
-              <span class="icon">📞</span>
-              <strong data-translate="contact_label">Байланыс:</strong><br />
-              <span data-translate="phone">Тел.: 8 727 229 18 32 </span><br />
-          <span data-translate="phone_whatsapp">Whatsapp: 8 707 171 08 00 </span><br />
-              <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-            </p>
-            <p>
-              <span class="icon">✉️</span>
-              <strong data-translate="email_label">Пошта:</strong><br />
-              <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-            </p>
-          </div>
-      
-      
-          <div class="footer-section">
-            <h3 data-translate="developers">Разработчики сайта</h3>
-            <p>
-              <span class="icon">👨‍💻</span>
-              <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-              <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-            </p>
-            
-            <a href="https://t.me/wikipediasoso_bot" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
-          </div>
-        </div>
-      </footer>  -->
 
-      <!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-            // Load layout first
-            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
-            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
 
-            // Initialize header dropdown and any custom UI logic
-            initComponents();
-            initDropdownMenus(); // <- this is your custom function from the script you posted
 
-            // Finally, reveal the body
-            document.body.classList.remove('loading');
-        });
 
-        function initDropdownMenus() {
-            const dropdownItems = document.querySelectorAll(".dropdown-item");
 
-            dropdownItems.forEach(item => {
-                const submenu = item.querySelector(".sub-dropdown-menu");
-
-                if (!submenu) return;
-
-                item.addEventListener("mouseenter", () => {
-                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
-
-                    submenu.style.visibility = "hidden";
-                    submenu.style.display = "block";
-
-                    const rect = submenu.getBoundingClientRect();
-                    const isOverflowing = rect.right > window.innerWidth;
-
-                    submenu.style.display = "";
-                    submenu.style.visibility = "";
-
-                    if (isOverflowing) {
-                        submenu.classList.add("sub-dropdown-menu-left");
-                    } else {
-                        submenu.classList.add("sub-dropdown-menu");
-                    }
-                });
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownItems = document.querySelectorAll(".dropdown-item");
+    
+        dropdownItems.forEach(item => {
+            const submenu = item.querySelector(".sub-dropdown-menu");
+    
+            if (!submenu) return;
+    
+            item.addEventListener("mouseenter", () => {
+                // Сброс предыдущих классов
+                submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
+    
+                // Временно показать для измерения
+                submenu.style.visibility = "hidden";
+                submenu.style.display = "block";
+    
+                const rect = submenu.getBoundingClientRect();
+                const isOverflowing = rect.right > window.innerWidth;
+    
+                submenu.style.display = "";
+                submenu.style.visibility = "";
+    
+                if (isOverflowing) {
+                    submenu.classList.add("sub-dropdown-menu-left");
+                } else {
+                    submenu.classList.add("sub-dropdown-menu");
+                }
             });
-        }
-        </script>
+        });
+    });
+    </script>
     
 
 </body>
