@@ -590,6 +590,9 @@ upd_form_5: 'Форма УПД для специальности 0612100 Ком�
   doc_medical_note: "Для инвалидов: заключение МСЭ по форме 031-у",
   doc_id: "Документ, удостоверяющий личность",
   Licenses: "Лицензий",
+  Internship: "Стажировка",
+  malaysia: "Малайзия",
+  china: "Китай",
 
 
 
@@ -1187,6 +1190,9 @@ doc_medical: "Medical certificate form No. 075-u",
 doc_medical_note: "For people with disabilities: medical-social expertise form 031-u",
 doc_id: "Identity document",
 Licenses: "Licenses",
+Internship: "Internship",
+malaysia: "Malaysia",
+china: "China",
 
 
 
@@ -1776,6 +1782,9 @@ doc_medical: "075-у нысанындағы медициналық анықта�
 doc_medical_note: "Мүгедектер үшін: 031-у нысанындағы МӘС қорытындысы",
 doc_id: "Жеке басын куәландыратын құжат",
 Licenses: "Лицензиялар",
+Internship: "Тағылымдама",
+malaysia: "Малайзия",
+china: "Қытай",
 
 
 
