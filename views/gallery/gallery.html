@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Галерея</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #0b0b0b;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 10px;
+      background: linear-gradient(90deg, #000, #0a0a0a, #000);
+      border-bottom: 2px solid #0ff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .gallery {
+      columns: 4 250px; /* автоматический коллаж */
+      column-gap: 12px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      filter: brightness(0.95);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0,255,255,0.4);
+      filter: brightness(1);
+    }
+
+    /* --- Модальное окно --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.95);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .modal img {
+      max-width: 95%;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0,255,255,0.3);
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #0ff;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.2s;
+    }
+
+    .close:hover {
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    #download-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: #0ff;
+      color: #000;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    #download-btn:hover {
+      background: #00cccc;
+    }
+
+    @media (max-width: 768px) {
+      .gallery { columns: 2 150px; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery { columns: 1 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header><h1>Галерея</h1></header>
+
+  <main>
+    <div id="gallery" class="gallery"></div>
+  </main>
+
+  <!-- Модальное окно -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img id="modal-img" src="">
+    <a id="download-btn" download>Скачать</a>
+  </div>
+
+  <script>
+    const gallery = document.getElementById("gallery");
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+    const downloadBtn = document.getElementById("download-btn");
+    const closeBtn = document.querySelector(".close");
+
+    // Автоматически подгружаем 26 фото (любых расширений)
+    for (let i = 1; i <= 26; i++) {
+      const img = document.createElement("img");
+      img.src = `${i}.jpg`; // названия 1.jpg ... 26.jpg
+      img.alt = `Фото ${i}`;
+      img.loading = "lazy";
+      gallery.appendChild(img);
+    }
+
+    // Открытие фото в оригинальном качестве
+    gallery.addEventListener("click", (e) => {
+      if (e.target.tagName === "IMG") {
+        modal.style.display = "flex";
+        modalImg.src = e.target.src;
+        downloadBtn.href = e.target.src;
+      }
+    });
+
+    // Закрытие
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+  </script>
+
+</body>
+</html>
