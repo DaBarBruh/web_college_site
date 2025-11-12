@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
+    <!-- Favicon -->
     <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon" />
-
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/static/style.css" />
     <link rel="stylesheet" href="/static/online_assistant.css" />
@@ -13,12 +14,13 @@
     <link rel="stylesheet" href="/static/header/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-
-    <!-- Particles.js -->
+    
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script async defer src="https://read.flypdf.ru/js/embed.min.js"></script>
     
     <title>Учебно-методическая работа</title>
-
+    
     <style>
         /* Loading state */
         body.loading { visibility: hidden; }
@@ -101,6 +103,129 @@
         .panel.open {
             display: block;
             margin-bottom: 15px;
+        }
+        
+        /* Certificates Slider Styles */
+        .certificates-container {
+            padding: 30px 0;
+        }
+        
+        .certificates-slider {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #2a2a2a;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+        }
+        
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide-image {
+            max-width: 100%;
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+            border: 2px solid #33ccff;
+            transition: transform 0.3s ease;
+        }
+        
+        .slide-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .slide-caption {
+            color: #cdeeff;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: rgba(42, 42, 42, 0.9);
+            border-radius: 8px;
+            width: 90%;
+            border: 1px solid #33ccff;
+            font-weight: 500;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(51, 204, 255, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slider-nav:hover {
+            background: rgba(51, 204, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-nav.prev {
+            left: 10px;
+        }
+        
+        .slider-nav.next {
+            right: 10px;
+        }
+        
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 12px;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .dot.active {
+            background: #33ccff;
+            transform: scale(1.2);
+            border-color: #8be9fd;
+        }
+        
+        .slider-counter {
+            text-align: center;
+            color: #8be9fd;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 500;
         }
         
         /* PDF buttons */
@@ -233,6 +358,20 @@
             .iframe-wrapper iframe {
                 height: 400px;
             }
+            
+            .certificates-slider {
+                padding: 15px;
+            }
+            
+            .slide-image {
+                max-height: 350px;
+            }
+            
+            .slider-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -248,20 +387,29 @@
                 font-size: 14px;
                 padding: 12px 14px;
             }
+            
+            .slide-image {
+                max-height: 250px;
+            }
+            
+            .slide-caption {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
 <body class="loading">
-    <!-- Particle Background -->
+    <!-- Background -->
     <div id="particle-background"></div>
     
     <!-- Header -->
     <div id="header-placeholder"></div>
-
+    
     <!-- Main Content -->
     <main class="page-container">
         <div class="content-wrapper">
-            <h1 class="page-title">Учебно-методическая работа</h1>
+            <h1 class="page-title"></h1>
             
             <div class="accordion-container">
                 <!-- Memorandum Section -->
@@ -269,59 +417,85 @@
                     <span data-translate="Memorandum">Меморандум</span>
                 </button>
                 <div class="panel">
-                    <!-- Add memorandum content here -->
-                    <button class="pdf-button" 
-                            onclick="togglePDF(this, '/static/Intern/usa/china/МЕМОРАНДУМ.pdf#view=FitH&zoom=page-width&toolbar=0')">
-                        Открыть Меморандум (PDF)
-                    </button>
+                    <p>В разработке</p>
                     <div class="iframe-wrapper"></div>
                 </div>
-
+                
                 <!-- Articles Section -->
                 <button class="accordion">
                     <span data-translate="Articles">Мақалалар</span>
                 </button>
                 <div class="panel">
-                    <!-- Add articles content here -->
-                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                    <p>В разработке</p>
                 </div>
-
+                
                 <!-- Experience Sharing Section -->
                 <button class="accordion">
                     <span data-translate="Sharing_Experience">Тәжірибемен бөлісу</span>
                 </button>
-                <div class="panel">
+                 <div class="panel">
                     <button class="pdf-button" 
                             onclick="togglePDF(this, '/static/Intern/usa/usa/Отчет по стажировке USA Абылханова Н.pptx.pdf#view=FitH&zoom=page-width&toolbar=0')">
-                        АҚШ тағылымдамасы туралы есеп
+                        Тəуелсіз аккредитация жəне кəсіби сертификаттау арқылы білім сапасын бақылаудың америкалық моделі
                     </button>
                     <div class="iframe-wrapper"></div>
                 </div>
-
-                <!-- Certificates Section -->
+                
+               <!-- Certificates Section -->
                 <button class="accordion">
                     <span data-translate="Certificates">Сертификаттар</span>
                 </button>
                 <div class="panel">
-                    <!-- Add certificates content here -->
-                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                    <div class="certificates-container">
+                        <div class="certificates-slider">
+                            <div class="slider-track">
+                                <!-- Замените пути на ваши реальные пути к JPG файлам -->
+                                <div class="slide">
+                                    <img src="/static/Intern/usa/usa/certificate/1.jpg" alt="Сертификат 1" class="slide-image">
+                                </div>
+                                
+                                <div class="slide">
+                                    <img src="/static/Intern/usa/usa/certificate/2.jpg" alt="Сертификат 2" class="slide-image">
+                                </div>
+                                
+                                <div class="slide">
+                                    <img src="/static/Intern/usa/usa/certificate/3.jpg" alt="Сертификат 3" class="slide-image">
+                                </div>
+                            </div>
+                            
+                            <button class="slider-nav prev">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-nav next">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            
+                            <div class="slider-dots">
+                                <!-- Точки будут сгенерированы JavaScript -->
+                            </div>
+                            
+                            <div class="slider-counter">
+                                <span id="current-slide">1</span> / <span id="total-slides">5</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
+                
                 <!-- Methodological Tools Section -->
                 <button class="accordion">
                     <span data-translate="Methodological_Tools">Әдістемелік құралдар</span>
                 </button>
                 <div class="panel">
-                    <!-- Add methodological tools content here -->
-                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                    <p>В разработке</p>
+                    <div class="iframe-wrapper"></div>
                 </div>
             </div>
         </div>
     </main>
-
+    
     <!-- Footer -->
     <div id="footer-placeholder"></div>
-
+    
     <!-- Scripts -->
     <script src="/static/loadLayout.js"></script>
     <script src="/static/header/main.js"></script>
@@ -330,7 +504,7 @@
     <script src="/static/languageSwitcher.js"></script>
     <script src="/static/online_assistant.js"></script>
     <script src="/static/script.js"></script>
-
+    
     <script>
         // Initialize page components
         document.addEventListener("DOMContentLoaded", async () => {
@@ -338,61 +512,20 @@
             await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
             await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
 
-            // Initialize particles background
-            initParticles();
-            
             // Initialize components
             initComponents();
             initDropdownMenus();
             initAccordions();
             initTooltips();
+            initCertificatesSlider();
 
             // Reveal the body
             document.body.classList.remove('loading');
         });
 
-        // Initialize particles.js background
-        function initParticles() {
-            if (typeof particlesJS !== 'undefined') {
-                particlesJS('particle-background', {
-                    particles: {
-                        number: { value: 80, density: { enable: true, value_area: 800 } },
-                        color: { value: "#33ccff" },
-                        shape: { type: "circle" },
-                        opacity: { value: 0.5, random: true },
-                        size: { value: 3, random: true },
-                        line_linked: {
-                            enable: true,
-                            distance: 150,
-                            color: "#33ccff",
-                            opacity: 0.2,
-                            width: 1
-                        },
-                        move: {
-                            enable: true,
-                            speed: 2,
-                            direction: "none",
-                            random: true,
-                            straight: false,
-                            out_mode: "out",
-                            bounce: false
-                        }
-                    },
-                    interactivity: {
-                        detect_on: "canvas",
-                        events: {
-                            onhover: { enable: true, mode: "grab" },
-                            onclick: { enable: true, mode: "push" },
-                            resize: true
-                        }
-                    },
-                    retina_detect: true
-                });
-            }
-        }
-
         // Initialize accordion functionality
         function initAccordions() {
+            // Main accordion
             document.querySelectorAll(".accordion").forEach(button => {
                 button.addEventListener("click", function () {
                     this.classList.toggle("active");
@@ -400,6 +533,91 @@
                     panel.classList.toggle("open");
                 });
             });
+        }
+
+        // Initialize certificates slider
+        function initCertificatesSlider() {
+            const track = document.querySelector('.slider-track');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.slider-nav.prev');
+            const nextBtn = document.querySelector('.slider-nav.next');
+            const dotsContainer = document.querySelector('.slider-dots');
+            const currentSlideElement = document.getElementById('current-slide');
+            const totalSlidesElement = document.getElementById('total-slides');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            
+            // Initialize dots and counter
+            totalSlidesElement.textContent = totalSlides;
+            updateCounter();
+            
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.setAttribute('data-index', i);
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            
+            const dots = document.querySelectorAll('.dot');
+            
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                
+                updateCounter();
+            }
+            
+            function updateCounter() {
+                currentSlideElement.textContent = currentIndex + 1;
+            }
+            
+            function goToSlide(index) {
+                currentIndex = index;
+                if (currentIndex < 0) currentIndex = totalSlides - 1;
+                if (currentIndex >= totalSlides) currentIndex = 0;
+                updateSlider();
+            }
+            
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+            
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+            
+            // Auto-slide (optional - раскомментируйте если нужно)
+            /*
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause auto-slide on hover
+            const slider = document.querySelector('.certificates-slider');
+            slider.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            slider.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+            */
         }
 
         // PDF viewer functionality
@@ -419,11 +637,9 @@
             if (wrapper.classList.contains("active")) {
                 wrapper.innerHTML = "";
                 wrapper.classList.remove("active");
-                button.classList.remove('active');
             } else {
                 wrapper.innerHTML = `<iframe src="${path}"></iframe>`;
                 wrapper.classList.add("active");
-                button.classList.add('active');
             }
         }
 
@@ -482,16 +698,13 @@
                 });
             });
         }
-
-        // Apply uppercase transformation
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.accordion-container');
-            if (container) {
-                container.querySelectorAll('*').forEach(el => {
-                    el.style.textTransform = 'uppercase';
-                });
-            }
-        });
     </script>
+
+<script>
+particlesJS.load('particle-background', '/static/particles_config.json', function() {
+  console.log('Particles.js background loaded.');
+});
+</script>
+
 </body>
 </html>
