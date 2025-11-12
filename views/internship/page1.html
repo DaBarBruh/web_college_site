@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/online_assistant.css" />
+    <link rel="stylesheet" href="/static/tour_frame_style.css" />
+    <link rel="stylesheet" href="/static/header/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <title>Учебно-методическая работа</title>
+
+    <style>
+        /* Loading state */
+        body.loading { visibility: hidden; }
+        
+        /* Main sections */
+        .page-container {
+            color: #fff;
+            padding: 30px 20px;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 50vh;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            color: #a6d8ff;
+            text-shadow: 2px 2px 8px #33ccff;
+            margin-bottom: 30px;
+        }
+        
+        /* Accordion styles */
+        .accordion-container {
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .accordion {
+            background-color: #2a2a2a;
+            color: #8be9fd;
+            cursor: pointer;
+            padding: 15px 20px;
+            text-align: left;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            position: relative;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .accordion:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .accordion::after {
+            content: "▾";
+            font-size: 18px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+        }
+        
+        .accordion.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        .panel {
+            background-color: #1f1f1f;
+            border-left: 2px solid #444;
+            padding: 0 20px;
+            display: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .panel.open {
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        /* PDF buttons */
+        .pdf-button {
+            background-color: #2e2e2e;
+            color: #fff;
+            border: none;
+            padding: 12px 15px;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+        /* Фон частиц */
+        #particle-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0; /* фон за всем контентом */
+        }
+
+        /* Поднимаем контент над фоном */
+        .page-container {
+          position: relative;
+          z-index: 1;
+          background: rgba(26, 26, 26, 0.7); /* прозрачный слой, чтобы фон был виден */
+          border-radius: 8px;
+        }
+
+        
+        .pdf-button:hover {
+            background-color: #3e3e3e;
+        }
+        
+        .pdf-button::after {
+            content: "▼";
+            color: #8be9fd;
+            position: absolute;
+            right: 15px;
+        }
+        
+        /* PDF viewer */
+        .iframe-wrapper {
+            display: none;
+            margin-top: 10px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        
+        .iframe-wrapper.active {
+            display: block;
+        }
+        
+        .iframe-wrapper iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #444;
+            border-radius: 8px;
+        }
+        
+        /* Download buttons */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #33ccff;
+            color: #000;
+            padding: 8px 12px;
+            margin: 10px 0 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            max-width: 100%;
+            width: fit-content;
+            overflow: hidden;
+        }
+        
+        .download-btn:hover {
+            background-color: #00aaff;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background-color: #111;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            max-width: 320px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            white-space: normal;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 1.3em;
+            }
+            
+            .accordion {
+                font-size: 15px;
+                padding: 14px 16px;
+            }
+            
+            .pdf-button {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            
+            .iframe-wrapper iframe {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-container {
+                padding: 15px 10px;
+            }
+            
+            .page-title {
+                font-size: 1.1em;
+            }
+            
+            .accordion {
+                font-size: 14px;
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Particle Background -->
+    <div id="particle-background"></div>
+    
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="page-container">
+        <div class="content-wrapper">
+            <h1 class="page-title">Учебно-методическая работа</h1>
+            
+            <div class="accordion-container">
+                <!-- Memorandum Section -->
+                <button class="accordion">
+                    <span data-translate="Memorandum">Әдістемелік құралдар</span>
+                </button>
+                <div class="panel">
+                    <!-- Add methodological tools content here -->
+                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                </div>
+
+                <!-- Articles Section -->
+                <button class="accordion">
+                    <span data-translate="Articles">Мақалалар</span>
+                </button>
+                <div class="panel">
+                    <!-- Add articles content here -->
+                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                </div>
+
+                <!-- Experience Sharing Section -->
+                <button class="accordion">
+                    <span data-translate="Sharing_Experience">Әдістемелік құралдар</span>
+                </button>
+                <div class="panel">
+                    <!-- Add methodological tools content here -->
+                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                </div>
+
+                <!-- Certificates Section -->
+                <button class="accordion">
+                    <span data-translate="Certificates">Сертификаттар</span>
+                </button>
+                <div class="panel">
+                    <!-- Add certificates content here -->
+                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                </div>
+
+                <!-- Methodological Tools Section -->
+                <button class="accordion">
+                    <span data-translate="Methodological_Tools">Әдістемелік құралдар</span>
+                </button>
+                <div class="panel">
+                    <!-- Add methodological tools content here -->
+                    <p style="color: #cdeeff; padding: 15px 0;">Раздел находится в разработке</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/static/loadLayout.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/online_assistant.js"></script>
+    <script src="/static/script.js"></script>
+
+    <script>
+        // Initialize page components
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Load layout first
+            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
+            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
+
+            // Initialize particles background
+            initParticles();
+            
+            // Initialize components
+            initComponents();
+            initDropdownMenus();
+            initAccordions();
+            initTooltips();
+
+            // Reveal the body
+            document.body.classList.remove('loading');
+        });
+
+        // Initialize particles.js background
+        function initParticles() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particle-background', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: "#33ccff" },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.5, random: true },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: "#33ccff",
+                            opacity: 0.2,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: "none",
+                            random: true,
+                            straight: false,
+                            out_mode: "out",
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: {
+                            onhover: { enable: true, mode: "grab" },
+                            onclick: { enable: true, mode: "push" },
+                            resize: true
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+        }
+
+        // Initialize accordion functionality
+        function initAccordions() {
+            document.querySelectorAll(".accordion").forEach(button => {
+                button.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    panel.classList.toggle("open");
+                });
+            });
+        }
+
+        // PDF viewer functionality
+        function togglePDF(button, path) {
+            const wrapper = button.nextElementSibling;
+
+            // Close other iframes in this panel
+            const allWrappers = button.closest('.panel').querySelectorAll('.iframe-wrapper');
+            allWrappers.forEach(el => {
+                if (el !== wrapper) {
+                    el.innerHTML = '';
+                    el.classList.remove('active');
+                }
+            });
+
+            // Toggle current PDF
+            if (wrapper.classList.contains("active")) {
+                wrapper.innerHTML = "";
+                wrapper.classList.remove("active");
+                button.classList.remove('active');
+            } else {
+                wrapper.innerHTML = `<iframe src="${path}"></iframe>`;
+                wrapper.classList.add("active");
+                button.classList.add('active');
+            }
+        }
+
+        // Tooltip functionality
+        function initTooltips() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', (e) => {
+                    const fullText = btn.getAttribute('data-fulltext');
+                    if (fullText) {
+                        tooltip.textContent = fullText;
+                        tooltip.style.display = 'block';
+                    }
+                });
+
+                btn.addEventListener('mousemove', (e) => {
+                    tooltip.style.left = e.pageX + 15 + 'px';
+                    tooltip.style.top = e.pageY + 15 + 'px';
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
+        }
+
+        // Dropdown menus initialization
+        function initDropdownMenus() {
+            const dropdownItems = document.querySelectorAll(".dropdown-item");
+
+            dropdownItems.forEach(item => {
+                const submenu = item.querySelector(".sub-dropdown-menu");
+
+                if (!submenu) return;
+
+                item.addEventListener("mouseenter", () => {
+                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
+
+                    submenu.style.visibility = "hidden";
+                    submenu.style.display = "block";
+
+                    const rect = submenu.getBoundingClientRect();
+                    const isOverflowing = rect.right > window.innerWidth;
+
+                    submenu.style.display = "";
+                    submenu.style.visibility = "";
+
+                    if (isOverflowing) {
+                        submenu.classList.add("sub-dropdown-menu-left");
+                    } else {
+                        submenu.classList.add("sub-dropdown-menu");
+                    }
+                });
+            });
+        }
+
+        // Apply uppercase transformation
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.accordion-container');
+            if (container) {
+                container.querySelectorAll('*').forEach(el => {
+                    el.style.textTransform = 'uppercase';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

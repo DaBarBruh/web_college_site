@@ -597,7 +597,11 @@ upd_form_5: 'Форма УПД для специальности 0612100 Ком�
   report: "Отчет по стажировке USA",
   memorandum_china: "Меморандум о сотрудничестве с Китаем",
   internship_in_february: "Стажировка в феврале 2024",
-  
+  Memorandum: "Меморандум",
+  Articles: "Статьи",
+  Sharing_Experience: "Обмен опытом",
+  Certificates: "Сертификаты",
+  Methodological_Tools: "Методические инструменты",
 
 
 
@@ -1225,6 +1229,11 @@ us: "USA",
 report: "USA Internship Report",
 memorandum_china: "Memorandum of Cooperation with China",
 internship_in_february: "Internship in February 2024",
+Memorandum: "Memorandum",
+Articles: "Articles",
+Sharing_Experience: "Sharing Experience",
+Certificates: "Certificates",
+Methodological_Tools: "Methodological Tools",
 
 
 
@@ -1831,6 +1840,11 @@ us: "АҚШ",
 report: "АҚШ тағылымдамасы туралы есеп",
 memorandum_china: "Қытай Халық Республикасымен ынтымақтастық туралы меморандум",
 internship_in_february: "2024 жылғы ақпандағы айындағы тағылымдама",
+Memorandum: "Меморандум ",
+Articles: "Мақалалар",
+Sharing_Experience: "Тәжірибемен бөлісу",
+Certificates: "Сертификаттар",
+Methodological_Tools: "Әдістемелік құралдар",
 
 
 

@@ -1,220 +1,515 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Сарапшылар базасы</title>
-
-  <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon" />
-  <link rel="stylesheet" href="/static/style.css" />
-  <link rel="stylesheet" href="/static/online_assistant.css" />
-  <link rel="stylesheet" href="/static/tour_frame_style.css" />
-  <link rel="stylesheet" href="/static/header/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-  <style>
-.pdf-section {
-  max-width: 1200px;
-  margin: 20px auto 20px auto;
-  background-color: #141414;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-  border: 1px solid rgba(0, 255, 255, 0.15);
-  transition: all 0.4s ease;
-}
-
-/* добавляем интервал между аккордеонами */
-.pdf-section + .pdf-section {
-  margin-top: 2px;           
-     /* расстояние между соседними блоками */
-}
-
-.pdf-toggle {
-  width: 100%;
-  background: linear-gradient(90deg, #1c1c1c, #2b2b2b);
-  border: none;
-  outline: none;
-  color: #8be9fd;
-  padding: 20px 26px;             /* чуть больше внутреннего отступа */
-  font-size: 18px;
-  font-weight: 600;
-  text-align: left;
-  position: relative;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 12px;
-  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
-}
-
-.pdf-toggle i {
-  margin-right: 10px;
-  color: #33ccff;
-}
-
-.pdf-toggle:hover {
-  background: linear-gradient(90deg, #2b2b2b, #3b3b3b);
-  color: #aef7ff;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
-}
-
-.pdf-toggle::after {
-  content: "\f078";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  position: absolute;
-  right: 22px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.3s ease;
-}
-
-.pdf-toggle.active::after {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.pdf-panel {
-  overflow: hidden;
-  background: #0c0c0c;
-  transition: height 0.4s ease;
-  height: 0;
-  border-top: 1px solid rgba(0, 255, 255, 0.08);
-}
-
-iframe {
-  width: 100%;
-  border: none;
-  background-color: #000;
-  box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
-  animation: fadeIn 0.25s ease;
-  display: block;
-}
-
-.pdf-section.open {
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
-  border: 1px solid rgba(0, 255, 255, 0.35);
-}
-
-    iframe {
-      width: 100%;
-      border: none;
-      background-color: #000;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.15) inset;
-      animation: fadeIn 0.25s ease;
-      display: block;
-    }
-
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon" />
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/online_assistant.css" />
+    <link rel="stylesheet" href="/static/tour_frame_style.css" />
+    <link rel="stylesheet" href="/static/header/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script async defer src="https://read.flypdf.ru/js/embed.min.js"></script>
+    
+    <title>Учебно-методическая работа</title>
+    
+    <style>
+        /* Loading state */
+        body.loading { visibility: hidden; }
+        
+        /* Main sections */
+        .page-container {
+            color: #fff;
+            padding: 30px 20px;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 50vh;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            color: #a6d8ff;
+            text-shadow: 2px 2px 8px #33ccff;
+            margin-bottom: 30px;
+        }
+        
+        /* Accordion styles */
+        .accordion-container {
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .accordion {
+            background-color: #2a2a2a;
+            color: #8be9fd;
+            cursor: pointer;
+            padding: 15px 20px;
+            text-align: left;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            position: relative;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .accordion:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .accordion::after {
+            content: "▾";
+            font-size: 18px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+        }
+        
+        .accordion.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        .panel {
+            background-color: #1f1f1f;
+            border-left: 2px solid #444;
+            padding: 0 20px;
+            display: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .panel.open {
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        /* PDF buttons */
+        .pdf-button {
+            background-color: #2e2e2e;
+            color: #fff;
+            border: none;
+            padding: 12px 15px;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+        /* Фон частиц */
+        #particle-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0; /* фон за всем контентом */
+        }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: none; }
-}
+        /* Поднимаем контент над фоном */
+        .page-container {
+          position: relative;
+          z-index: 1;
+          background: rgba(26, 26, 26, 0.7); /* прозрачный слой, чтобы фон был виден */
+          border-radius: 8px;
+        }
 
-@media (max-width: 768px) {
-  .pdf-toggle {
-    font-size: 15px;
-    padding: 16px 18px;
-  }
-}
-  </style>
+        
+        .pdf-button:hover {
+            background-color: #3e3e3e;
+        }
+        
+        .pdf-button::after {
+            content: "▼";
+            color: #8be9fd;
+            position: absolute;
+            right: 15px;
+        }
+        
+        /* PDF viewer */
+        .iframe-wrapper {
+            display: none;
+            margin-top: 10px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        
+        .iframe-wrapper.active {
+            display: block;
+        }
+        
+        .iframe-wrapper iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #444;
+            border-radius: 8px;
+        }
+        
+        /* Download buttons */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #33ccff;
+            color: #000;
+            padding: 8px 12px;
+            margin: 10px 0 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            max-width: 100%;
+            width: fit-content;
+            overflow: hidden;
+        }
+        
+        .download-btn:hover {
+            background-color: #00aaff;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background-color: #111;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            max-width: 320px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            white-space: normal;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 1.3em;
+            }
+            
+            .accordion {
+                font-size: 15px;
+                padding: 14px 16px;
+            }
+            
+            .pdf-button {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            
+            .iframe-wrapper iframe {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-container {
+                padding: 15px 10px;
+            }
+            
+            .page-title {
+                font-size: 1.1em;
+            }
+            
+            .accordion {
+                font-size: 14px;
+                padding: 12px 14px;
+            }
+        }
+    </style>
 </head>
+<body class="loading">
+    <!-- Background -->
+    <div id="particle-background"></div>
+    
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+    
+    <!-- Main Content -->
+    <main class="page-container">
+        <div class="content-wrapper">
+            <h1 class="page-title">Учебно-методическая работа</h1>
+            
+            <div class="accordion-container">
+                <!-- Memorandum Section -->
+                <button class="accordion">
+                    <span data-translate="Memorandum">Меморандум</span>
+                </button>
+                <div class="panel">
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/МЕМОРАНДУМ.pdf#view=FitH&zoom=page-width&toolbar=0')">
+                        Открыть Меморандум (PDF)
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                </div>
+                
+                <!-- Articles Section -->
+                <button class="accordion">
+                    <span data-translate="Articles">Мақалалар</span>
+                </button>
+                <div class="panel">
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Article/«Ы.Алтынсарин ізбасарлары» республикалық ғылыми-тәжірибелік журнал – №49 (70) 15-бөлім-1.pdf')">
+                        «Ы.Алтынсарин ізбасарлары» республикалық ғылыми-тәжірибелік журнал – №49 (70) 15-бөлім-1
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Article/051 Тағылым Ақпан.pdf')">
+                        2051 Тағылым Ақпан
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Article/макала Меж.pdf')">
+                        Макала Меж.
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Article/Орыншайхова Галия Асхатовна Алғыс хат - 2025-03-21T111046.570.pdf')">
+                        Орыншайхова Галия Асхатовна Алғыс хат
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Article/Орыншайхова Галия Асхатовна сертификат - 2025-03-21T111047.502.pdf')">
+                        Орыншайхова Галия Асхатовна сертификат
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                </div>
+                
+                <!-- Experience Sharing Section -->
+                <button class="accordion">
+                    <span data-translate="Sharing_Experience">Тәжірибемен бөлісу</span>
+                </button>
+                <div class="panel">
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Sharing experiences in China/Коуч-сессия по подготовке к чемпионату профессионального мастерства Worldskills на примере КНР.pdf')">
+                        Коуч-сессия по подготовке к чемпионату профессионального мастерства Worldskills на примере КНР
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Sharing experiences in China/ҚАЛАЛЫҚ СЕМИНАР программасы.pdf')">
+                        ҚАЛАЛЫҚ СЕМИНАР программасы
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Sharing experiences in China/ҚХР IT саласы бойынша білім беру ерекшеліктері.pdf')">
+                        ҚХР IT саласы бойынша білім беру ерекшеліктері
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Sharing experiences in China/ҚХР заманауи IT және электронды технологиялар саласындағы әлеуеті.pdf')">
+                        ҚХР заманауи IT және электронды технологиялар саласындағы әлеуеті
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                </div>
+                
+                <!-- Certificates Section -->
+                <button class="accordion">
+                    <span data-translate="Certificates">Сертификаттар</span>
+                </button>
+                <div class="panel">
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/images/pdfs/план_2023.pdf')">
+                        2023-2024 оқу жылы
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/images/pdfs/план_2024.pdf')">
+                        2024-2025 оқу жылы
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                </div>
+                
+                <!-- Methodological Tools Section -->
+                <button class="accordion">
+                    <span data-translate="Methodological_Tools">Әдістемелік құралдар</span>
+                </button>
+                <div class="panel">
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Methodological tools/Әдістемелік құрал Білім беруде жасанды интеллект пен цифрлық технологияларды қолдану Орыншайхова Г.А..pdf')">
+                        Әдістемелік құрал Білім беруде жасанды интеллект пен цифрлық технологияларды қолдану
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                    
+                    <button class="pdf-button" 
+                            onclick="togglePDF(this, '/static/Intern/usa/china/Methodological tools/Куәлік.pdf')">
+                        Куәлік
+                    </button>
+                    <div class="iframe-wrapper"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    
+    <!-- Scripts -->
+    <script src="/static/loadLayout.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/online_assistant.js"></script>
+    <script src="/static/script.js"></script>
+    
+    <script>
+        // Initialize page components
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Load layout first
+            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
+            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
 
-<body>
-  <div id="particle-background"></div>
-  <div id="header-placeholder"></div>
+            // Initialize components
+            initComponents();
+            initDropdownMenus();
+            initAccordions();
+            initTooltips();
 
-  <main>
-    <!-- Первый аккордеон -->
-    <div class="pdf-section">
-      <button class="pdf-toggle">
-        <span data-translate="memorandum_china">memorandum_china</span>
-      </button>
-      <div class="pdf-panel">
-        <iframe src="/static/Intern/usa/china/МЕМОРАНДУМ.pdf#view=FitH&zoom=page-width&toolbar=0" allowfullscreen></iframe>
-      </div>
-    </div>
+            // Reveal the body
+            document.body.classList.remove('loading');
+        });
 
-
-    <div class="pdf-section">
-      <button class="pdf-toggle">
-       <span data-translate="internship_in_february">internship_in_february</span>
-      </button>
-      <div class="pdf-panel">
-        <iframe src="/static/Intern/usa/china/051 Тағылым Ақпан.pdf" allowfullscreen></iframe>
-      </div>
-    </div>
-  </main>
-
-  <div id="footer-placeholder"></div>
-
-  <script src="/static/loadLayout.js"></script>
-  <script src="/static/header/main.js"></script>
-  <script src="/static/particles_config.js"></script>
-  <script src="/static/translations.js"></script>
-  <script src="/static/languageSwitcher.js"></script>
-  <script src="/static/online_assistant.js"></script>
-  <script src="/static/script.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const pdfSections = document.querySelectorAll('.pdf-section');
-
-      pdfSections.forEach(section => {
-        const toggleBtn = section.querySelector('.pdf-toggle');
-        const panel = section.querySelector('.pdf-panel');
-        const frame = section.querySelector('iframe');
-
-        function calcAvailableHeight() {
-          const header = document.getElementById('header-placeholder');
-          const headerH = header?.firstElementChild
-            ? header.firstElementChild.getBoundingClientRect().height
-            : 0;
-          const vh = window.innerHeight;
-          const gaps = 40;
-          return Math.max(300, vh - headerH - gaps);
-        }
-
-        function applyHeights() {
-          const h = calcAvailableHeight();
-          frame.style.height = h + 'px';
-          panel.style.height = h + 'px';
-        }
-
-        toggleBtn.addEventListener('click', () => {
-          const isOpen = panel.classList.contains('open');
-          if (isOpen) {
-            section.classList.remove('open');
-            panel.classList.remove('open');
-            toggleBtn.classList.remove('active');
-            panel.style.height = '0px';
-          } else {
-            // закрыть остальные
-            pdfSections.forEach(s => {
-              s.classList.remove('open');
-              s.querySelector('.pdf-panel').classList.remove('open');
-              s.querySelector('.pdf-toggle').classList.remove('active');
-              s.querySelector('.pdf-panel').style.height = '0px';
+        // Initialize accordion functionality
+        function initAccordions() {
+            // Main accordion
+            document.querySelectorAll(".accordion").forEach(button => {
+                button.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    panel.classList.toggle("open");
+                });
             });
-            // открыть текущий
-            section.classList.add('open');
-            panel.classList.add('open');
-            toggleBtn.classList.add('active');
-            applyHeights();
-            setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-          }
-        });
+        }
 
-        window.addEventListener('resize', () => {
-          if (panel.classList.contains('open')) applyHeights();
-        });
-      });
-    });
-  </script>
+        // PDF viewer functionality
+        function togglePDF(button, path) {
+            const wrapper = button.nextElementSibling;
+
+            // Close other iframes in this panel
+            const allWrappers = button.closest('.panel').querySelectorAll('.iframe-wrapper');
+            allWrappers.forEach(el => {
+                if (el !== wrapper) {
+                    el.innerHTML = '';
+                    el.classList.remove('active');
+                }
+            });
+
+            // Toggle current PDF
+            if (wrapper.classList.contains("active")) {
+                wrapper.innerHTML = "";
+                wrapper.classList.remove("active");
+            } else {
+                wrapper.innerHTML = `<iframe src="${path}"></iframe>`;
+                wrapper.classList.add("active");
+            }
+        }
+
+        // Tooltip functionality
+        function initTooltips() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', (e) => {
+                    const fullText = btn.getAttribute('data-fulltext');
+                    if (fullText) {
+                        tooltip.textContent = fullText;
+                        tooltip.style.display = 'block';
+                    }
+                });
+
+                btn.addEventListener('mousemove', (e) => {
+                    tooltip.style.left = e.pageX + 15 + 'px';
+                    tooltip.style.top = e.pageY + 15 + 'px';
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
+        }
+
+        // Dropdown menus initialization
+        function initDropdownMenus() {
+            const dropdownItems = document.querySelectorAll(".dropdown-item");
+
+            dropdownItems.forEach(item => {
+                const submenu = item.querySelector(".sub-dropdown-menu");
+
+                if (!submenu) return;
+
+                item.addEventListener("mouseenter", () => {
+                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
+
+                    submenu.style.visibility = "hidden";
+                    submenu.style.display = "block";
+
+                    const rect = submenu.getBoundingClientRect();
+                    const isOverflowing = rect.right > window.innerWidth;
+
+                    submenu.style.display = "";
+                    submenu.style.visibility = "";
+
+                    if (isOverflowing) {
+                        submenu.classList.add("sub-dropdown-menu-left");
+                    } else {
+                        submenu.classList.add("sub-dropdown-menu");
+                    }
+                });
+            });
+        }
+    </script>
+
+
+<script>
+particlesJS.load('particle-background', '/static/particles_config.json', function() {
+  console.log('Particles.js background loaded.');
+});
+</script>
+
 </body>
 </html>
