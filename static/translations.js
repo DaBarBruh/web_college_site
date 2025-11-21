@@ -575,7 +575,7 @@ upd_form_5: 'Форма УПД для специальности 0612100 Ком�
 	spes_prepod: "Преподаватель специальных дисциплин",
 	spes_prepod_2: "Преподаватель общеобразовательных дисциплин",
 	otdelenie_6: "Отделение рабочей квалификации «Вычислительная техника и информационные сети»",
-	otdelenie_1: "Отделение «Вычислительная техника и информационные сети»"
+	otdelenie_1: "Отделение «Вычислительная техника и информационные сети»",
 	spes_prepod_3: "Мастер производственного обучения",
 	spes_prepod_4: "Преподаватель начальной военной и технологической подготовки",
 	S061201011: "4S06120202 Техник по информационной безопасности",
@@ -1211,7 +1211,7 @@ it_hub: "IT HUB",
 	spes_prepod_3: "Master of Industrial Training",
 	spes_prepod_4: "Instructor of Initial Military and Technological Training",
 	otdelenie_6: "Computer Engineering and Information Networks» Department of Vocational Qualification",
-	otdelenie_1: "Department of «Computer Engineering and Information Networks»"
+	otdelenie_1: "Department of «Computer Engineering and Information Networks»",
 docs_title: "List of required documents for admission",
 doc_application: "Application for submission of documents",
 doc_education: "Original education certificate or diploma",
