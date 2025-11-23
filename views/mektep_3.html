@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бастауыш сыныпта білім берудегі инновациялар</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light-blue: #e2f0ff;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --gray: #718096;
+            --success: #4bb543;
+            --warning: #ffcc00;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Particles Container */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 1rem 0;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            transition: all 0.3s ease;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 1.2rem 1.5rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 10px;
+            color: var(--dark);
+        }
+        
+        li::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        /* Highlight Box */
+        .highlight {
+            background: var(--light-blue);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Card Styles */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            transition: color 0.4s ease;
+        }
+        
+        /* Accordion Styles */
+        .accordion {
+            margin: 2rem 0;
+        }
+        
+        .accordion-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-item:hover {
+            border-color: var(--primary);
+        }
+        
+        .accordion-header {
+            padding: 1.5rem;
+            background: var(--light-blue);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background: #d4e6ff;
+        }
+        
+        .accordion-header h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            color: var(--accent);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .accordion-content-inner {
+            padding: 1.5rem;
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+        
+        /* Stage Styles */
+        .stage {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: var(--light-blue);
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .stage:hover {
+            transform: translateX(10px);
+        }
+        
+        .stage h3 {
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stage-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            margin: 2rem 0;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg, 
+                rgba(255, 255, 255, 0.2) 25%, 
+                transparent 25%, 
+                transparent 50%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0.2) 75%, 
+                transparent 75%, 
+                transparent
+            );
+            z-index: 1;
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+        
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--secondary) 0%, #2a0a7a 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.4);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            border: none;
+            outline: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .card-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                transition: left 0.3s ease;
+                padding-top: 2rem;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 1.2rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Container -->
+    <div id="particles-js"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>Бастауыш сыныпта білім берудегі инновациялар</h1>
+            <p class="subtitle">Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру жобасы</p>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Инновация<span>Білім</span></a>
+            <div class="burger" id="burger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#about"><i class="fas fa-info-circle"></i> Жоба туралы ақпарат</a>
+                <a href="#tasks"><i class="fas fa-tasks"></i> Тапсырмалар</a>
+                <a href="#library"><i class="fas fa-book"></i> Кітапхана</a>
+                <a href="#results"><i class="fas fa-chart-line"></i> Нәтижелерге шолу</a>
+                <a href="#feedback"><i class="fas fa-comments"></i> Пікірлер мен ұсыныстар</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <section id="about" class="active">
+            <h2><i class="fas fa-info-circle"></i> Жоба туралы ақпарат</h2>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-lightbulb"></i> Инновациялық идеяның жаңашылдығы</h3>
+                <ul>
+                    <li>Оқытуды цифрлық платформа интерактивті тапсырмалар арқылы ұйымдастыру.</li>
+                    <li>STEAM элементтерін бастауыш сынып деңгейіне бейімдеп енгізу.</li>
+                    <li>«Функционалдық сауаттылық бұрышы» – өмірлік жағдаяттарды шешуге бағытталған тапсырмалар жүйесі.</li>
+                    <li>Жобалық және зерттеу жұмыстарын ерте жастан дамытуға арналған шағын форматтағы зертханалық тәжірибелер.</li>
+                    <li>Оқушының жеке оқу траекториясын құру.</li>
+                </ul>
+            </div>
+            
+            <h3><i class="fas fa-sitemap"></i> Жобаның құрылымы</h3>
+            <ol>
+                <li>Кіріспе (өзектілігі, мақсат-міндеттері)</li>
+                <li>Теориялық бөлім
+                    <ul>
+                        <li>Инновациялық технологиялар сипаттамасы</li>
+                        <li>Оқушының даму ерекшеліктері</li>
+                    </ul>
+                </li>
+                <li>Практикалық бөлім
+                    <ul>
+                        <li>Инновациялық әдістерді сабақта қолдану үлгілері</li>
+                        <li>Цифрлық ресурстармен жұмыс</li>
+                    </ul>
+                </li>
+                <li>Функционалдық сауаттылықты дамытуға арналған тапсырмалар</li>
+                <li>Зерттеу нәтижелері, талдау</li>
+                <li>Қорытынды және ұсыныстар</li>
+            </ol>
+        </section>
+        
+        <section id="tasks">
+            <h2><i class="fas fa-tasks"></i> Тапсырмалар</h2>
+            
+            <h3><i class="fas fa-list-ol"></i> Жобаның кезеңдері</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-clipboard-check"></i> 1-кезең. Дайындық кезеңі</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Әдебиеттер, нормативтік құжаттармен танысу.</li>
+                                <li>Инновациялық әдістерді таңдау.</li>
+                                <li>Сабақ жоспарларын әзірлеу.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-play-circle"></i> 2-кезең. Практикалық іске асыру</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Сабақтарда таңдалған инновациялық әдістерді қолдану.</li>
+                                <li>Топтық, жұптық жұмыстар ұйымдастыру.</li>
+                                <li>Цифрлық платформалар арқылы тапсырмалар орындау.</li>
+                                <li>STEAM және ойын технологияларын енгізу.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-chart-bar"></i> 3-кезең. Мониторинг және талдау</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Оқушылардың білім сапасын, белсенділігін, сауаттылығын бақылау.</li>
+                                <li>Қорытынды диагностика жүргізу.</li>
+                                <li>Нәтижелерді талдау.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-flag-checkered"></i> 4-кезең. Қорытындылау</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Жетістіктер мен қиындықтарды анықтау.</li>
+                                <li>Ұсыныстар дайындау.</li>
+                                <li>Жобаны тарату (ашық сабақ, әдістемелік ұсыным, презентация).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-cogs"></i> Функционалдық сауаттылықты дамыту бағытындағы қызметтер</h3>
+            <div class="card-container">
+                <div class="card">
+                    <h3><i class="fas fa-shopping-cart"></i> Нақты өмірге байланысты есептер</h3>
+                    <p>Дүкен, уақыт, ақша, бағдарлау сияқты күнделікті жағдайларға арналған тапсырмалар.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-file-alt"></i> Мәтінмен жұмыс</h3>
+                    <p>Ақпаратты табу, салыстыру, қорытынды жасау дағдыларын дамыту.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-home"></i> Күнделікті тұрмыстық жағдайлар</h3>
+                    <p>Тұрмыстық мәселелерді шешуге бағытталған практикалық тапсырмалар.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-search"></i> Зерттеу жұмыстары</h3>
+                    <p>Қоршаған ортамен байланысты зерттеулер жүргізу.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Инструкция, схема, карта, кестелермен жұмыс</h3>
+                    <p>Әртүрлі ақпарат көздерімен жұмыс істеу дағдыларын қалыптастыру.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-users"></i> Топтық пікірталастар</h3>
+                    <p>Коммуникативтік дағдыларды дамытуға арналған топтық жұмыс түрлері.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="library">
+            <h2><i class="fas fa-book"></i> Кітапхана</h2>
+            
+            <h3><i class="fas fa-chart-bar"></i> Қолданылған әдіс-тәсілдердің тиімділігі</h3>
+            
+            <div class="card-container">
+                <div class="card">
+                    <h3><i class="fas fa-gamepad"></i> Ойын технологиясы</h3>
+                    <p>Оқушылардың қызығушылығын арттырады, есте сақтау мен қабылдау процесін жақсартады.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-project-diagram"></i> Жобалық оқыту</h3>
+                    <p>Зерттеу дағдыларын дамытады, жауапкершілікке тәрбиелейді.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-layer-group"></i> Саралап оқыту</h3>
+                    <p>Әр оқушының қабілетіне қарай тапсырма беріп, жеке нәтижеге жетуге көмектеседі.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-laptop-code"></i> Цифрлық технологиялар</h3>
+                    <p>Визуалды және интерактивті материалдар арқылы оқу әрекетін жандандырады.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-brain"></i> Сыни ойлау технологиясы</h3>
+                    <p>Ой қорытындысын жасауға, сұрақ қою мен талдауға үйретеді.</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-atom"></i> STEAM элементтері</h3>
+                    <p>Логикалық ойлау, тәжірибелік жұмысқа қызығушылық қалыптастырады.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-book-open"></i> Ұсынылатын ресурстар</h3>
+            <ul>
+                <li>Интерактивті оқу платформаларының жинағы</li>
+                <li>STEAM бойынша әдістемелік құралдар</li>
+                <li>Функционалдық сауаттылықты дамытуға арналған тапсырмалар жинағы</li>
+                <li>Бастауыш сынып оқушыларына арналған зертханалық жұмыстар үлгілері</li>
+                <li>Санатты ойлауды дамытуға арналған ойындар мен тапсырмалар</li>
+            </ul>
+        </section>
+        
+        <section id="results">
+            <h2><i class="fas fa-chart-line"></i> Нәтижелерге шолу</h2>
+            
+            <h3><i class="fas fa-trophy"></i> Жобаның практикада қолданылуы мен нәтижелілігі</h3>
+            
+            <div class="progress-container">
+                <div class="progress-labels">
+                    <span>Бастапқы кезең</span>
+                    <span>Аяқталуы</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="progress-result"></div>
+                </div>
+            </div>
+            
+            <div class="card-container">
+                <div class="card">
+                    <h3><i class="fas fa-graduation-cap"></i> Оқу мотивациясы</h3>
+                    <p>Оқушылардың оқу мотивациясы айтарлықтай артты</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-language"></i> Функционалдық сауаттылық</h3>
+                    <p>Оқушылардың функционалдық сауаттылығы елеулі дәрежеде дамыды</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-laptop"></i> Цифрлық дағдылар</h3>
+                    <p>Оқушылардың цифрлық дағдылары қалыптасты</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-comments"></i> Ойын жеткізу дағдылары</h3>
+                    <p>Оқушылар өз ойын еркін жеткізуді, ақпаратты талдауды үйренді</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Инновациялық әдіс-тәсілдер</h3>
+                    <p>Оқушылар инновациялық әдіс-тәсілдерді меңгерді</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-chart-pie"></i> Білім сапасы</h3>
+                    <p>Білім сапасы мен оқу жетістіктері жоғарылады</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-flask"></i> Жобалық дағдылар</h3>
+                    <p>Жобалық және зерттеушілік дағдылар дамыды</p>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-clipboard-check"></i> Бағалау критерийлері</h3>
+                <ul>
+                    <li>Оқушылардың белсенділік деңгейінің өзгеруі</li>
+                    <li>Функционалдық сауаттылық көрсеткіштерінің өсуі</li>
+                    <li>Цифрлық құралдарды пайдалану дағдыларының қалыптасуы</li>
+                    <li>Оқу материалдарын түсіну деңгейінің жоғарылауы</li>
+                    <li>Топтық жұмыс істеу дағдыларының дамуы</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="feedback">
+            <h2><i class="fas fa-comments"></i> Пікірлер мен ұсыныстар</h2>
+            
+            <h3><i class="fas fa-tools"></i> Жобаны жетілдіру бойынша ұсыныстар</h3>
+            <ul>
+                <li>Цифрлық ресурстарды одан әрі байыту</li>
+                <li>Мұғалімдерді біліктілігін арттыру курстарын ұйымдастыру</li>
+                <li>Ата-аналармен жұмысты нығайту</li>
+                <li>Әртүрлі оқу стилі бар оқушыларға арналған материалдарды әзірлеу</li>
+                <li>Инновациялық әдістерді басқа пәндерге де кеңейту</li>
+            </ul>
+            
+            <h3><i class="fas fa-envelope"></i> Кері байланыс формасы</h3>
+            <div class="highlight">
+                <p>Жоба бойынша пікіріңізбен бөлісу үшін:</p>
+                <ul>
+                    <li>Электрондық пошта: info@bilim-innovatsiya.kz</li>
+                    <li>Телефон: +7 (777) 123-45-67</li>
+                    <li>Әлеуметтік желілердегі бейнересми: @bilim_innovatsiya</li>
+                </ul>
+            </div>
+            
+            <h3><i class="fas fa-rocket"></i> Жобаны тарату жоспарлары</h3>
+            <ul>
+                <li>Әдістемелік нұсқаулықтарды дайындау</li>
+                <li>Оқытушыларға арналған семинарлар өткізу</li>
+                <li>Ашық сабақтар ұйымдастыру</li>
+                <li>Білім беру конференцияларына қатысу</li>
+                <li>Жоба материалын интернет-ресурстарда жариялау</li>
+            </ul>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Білім берудегі инновациялар</h3>
+            <p>Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>© 2023 "Бастауыш сыныпта білім берудегі инновациялар" жобасы</p>
+            <p>Барлық құқықтар қорғалған</p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js with white particles
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.3
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const progressBar = document.getElementById('progress-result');
+            const section = document.getElementById('results');
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.pageYOffset > sectionTop - 500) {
+                progressBar.style.width = '85%';
+            }
+        });
+        
+        // Section animation on scroll
+        const sections = document.querySelectorAll('section');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scrolling for navigation links with section activation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Deactivate all sections
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Activate target section
+                setTimeout(() => {
+                    targetSection.classList.add('active');
+                }, 300);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Scroll down button
+        document.querySelector('.scroll-down').addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile menu toggle
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+        
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Accordion functionality
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
