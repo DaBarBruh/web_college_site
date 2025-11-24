@@ -42,6 +42,34 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
         }
+        .pdf-gallery {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
+
+        .pdf-gallery canvas {
+            margin-right: 15px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            transition: transform 0.3s ease;
+            height: 420px;
+        }
+
+        .pdf-gallery canvas:hover {
+            transform: scale(1.05);
+        }
+
+        .pdf-gallery::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .pdf-gallery::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
         
         /* Particles Container */
         #particles-js {
@@ -294,6 +322,63 @@
             position: relative;
             overflow: hidden;
         }
+
+
+        #author-info {
+            margin-top: 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+
+    .author-box {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        background: var(--light-blue);
+        padding: 20px 25px;
+        border-radius: 12px;
+        border-left: 6px solid var(--primary);
+        transition: 0.3s ease;
+    }
+
+    .author-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .author-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+    }
+
+    .author-text h3 {
+        margin: 0;
+        color: var(--secondary);
+        font-size: 1.5rem;
+    }
+
+    .author-text p {
+        margin: 4px 0;
+        font-size: 1.05rem;
+        color: var(--dark);
+    }
+
+    @media (max-width: 600px) {
+        .author-box {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
         
         /* Card Styles */
         .card-container {
@@ -583,6 +668,25 @@
             background: var(--accent);
             transform: translateY(-5px) scale(1.1);
         }
+
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 18px;
+            background: var(--primary);
+            color: white !important;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
         
         /* Section transition animation */
         @keyframes fadeInUp {
@@ -768,18 +872,6 @@
                 </li>
 
                 <!-- ===== Практикалық бөлімнен кейін АККОРДЕОН ҚОСЫЛДЫ ===== -->
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <h3><i class="fas fa-file-pdf"></i> Дене биометриясы</h3>
-                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-content-inner">
-                            <iframe src="/static/mektep/1.pdf" 
-                                    width="100%" height="500px" style="border:none;"></iframe>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="accordion-item">
                     <div class="accordion-header">
@@ -830,22 +922,48 @@
                     </div>
                 </div>
                 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>2-кезең. Практикалық іске асыру</h3>
-                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-content-inner">
-                            <ul>
-                                <li>Сабақтарда таңдалған инновациялық әдістерді қолдану.</li>
-                                <li>Топтық, жұптық жұмыстар ұйымдастыру.</li>
-                                <li>Цифрлық платформалар арқылы тапсырмалар орындау.</li>
-                                <li>STEAM және ойын технологияларын енгізу.</li>
-                            </ul>
-                        </div>
+<div class="accordion-item">
+    <div class="accordion-header">
+        <h3>2-кезең. Практикалық іске асыру</h3>
+        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+    </div>
+
+    <div class="accordion-content">
+        <div class="accordion-content-inner">
+
+            <ul>
+                <li>Сабақтарда таңдалған инновациялық әдістерді қолдану.</li>
+                <li>Топтық, жұптық жұмыстар ұйымдастыру.</li>
+                <li>Цифрлық платформалар арқылы тапсырмалар орындау.</li>
+                <li>STEAM және ойын технологияларын енгізу.</li>
+            </ul>
+
+            <!-- ===== Дене биометриясы PDF (осы жерде дұрыс тұр) ===== -->
+            <div class="accordion-item" style="margin-top:20px;">
+                <div class="accordion-header" style="background:#e6f1ff; padding:18px;">
+                    <h3 style="font-size:1.15rem; display:flex; align-items:center;">
+                        <i class="fas fa-file-pdf" style="margin-right:10px;"></i>
+                        Дене биометриясы
+                    </h3>
+                    <span class="accordion-icon">
+                        <i class="fas fa-chevron-down" style="font-size:1.3rem;"></i>
+                    </span>
+                </div>
+
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <iframe src="/static/mektep/1.pdf"
+                                width="100%" height="600px"
+                                style="border:none; border-radius:6px;"></iframe>
                     </div>
                 </div>
+            </div>
+            <!-- ===== /Дене биометриясы ===== -->
+
+        </div>
+    </div>
+</div>
+
                 
 <div class="accordion-item">
     <div class="accordion-header">
@@ -960,9 +1078,16 @@
                 </div>
                 
                 <div class="card">
-                    <h3>Мәтінмен жұмыс</h3>
-                    <p>Ақпаратты табу, салыстыру, қорытынды жасау дағдыларын дамыту.</p>
-                </div>
+                <h3>Мәтінмен жұмыс</h3>
+                <p>Ақпаратты табу, салыстыру, қорытынды жасау дағдыларын дамыту.</p>
+
+                <a href="https://heyzine.com/flip-book/61c67bd172.html" 
+                target="_blank" 
+                class="btn-link">
+                📘 Мақта қыз бен мысық ертегісі
+                </a>
+            </div>
+
                 
                 <div class="card">
                     <h3>Күнделікті тұрмыстық жағдайлар</h3>
@@ -986,52 +1111,178 @@
             </div>
         </section>
         
-        <section id="library">
-            <h2>Кітапхана</h2>
-            
-            <h3><i class="fas fa-chart-bar"></i> Қолданылған әдіс-тәсілдердің тиімділігі</h3>
-            
-            <div class="card-container">
-                <div class="card">
-                    <h3>Ойын технологиясы</h3>
-                    <p>Оқушылардың қызығушылығын арттырады, есте сақтау мен қабылдау процесін жақсартады.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Жобалық оқыту</h3>
-                    <p>Зерттеу дағдыларын дамытады, жауапкершілікке тәрбиелейді.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Саралап оқыту</h3>
-                    <p>Әр оқушының қабілетіне қарай тапсырма беріп, жеке нәтижеге жетуге көмектеседі.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Цифрлық технологиялар</h3>
-                    <p>Визуалды және интерактивті материалдар арқылы оқу әрекетін жандандырады.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Сыни ойлау технологиясы</h3>
-                    <p>Ой қорытындысын жасауға, сұрақ қою мен талдауға үйретеді.</p>
-                </div>
-                
-                <div class="card">
-                    <h3>STEAM элементтері</h3>
-                    <p>Логикалық ойлау, тәжірибелік жұмысқа қызығушылық қалыптастырады.</p>
+<section id="library">
+    <h2>Кітапхана</h2>
+
+    <h3><i class="fas fa-chart-bar"></i> Қолданылған әдіс-тәсілдердің тиімділігі</h3>
+
+    <div class="card-container">
+        <div class="card">
+            <h3>Ойын технологиясы</h3>
+            <p>Оқушылардың қызығушылығын арттырады, есте сақтау мен қабылдау процесін жақсартады.</p>
+        </div>
+        <div class="card">
+            <h3>Жобалық оқыту</h3>
+            <p>Зерттеу дағдыларын дамытады, жауапкершілікке тәрбиелейді.</p>
+        </div>
+        <div class="card">
+            <h3>Саралап оқыту</h3>
+            <p>Әр оқушының қабілетіне қарай тапсырма беріп, жеке нәтижеге жетуге көмектеседі.</p>
+        </div>
+        <div class="card">
+            <h3>Цифрлық технологиялар</h3>
+            <p>Визуалды және интерактивті материалдар арқылы оқу әрекетін жандандырады.</p>
+        </div>
+        <div class="card">
+            <h3>Сыни ойлау технологиясы</h3>
+            <p>Сұрақ қою, талдау және қорытынды жасауға үйретеді.</p>
+        </div>
+        <div class="card">
+            <h3>STEAM элементтері</h3>
+            <p>Логикалық ойлау, зерттеу дағдыларын қалыптастырады.</p>
+        </div>
+    </div>
+
+    <h3><i class="fas fa-book-open"></i> Ұсынылатын ресурстар</h3>
+    <ul>
+        <li>Интерактивті оқу платформаларының жинағы</li>
+        <li>STEAM бойынша әдістемелік құралдар</li>
+        <li>Функционалдық сауаттылық тапсырмалары</li>
+        <li>Зертханалық жұмыстар үлгілері</li>
+        <li>Санатты ойлауды дамыту ойындары</li>
+    </ul>
+
+    <h3><i class="fas fa-heart"></i> Отбасылық тәрбиелік оқиғалар</h3>
+
+    <div class="accordion">
+
+        <!-- 1 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>1. Ана жүрегі</h3>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p>Бір күні Айсулу деген кішкентай қыз мектептен қайтып келе жатып, анасына гүл әкеледі.</p>
+                    <p><b>— Анашым, сізге!</b></p>
+                    <p><i>— Гүлдің кішкентайы болмайды, қызым. Ниетің — ең үлкен сый.</i></p>
+                    <p><b>Өсиет:</b> Жылы сөз — ананы қуантатын ең үлкен сый.</p>
                 </div>
             </div>
-            
-            <h3><i class="fas fa-book-open"></i> Ұсынылатын ресурстар</h3>
-            <ul>
-                <li>Интерактивті оқу платформаларының жинағы</li>
-                <li>STEAM бойынша әдістемелік құралдар</li>
-                <li>Функционалдық сауаттылықты дамытуға арналған тапсырмалар жинағы</li>
-                <li>Бастауыш сынып оқушыларына арналған зертханалық жұмыстар үлгілері</li>
-                <li>Санатты ойлауды дамытуға арналған ойындар мен тапсырмалар</li>
-            </ul>
-        </section>
+        </div>
+
+        <!-- 2 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>2. Бірлік болған жерде — тірлік бар</h3>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p>Әкесі екі бауырына шыбық будасын сындыруды айтады. Олар сындыра алмайды.</p>
+                    <p><i>— Бірлік болса, барлығы жеңіл, – деді әкесі.</i></p>
+                    <p><b>Өсиет:</b> Отбасындағы татулық — ең мықты тірек.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>3. Үйдің берекесі</h3>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p>Айнұр кешкі асқа қосылмай қойғанда, әкесі:</p>
+                    <p><i>— Біз үшін ең дәмді ас — бәріміз бірге жейтін ас.</i></p>
+                    <p><b>Өсиет:</b> Бірге өткізген уақыт — отбасының байлығы.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>4. Әженің батасы</h3>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><i>— Жасаған жақсылығың — өзіңе қайтады,</i> – деді әжесі.</p>
+                    <p><b>Өсиет:</b> Үйге көмектесу — мінезді тәрбиелейді.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>5. Мейірімділік қайтарымы</h3>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p>Дастан кішкентай қызға көмектесті, кейін анасына да жәрдемдесті.</p>
+                    <p><i>— Мейірімді бала — отбасының айнасы,</i> – деді анасы.</p>
+                    <p><b>Өсиет:</b> Мейірімділік — айналаға тарайтын жарық.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================= -->
+    <!--      PDF ГАЛЕРЕЯ АККОРДЕОН     -->
+    <!-- ============================= -->
+
+    <h3><i class="fas fa-file-pdf"></i> Ертегі</h3>
+
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <h3><i class="fas fa-file-pdf"></i> Түлік, тасбақа және кене</h3>
+            <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+        </div>
+
+        <div class="accordion-content">
+            <div class="accordion-content-inner">
+
+                <div id="pdf-gallery" class="pdf-gallery"></div>
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+
+                <script>
+                    const pdfPath = "/static/mektep/4.pdf";
+                    const container = document.getElementById("pdf-gallery");
+
+                    pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {
+                        const totalPages = pdf.numPages;
+
+                        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                            pdf.getPage(pageNum).then(function(page) {
+                                const scale = 1.2;
+                                const viewport = page.getViewport({ scale });
+
+                                const canvas = document.createElement("canvas");
+                                const ctx = canvas.getContext("2d");
+                                canvas.height = viewport.height;
+                                canvas.width = viewport.width;
+                                canvas.classList.add("pdf-page-img");
+
+                                page.render({ canvasContext: ctx, viewport });
+                                container.appendChild(canvas);
+                            });
+                        }
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
         
         <section id="results">
             <h2>Нәтижелерге шолу</h2>
@@ -1155,6 +1406,28 @@
             </ul>
         </section>
     </div>
+
+
+
+
+
+    <section id="author-info">
+        <h2>Жоба авторы туралы қысқаша мәлімет</h2>
+
+        <div class="author-box">
+            <div class="author-icon">
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="author-text">
+                <h3>Илияхын Дарина Ерболқызы</h3>
+                <p><b>Бастауыш сынып мұғалімі</b></p>
+                <p><b>Педагог-сарапшы</b></p>
+                <p>«Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру» жобасының авторы</p>
+            </div>
+        </div>
+    </section>
+
     
     <!-- Footer -->
     <footer>
