@@ -141,7 +141,7 @@
         }
         
         .nav-container {
-            max-width: 1200px;
+            max-width: 1700px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -344,6 +344,48 @@
             transition: color 0.4s ease;
         }
         
+        /* Video Styles */
+        .video-container {
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-title {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
         /* Accordion Styles */
         .accordion {
             margin: 2rem 0;
@@ -404,42 +446,6 @@
         
         .accordion-item.active .accordion-content {
             max-height: 500px;
-        }
-        
-        /* Stage Styles */
-        .stage {
-            margin-bottom: 2.5rem;
-            padding: 2rem;
-            background: var(--light-blue);
-            border-radius: 12px;
-            border-left: 5px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        
-        .stage:hover {
-            transform: translateX(10px);
-        }
-        
-        .stage h3 {
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-        }
-        
-        .stage-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
         
         /* Progress Bar */
@@ -578,6 +584,14 @@
             transform: translateY(-5px) scale(1.1);
         }
         
+        /* Section transition animation */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             h1 {
@@ -586,6 +600,10 @@
             
             .card-container {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .video-container {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             }
         }
         
@@ -630,6 +648,10 @@
                 grid-template-columns: 1fr;
             }
             
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+            
             section {
                 padding: 1.5rem;
             }
@@ -643,6 +665,10 @@
             .subtitle {
                 font-size: 1rem;
             }
+            
+            .video-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -652,6 +678,12 @@
     
     <!-- Header -->
     <header>
+        <style>
+    .subtitle {
+        color: #f3f3f3; /* слегка черный */
+    }
+</style>
+
         <div class="header-content">
             <h1>Бастауыш сыныпта білім берудегі инновациялар</h1>
             <p class="subtitle">Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру жобасы</p>
@@ -669,6 +701,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="nav-links" id="navLinks">
+                <a href="#main-info"><i class="fas fa-star"></i> Негізгі ақпарат</a>
                 <a href="#about"><i class="fas fa-info-circle"></i> Жоба туралы ақпарат</a>
                 <a href="#tasks"><i class="fas fa-tasks"></i> Тапсырмалар</a>
                 <a href="#library"><i class="fas fa-book"></i> Кітапхана</a>
@@ -680,8 +713,32 @@
     
     <!-- Main Content -->
     <div class="container">
-        <section id="about" class="active">
-            <h2><i class="fas fa-info-circle"></i> Жоба туралы ақпарат</h2>
+        <section id="main-info" class="active">
+            <h2>Жобаның негізгі бағыттары</h2>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-exclamation-circle"></i> Жобаның өзектілігі:</h3>
+                <p>Қазіргі білім беру жүйесі баланың шығармашылық, сыни ойлау және функционалдық сауаттылығын дамытуға бағытталған.</p>
+            </div>
+
+            <div class="highlight">
+                <h3><i class="fas fa-bullseye"></i> Жобаның мақсаты:</h3>
+                <p>Инновациялық әдіс-тәсілдерді енгізу арқылы білім сапасын арттыру.</p>
+            </div>
+
+            <div class="highlight">
+                <h3><i class="fas fa-tasks"></i> Жобаның міндеттері:</h3>
+                <ul>
+                    <li>Инновациялық технологияларды танып, қолдану;</li>
+                    <li>Шығармашылық қабілеттерді дамыту;</li>
+                    <li>Цифрлық ресурстарды тиімді пайдалану;</li>
+                    <li>Саралап және жобалық оқыту енгізу.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="about">
+            <h2>Жоба туралы ақпарат</h2>
             
             <div class="highlight">
                 <h3><i class="fas fa-lightbulb"></i> Инновациялық идеяның жаңашылдығы</h3>
@@ -709,6 +766,42 @@
                         <li>Цифрлық ресурстармен жұмыс</li>
                     </ul>
                 </li>
+
+                <!-- ===== Практикалық бөлімнен кейін АККОРДЕОН ҚОСЫЛДЫ ===== -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-file-pdf"></i> Дене биометриясы</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <iframe src="/static/mektep/1.pdf" 
+                                    width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-file-pdf"></i> Көлеңке театры</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <iframe src="/static/mektep/2.pdf" 
+                                    width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== АККОРДЕОН АЯҒЫ ===== -->
+
+
+
+
+
+
+
+
                 <li>Функционалдық сауаттылықты дамытуға арналған тапсырмалар</li>
                 <li>Зерттеу нәтижелері, талдау</li>
                 <li>Қорытынды және ұсыныстар</li>
@@ -716,14 +809,14 @@
         </section>
         
         <section id="tasks">
-            <h2><i class="fas fa-tasks"></i> Тапсырмалар</h2>
+            <h2>Тапсырмалар</h2>
             
             <h3><i class="fas fa-list-ol"></i> Жобаның кезеңдері</h3>
             
             <div class="accordion">
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <h3><i class="fas fa-clipboard-check"></i> 1-кезең. Дайындық кезеңі</h3>
+                        <h3>1-кезең. Дайындық кезеңі</h3>
                         <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="accordion-content">
@@ -739,7 +832,7 @@
                 
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <h3><i class="fas fa-play-circle"></i> 2-кезең. Практикалық іске асыру</h3>
+                        <h3>2-кезең. Практикалық іске асыру</h3>
                         <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="accordion-content">
@@ -756,7 +849,7 @@
                 
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <h3><i class="fas fa-chart-bar"></i> 3-кезең. Мониторинг және талдау</h3>
+                        <h3>3-кезең. Мониторинг және талдау</h3>
                         <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="accordion-content">
@@ -772,7 +865,7 @@
                 
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <h3><i class="fas fa-flag-checkered"></i> 4-кезең. Қорытындылау</h3>
+                        <h3>4-кезең. Қорытындылау</h3>
                         <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="accordion-content">
@@ -790,70 +883,70 @@
             <h3><i class="fas fa-cogs"></i> Функционалдық сауаттылықты дамыту бағытындағы қызметтер</h3>
             <div class="card-container">
                 <div class="card">
-                    <h3><i class="fas fa-shopping-cart"></i> Нақты өмірге байланысты есептер</h3>
+                    <h3>Нақты өмірге байланысты есептер</h3>
                     <p>Дүкен, уақыт, ақша, бағдарлау сияқты күнделікті жағдайларға арналған тапсырмалар.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-file-alt"></i> Мәтінмен жұмыс</h3>
+                    <h3>Мәтінмен жұмыс</h3>
                     <p>Ақпаратты табу, салыстыру, қорытынды жасау дағдыларын дамыту.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-home"></i> Күнделікті тұрмыстық жағдайлар</h3>
+                    <h3>Күнделікті тұрмыстық жағдайлар</h3>
                     <p>Тұрмыстық мәселелерді шешуге бағытталған практикалық тапсырмалар.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-search"></i> Зерттеу жұмыстары</h3>
+                    <h3>Зерттеу жұмыстары</h3>
                     <p>Қоршаған ортамен байланысты зерттеулер жүргізу.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-map-marked-alt"></i> Инструкция, схема, карта, кестелермен жұмыс</h3>
+                    <h3>Инструкция, схема, карта, кестелермен жұмыс</h3>
                     <p>Әртүрлі ақпарат көздерімен жұмыс істеу дағдыларын қалыптастыру.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-users"></i> Топтық пікірталастар</h3>
+                    <h3>Топтық пікірталастар</h3>
                     <p>Коммуникативтік дағдыларды дамытуға арналған топтық жұмыс түрлері.</p>
                 </div>
             </div>
         </section>
         
         <section id="library">
-            <h2><i class="fas fa-book"></i> Кітапхана</h2>
+            <h2>Кітапхана</h2>
             
             <h3><i class="fas fa-chart-bar"></i> Қолданылған әдіс-тәсілдердің тиімділігі</h3>
             
             <div class="card-container">
                 <div class="card">
-                    <h3><i class="fas fa-gamepad"></i> Ойын технологиясы</h3>
+                    <h3>Ойын технологиясы</h3>
                     <p>Оқушылардың қызығушылығын арттырады, есте сақтау мен қабылдау процесін жақсартады.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-project-diagram"></i> Жобалық оқыту</h3>
+                    <h3>Жобалық оқыту</h3>
                     <p>Зерттеу дағдыларын дамытады, жауапкершілікке тәрбиелейді.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-layer-group"></i> Саралап оқыту</h3>
+                    <h3>Саралап оқыту</h3>
                     <p>Әр оқушының қабілетіне қарай тапсырма беріп, жеке нәтижеге жетуге көмектеседі.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-laptop-code"></i> Цифрлық технологиялар</h3>
+                    <h3>Цифрлық технологиялар</h3>
                     <p>Визуалды және интерактивті материалдар арқылы оқу әрекетін жандандырады.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-brain"></i> Сыни ойлау технологиясы</h3>
+                    <h3>Сыни ойлау технологиясы</h3>
                     <p>Ой қорытындысын жасауға, сұрақ қою мен талдауға үйретеді.</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-atom"></i> STEAM элементтері</h3>
+                    <h3>STEAM элементтері</h3>
                     <p>Логикалық ойлау, тәжірибелік жұмысқа қызығушылық қалыптастырады.</p>
                 </div>
             </div>
@@ -869,7 +962,33 @@
         </section>
         
         <section id="results">
-            <h2><i class="fas fa-chart-line"></i> Нәтижелерге шолу</h2>
+            <h2>Нәтижелерге шолу</h2>
+            
+            <h3><i class="fas fa-video"></i> Жоба нәтижелері бейнелері</h3>
+            
+            <div class="video-container">
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/X4YgRoe6fu0" 
+                                title="Бастауыш білім берудегі инновациялық әдістер" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-title">Инновациялық оқыту әдістері</p>
+                </div>
+                
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/CHOCPMmrPRQ" 
+                                title="Функционалдық сауаттылықты дамыту" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-title">Функционалдық сауаттылық бойынша практика</p>
+                </div>
+            </div>
             
             <h3><i class="fas fa-trophy"></i> Жобаның практикада қолданылуы мен нәтижелілігі</h3>
             
@@ -885,37 +1004,37 @@
             
             <div class="card-container">
                 <div class="card">
-                    <h3><i class="fas fa-graduation-cap"></i> Оқу мотивациясы</h3>
+                    <h3>Оқу мотивациясы</h3>
                     <p>Оқушылардың оқу мотивациясы айтарлықтай артты</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-language"></i> Функционалдық сауаттылық</h3>
+                    <h3>Функционалдық сауаттылық</h3>
                     <p>Оқушылардың функционалдық сауаттылығы елеулі дәрежеде дамыды</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-laptop"></i> Цифрлық дағдылар</h3>
+                    <h3>Цифрлық дағдылар</h3>
                     <p>Оқушылардың цифрлық дағдылары қалыптасты</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-comments"></i> Ойын жеткізу дағдылары</h3>
+                    <h3>Ойын жеткізу дағдылары</h3>
                     <p>Оқушылар өз ойын еркін жеткізуді, ақпаратты талдауды үйренді</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-lightbulb"></i> Инновациялық әдіс-тәсілдер</h3>
+                    <h3>Инновациялық әдіс-тәсілдер</h3>
                     <p>Оқушылар инновациялық әдіс-тәсілдерді меңгерді</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-chart-pie"></i> Білім сапасы</h3>
+                    <h3>Білім сапасы</h3>
                     <p>Білім сапасы мен оқу жетістіктері жоғарылады</p>
                 </div>
                 
                 <div class="card">
-                    <h3><i class="fas fa-flask"></i> Жобалық дағдылар</h3>
+                    <h3>Жобалық дағдылар</h3>
                     <p>Жобалық және зерттеушілік дағдылар дамыды</p>
                 </div>
             </div>
@@ -933,7 +1052,7 @@
         </section>
         
         <section id="feedback">
-            <h2><i class="fas fa-comments"></i> Пікірлер мен ұсыныстар</h2>
+            <h2>Пікірлер мен ұсыныстар</h2>
             
             <h3><i class="fas fa-tools"></i> Жобаны жетілдіру бойынша ұсыныстар</h3>
             <ul>
@@ -948,8 +1067,8 @@
             <div class="highlight">
                 <p>Жоба бойынша пікіріңізбен бөлісу үшін:</p>
                 <ul>
-                    <li>Электрондық пошта: info@bilim-innovatsiya.kz</li>
-                    <li>Телефон: +7 (777) 123-45-67</li>
+                    <li>Электрондық пошта: Iliyakhyndd015@gmail.com</li>
+                    <li>Телефон: +7 (747) 133-50-80</li>
                     <li>Әлеуметтік желілердегі бейнересми: @bilim_innovatsiya</li>
                 </ul>
             </div>
@@ -967,16 +1086,26 @@
     
     <!-- Footer -->
     <footer>
+        <style>
+    footer, footer p, footer a, footer i {
+        color: white !important;
+    }
+</style>
+
         <div class="footer-content">
-            <h3>Білім берудегі инновациялар</h3>
             <p>Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру</p>
+
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/200school.gymnasium?igsh=MXhteXNwNDZ0MzFmNw==">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="mailto:Iliyakhyndd015@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>© 2023 "Бастауыш сыныпта білім берудегі инновациялар" жобасы</p>
+
+            <p>© 2025 "Бастауыш сыныпта білім берудегі инновациялар" жобасы</p>
             <p>Барлық құқықтар қорғалған</p>
         </div>
     </footer>

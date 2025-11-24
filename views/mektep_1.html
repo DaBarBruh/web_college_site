@@ -4,32 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бастауыш сыныпта білім берудегі инновациялар</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%236c63ff'/%3E%3Cpath d='M35 40 L65 40 L65 45 L50 60 L35 45 Z' fill='white'/%3E%3Ccircle cx='50' cy='35' r='5' fill='white'/%3E%3C/svg%3E">
-    
-    <!-- Альтернативные варианты favicon (раскомментируйте нужный) -->
-    <!--
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2336d1dc'/%3E%3Cpath d='M30 40 L70 40 L50 65 Z' fill='white'/%3E%3Ccircle cx='50' cy='35' r='8' fill='white'/%3E%3C/svg%3E">
-    -->
-    
-    <!--
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 30 Q50 10 80 30 Q85 50 80 70 Q50 90 20 70 Q15 50 20 30 Z' fill='%236c63ff'/%3E%3Ccircle cx='50' cy='40' r='8' fill='white'/%3E%3Cpath d='M40 55 L60 55 L50 70 Z' fill='white'/%3E%3C/svg%3E">
-    -->
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6c63ff;
-            --secondary: #4a44c6;
-            --accent: #36d1dc;
-            --neon: #0084ff;
-            --neon-blue: #00ffff;
-            --dark: #121212;
-            --darker: #0a0a0a;
-            --light: #e0e0e0;
-            --gray: #2d2d2d;
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light-blue: #e2f0ff;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --gray: #718096;
             --success: #4bb543;
             --warning: #ffcc00;
             --danger: #dc3545;
@@ -47,11 +32,10 @@
         
         body {
             font-family: 'Nunito', sans-serif;
-            background: var(--darker);
-            color: var(--light);
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
         
         h1, h2, h3, h4, h5 {
@@ -65,21 +49,18 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            opacity: 0.6;
         }
         
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, rgba(18, 18, 18, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 2rem 0;
+            padding: 4rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
         }
         
         .header-content {
@@ -90,43 +71,19 @@
             z-index: 2;
         }
         
-        .neon-text {
-            font-size: 4.5rem;
-            text-align: center;
-            color: #fff;
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 20px var(--neon),
-                0 0 40px var(--neon),
-                0 0 80px var(--neon);
-            margin-bottom: 2rem;
-        }
-        
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                text-shadow: 
-                    0 0 5px #fff,
-                    0 0 10px #fff,
-                    0 0 20px var(--neon),
-                    0 0 40px var(--neon),
-                    0 0 80px var(--neon),
-                    0 0 90px var(--neon),
-                    0 0 100px var(--neon),
-                    0 0 150px var(--neon);
-            }
-            20%, 24%, 55% {
-                text-shadow: none;
-            }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease;
         }
         
         .subtitle {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto;
             opacity: 0.9;
-            text-align: center;
-            color: var(--accent);
+            animation: fadeInUp 1s ease 0.3s both;
         }
         
         .scroll-down {
@@ -134,7 +91,7 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--light);
+            color: white;
             font-size: 2rem;
             animation: bounce 2s infinite;
             cursor: pointer;
@@ -152,15 +109,35 @@
             }
         }
         
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Navigation */
         nav {
-            background-color: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid var(--gray);
         }
         
         .nav-container {
@@ -176,12 +153,13 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--light);
+            color: var(--primary);
             text-decoration: none;
+            padding: 1rem 0;
         }
         
         .logo span {
-            color: var(--accent);
+            color: var(--secondary);
         }
         
         .nav-links {
@@ -190,7 +168,7 @@
         }
         
         nav a {
-            color: var(--light);
+            color: var(--dark);
             text-decoration: none;
             padding: 1.2rem 1.5rem;
             display: inline-block;
@@ -203,28 +181,27 @@
         nav a::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.4), transparent);
-            transition: left 0.5s;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
         
         nav a:hover {
-            color: var(--accent);
-            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary);
         }
         
         nav a:hover::before {
-            left: 100%;
+            width: 100%;
         }
         
         .burger {
             display: none;
             cursor: pointer;
             font-size: 1.5rem;
-            color: var(--light);
+            color: var(--dark);
         }
         
         /* Main Content */
@@ -235,12 +212,11 @@
         }
         
         section {
-            background: rgba(30, 30, 30, 0.7);
+            background: white;
             border-radius: 15px;
             padding: 2.5rem;
             margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--gray);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -264,7 +240,7 @@
         }
         
         h2 {
-            color: var(--accent);
+            color: var(--secondary);
             margin-bottom: 1.5rem;
             padding-bottom: 0.8rem;
             border-bottom: 2px solid var(--primary);
@@ -285,6 +261,7 @@
         
         p {
             margin-bottom: 1.2rem;
+            color: var(--dark);
         }
         
         ul, ol {
@@ -296,10 +273,11 @@
             margin-bottom: 0.7rem;
             position: relative;
             padding-left: 10px;
+            color: var(--dark);
         }
         
         li::before {
-            content: '▸';
+            content: '•';
             color: var(--accent);
             font-weight: bold;
             position: absolute;
@@ -308,24 +286,13 @@
         
         /* Highlight Box */
         .highlight {
-            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(54, 209, 220, 0.1) 100%);
+            background: var(--light-blue);
             padding: 2rem;
             border-radius: 12px;
             border-left: 5px solid var(--accent);
             margin: 2rem 0;
             position: relative;
             overflow: hidden;
-        }
-        
-        .highlight::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
         }
         
         /* Card Styles */
@@ -337,12 +304,12 @@
         }
         
         .card {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(30, 30, 30, 0.9));
+            background: white;
             border-radius: 12px;
             padding: 1.8rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
-            border: 1px solid var(--gray);
+            border: 1px solid #e2e8f0;
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -363,16 +330,16 @@
         
         .card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             border-color: var(--primary);
         }
         
         .card:hover::before {
-            opacity: 0.1;
+            opacity: 0.05;
         }
         
         .card h3 {
-            color: var(--light);
+            color: var(--primary);
             margin-top: 0;
             transition: color 0.4s ease;
         }
@@ -392,14 +359,14 @@
             padding-bottom: 56.25%;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--gray);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
         }
         
         .video-wrapper:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
             border-color: var(--primary);
         }
         
@@ -425,11 +392,11 @@
         }
         
         .accordion-item {
-            background: rgba(40, 40, 40, 0.6);
+            background: white;
             border-radius: 8px;
             margin-bottom: 1rem;
             overflow: hidden;
-            border: 1px solid var(--gray);
+            border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
         }
         
@@ -439,7 +406,7 @@
         
         .accordion-header {
             padding: 1.5rem;
-            background: rgba(50, 50, 50, 0.8);
+            background: var(--light-blue);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -448,12 +415,12 @@
         }
         
         .accordion-header:hover {
-            background: rgba(70, 70, 70, 0.8);
+            background: #d4e6ff;
         }
         
         .accordion-header h3 {
             margin: 0;
-            color: var(--light);
+            color: var(--dark);
             font-size: 1.2rem;
         }
         
@@ -466,7 +433,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
-            background: rgba(30, 30, 30, 0.8);
+            background: white;
         }
         
         .accordion-content-inner {
@@ -488,11 +455,11 @@
         
         .progress-bar {
             height: 12px;
-            background: var(--gray);
+            background: #e2e8f0;
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 0.5rem;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .progress {
@@ -540,17 +507,16 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.9rem;
-            color: #aaa;
+            color: var(--gray);
         }
         
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--darker) 0%, #1a1a2e 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, #2a0a7a 100%);
             color: white;
             text-align: center;
             padding: 3rem 0;
             margin-top: 3rem;
-            border-top: 1px solid var(--gray);
         }
         
         .footer-content {
@@ -580,7 +546,7 @@
         }
         
         .social-links a:hover {
-            background: var(--primary);
+            background: var(--accent);
             transform: translateY(-5px) scale(1.1);
         }
         
@@ -598,7 +564,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(108, 99, 255, 0.4);
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.4);
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
@@ -628,8 +594,8 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
-            .neon-text {
-                font-size: 3.5rem;
+            h1 {
+                font-size: 3rem;
             }
             
             .card-container {
@@ -648,11 +614,11 @@
                 left: -100%;
                 width: 80%;
                 height: calc(100vh - 70px);
-                background: rgba(18, 18, 18, 0.95);
+                background: white;
                 flex-direction: column;
                 transition: left 0.3s ease;
                 padding-top: 2rem;
-                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
             }
             
             .nav-links.active {
@@ -663,14 +629,14 @@
                 width: 100%;
                 text-align: center;
                 padding: 1.2rem;
-                border-bottom: 1px solid var(--gray);
+                border-bottom: 1px solid #e2e8f0;
             }
             
             .burger {
                 display: block;
             }
             
-            .neon-text {
+            h1 {
                 font-size: 2.5rem;
             }
             
@@ -692,7 +658,7 @@
         }
         
         @media (max-width: 480px) {
-            .neon-text {
+            h1 {
                 font-size: 2rem;
             }
             
@@ -712,8 +678,14 @@
     
     <!-- Header -->
     <header>
+        <style>
+    .subtitle {
+        color: #f3f3f3; /* слегка черный */
+    }
+</style>
+
         <div class="header-content">
-            <h1 class="neon-text">Бастауыш сыныпта білім берудегі инновациялар</h1>
+            <h1>Бастауыш сыныпта білім берудегі инновациялар</h1>
             <p class="subtitle">Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру жобасы</p>
         </div>
         <div class="scroll-down">
@@ -794,6 +766,42 @@
                         <li>Цифрлық ресурстармен жұмыс</li>
                     </ul>
                 </li>
+
+                <!-- ===== Практикалық бөлімнен кейін АККОРДЕОН ҚОСЫЛДЫ ===== -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-file-pdf"></i> Дене биометриясы</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <iframe src="/static/mektep/1.pdf" 
+                                    width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><i class="fas fa-file-pdf"></i> Көлеңке театры</h3>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <iframe src="/static/mektep/2.pdf" 
+                                    width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== АККОРДЕОН АЯҒЫ ===== -->
+
+
+
+
+
+
+
+
                 <li>Функционалдық сауаттылықты дамытуға арналған тапсырмалар</li>
                 <li>Зерттеу нәтижелері, талдау</li>
                 <li>Қорытынды және ұсыныстар</li>
@@ -1078,6 +1086,12 @@
     
     <!-- Footer -->
     <footer>
+        <style>
+    footer, footer p, footer a, footer i {
+        color: white !important;
+    }
+</style>
+
         <div class="footer-content">
             <p>Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру</p>
 
@@ -1104,7 +1118,7 @@
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize particles.js
+        // Initialize particles.js with white particles
         particlesJS('particles-js', {
             particles: {
                 number: {
@@ -1115,7 +1129,7 @@
                     }
                 },
                 color: {
-                    value: ['#6c63ff', '#36d1dc', '#4a44c6']
+                    value: '#ffffff'
                 },
                 shape: {
                     type: 'circle',
@@ -1147,7 +1161,7 @@
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: '#6c63ff',
+                    color: '#ffffff',
                     opacity: 0.2,
                     width: 1
                 },
