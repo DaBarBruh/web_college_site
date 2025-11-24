@@ -445,7 +445,7 @@
         }
         
         .accordion-item.active .accordion-content {
-            max-height: 500px;
+            max-height: auto;
         }
         
         /* Progress Bar */
@@ -863,26 +863,33 @@
             </ul>
 
             <!-- ==== КІШІ АККОРДЕОН (PDF) ==== -->
-            <div class="accordion-item" style="margin-top:15px;">
-                <div class="accordion-header" style="background:#eef5ff;">
-                    <h3 style="font-size:1rem;">
-                        <i class="fas fa-file-pdf"></i> Оқу мақсаттарына сәйкес элементтер
+            <div class="accordion-item" style="margin-top:20px;">
+                <div class="accordion-header" style="background:#e6f1ff; padding:18px;">
+                    <h3 style="font-size:1.15rem; display:flex; align-items:center;">
+                        <i class="fas fa-file-pdf" style="margin-right:10px;"></i> 
+                        Оқу мақсаттарына сәйкес элементтер
                     </h3>
-                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    <span class="accordion-icon">
+                        <i class="fas fa-chevron-down" style="font-size:1.3rem;"></i>
+                    </span>
                 </div>
 
+                <!-- Бастапқыда ЖАБЫҚ -->
                 <div class="accordion-content">
-                    <div class="accordion-content-inner">
+                    <div class="accordion-content-inner" style="padding:0;">
                         <iframe src="/static/mektep/3.pdf"
-                                width="100%" height="450px" style="border:none;"></iframe>
+                                width="100%" height="600px" 
+                                style="border:none; border-radius:6px;"></iframe>
                     </div>
                 </div>
             </div>
-            <!-- ==== КІШІ АККОРДЕОН АЯҚТАЛДЫ ==== -->
+            <!-- ==== КІШІ АККОРДЕОН АЯҒЫ ==== -->
 
         </div>
     </div>
 </div>
+
+
 
                 
                 <div class="accordion-item">
