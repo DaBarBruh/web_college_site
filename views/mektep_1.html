@@ -364,6 +364,48 @@
             transition: color 0.4s ease;
         }
         
+        /* Video Styles */
+        .video-container {
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-title {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
         /* Accordion Styles */
         .accordion {
             margin: 2rem 0;
@@ -580,6 +622,10 @@
             .card-container {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+            
+            .video-container {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
         }
         
         @media (max-width: 768px) {
@@ -623,6 +669,10 @@
                 grid-template-columns: 1fr;
             }
             
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+            
             section {
                 padding: 1.5rem;
             }
@@ -635,6 +685,10 @@
             
             .subtitle {
                 font-size: 1rem;
+            }
+            
+            .video-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -662,6 +716,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="nav-links" id="navLinks">
+                <a href="#main-info"><i class="fas fa-star"></i> Негізгі ақпарат</a>
                 <a href="#about"><i class="fas fa-info-circle"></i> Жоба туралы ақпарат</a>
                 <a href="#tasks"><i class="fas fa-tasks"></i> Тапсырмалар</a>
                 <a href="#library"><i class="fas fa-book"></i> Кітапхана</a>
@@ -673,7 +728,31 @@
     
     <!-- Main Content -->
     <div class="container">
-        <section id="about" class="active">
+        <section id="main-info" class="active">
+            <h2>Жобаның негізгі бағыттары</h2>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-exclamation-circle"></i> Жобаның өзектілігі:</h3>
+                <p>Қазіргі білім беру жүйесі баланың шығармашылық, сыни ойлау және функционалдық сауаттылығын дамытуға бағытталған.</p>
+            </div>
+
+            <div class="highlight">
+                <h3><i class="fas fa-bullseye"></i> Жобаның мақсаты:</h3>
+                <p>Инновациялық әдіс-тәсілдерді енгізу арқылы білім сапасын арттыру.</p>
+            </div>
+
+            <div class="highlight">
+                <h3><i class="fas fa-tasks"></i> Жобаның міндеттері:</h3>
+                <ul>
+                    <li>Инновациялық технологияларды танып, қолдану;</li>
+                    <li>Шығармашылық қабілеттерді дамыту;</li>
+                    <li>Цифрлық ресурстарды тиімді пайдалану;</li>
+                    <li>Саралап және жобалық оқыту енгізу.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="about">
             <h2>Жоба туралы ақпарат</h2>
             
             <div class="highlight">
@@ -864,6 +943,32 @@
         <section id="results">
             <h2>Нәтижелерге шолу</h2>
             
+            <h3><i class="fas fa-video"></i> Жоба нәтижелері бейнелері</h3>
+            
+            <div class="video-container">
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/X4YgRoe6fu0" 
+                                title="Бастауыш білім берудегі инновациялық әдістер" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-title">Инновациялық оқыту әдістері</p>
+                </div>
+                
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/CHOCPMmrPRQ" 
+                                title="Функционалдық сауаттылықты дамыту" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-title">Функционалдық сауаттылық бойынша практика</p>
+                </div>
+            </div>
+            
             <h3><i class="fas fa-trophy"></i> Жобаның практикада қолданылуы мен нәтижелілігі</h3>
             
             <div class="progress-container">
@@ -959,26 +1064,24 @@
     </div>
     
     <!-- Footer -->
-<footer>
-    <div class="footer-content">
-        <p>Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру</p>
+    <footer>
+        <div class="footer-content">
+            <p>Заманауи әдіс-тәсілдер арқылы бастауыш білім беруді жетілдіру</p>
 
-        <div class="social-links">
-            <a href="https://www.instagram.com/200school.gymnasium?igsh=MXhteXNwNDZ0MzFmNw==">
-                <i class="fab fa-instagram"></i>
-            </a>
+            <div class="social-links">
+                <a href="https://www.instagram.com/200school.gymnasium?igsh=MXhteXNwNDZ0MzFmNw==">
+                    <i class="fab fa-instagram"></i>
+                </a>
 
-            <!-- Иконка email -->
-            <a href="mailto:Iliyakhyndd015@gmail.com">
-                <i class="fas fa-envelope"></i>
-            </a>
+                <a href="mailto:Iliyakhyndd015@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <p>© 2023 "Бастауыш сыныпта білім берудегі инновациялар" жобасы</p>
+            <p>Барлық құқықтар қорғалған</p>
         </div>
-
-        <p>© 2023 "Бастауыш сыныпта білім берудегі инновациялар" жобасы</p>
-        <p>Барлық құқықтар қорғалған</p>
-    </div>
-</footer>
-
+    </footer>
     
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop">
