@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модуль 2: Пересылка сообщений - PT4 Mini</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4a44c9;
+            --accent-color: #ff6584;
+            --light-color: #f8f9fa;
+            --dark-color: #2d3748;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Анимированный фон */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #f5f7ff, #e3e8ff, #dce4ff, #f0f4ff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            color: var(--dark-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.7rem 1rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .module-info {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+        
+        .module-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.1"><polygon points="0,0 1000,50 1000,100 0,100"/></svg>');
+            background-size: cover;
+        }
+        
+        .module-info h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            animation: slideUp 1s ease;
+        }
+        
+        .module-info p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            position: relative;
+            animation: slideUp 1s ease 0.2s both;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            font-size: 2rem;
+        }
+        
+        .tasks-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .task-list {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .task-item {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-left: 5px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .task-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+        
+        .task-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .task-item.active {
+            border-left: 5px solid var(--accent-color);
+            background-color: rgba(108, 99, 255, 0.05);
+        }
+        
+        .task-item.active::before {
+            opacity: 0.05;
+        }
+        
+        .task-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .task-item p {
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .code-display {
+            background: #1e1e2e;
+            color: #f8f8f2;
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-height: 500px;
+            overflow: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            line-height: 1.5;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(108, 99, 255, 0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .task-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .task-content.active {
+            display: block;
+        }
+        
+        pre {
+            background: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        code {
+            color: #dcdcaa;
+            font-family: 'Fira Code', 'Courier New', monospace;
+        }
+        
+        .explanation {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(108, 99, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+        
+        .explanation:hover {
+            transform: translateX(5px);
+        }
+        
+        .explanation ul {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .explanation li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .explanation li:hover {
+            transform: translateX(5px);
+        }
+        
+        .explanation li::before {
+            content: '▸';
+            color: var(--accent-color);
+            position: absolute;
+            left: -1rem;
+        }
+        
+        .screenshot-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #666;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .screenshot-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .screenshot-placeholder:hover {
+            border-color: var(--primary-color);
+            background: #f8f8f8;
+        }
+        
+        .screenshot-placeholder:hover::before {
+            left: 100%;
+        }
+        
+        .screenshot-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .screenshot-placeholder:hover img {
+            transform: scale(1.02);
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -50px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .task-number {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(108, 99, 255, 0.3);
+        }
+        
+        .task-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(108, 99, 255, 0.2);
+        }
+        
+        .task-title {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+        }
+        
+        .task-description {
+            background: rgba(255, 101, 132, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+        
+        .task-description:hover {
+            transform: translateX(5px);
+        }
+        
+        .task-description strong {
+            color: var(--secondary-color);
+        }
+        
+        .progress-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(108, 99, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 1s ease;
+            border-radius: 10px;
+        }
+        
+        .completion-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .completion-percentage {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .tasks-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .module-info h1 {
+                font-size: 2.2rem;
+            }
+            
+            .module-info p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 80px; height: 80px; top: 15%; left: 8%;"></div>
+        <div class="floating-element" style="width: 120px; height: 120px; top: 65%; left: 85%;"></div>
+        <div class="floating-element" style="width: 60px; height: 60px; top: 85%; left: 15%;"></div>
+        <div class="floating-element" style="width: 100px; height: 100px; top: 35%; left: 75%;"></div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> Код скопирован в буфер обмена!
+    </div>
+    
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <i class="fas fa-exchange-alt"></i>
+                PT4 Mini - Модуль 2
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="module-info">
+            <h1>Модуль 2: Пересылка сообщений между двумя процессами</h1>
+            <p>Изучите механизмы пересылки сообщений между различными процессами параллельной программы с использованием функций MPI_Send и MPI_Recv.</p>
+        </section>
+
+        <section class="section">
+            <h2>Задания модуля 2</h2>
+            
+            <div class="progress-container">
+                <div class="completion-text">
+                    <span>Прогресс изучения модуля:</span>
+                    <span class="completion-percentage" id="completionPercentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+            </div>
+            
+            <div class="tasks-container">
+                <div class="task-list">
+                    <div class="task-item active" data-task="1">
+                        <h3><i class="fas fa-share-square"></i> Задание MPIBegin7</h3>
+                        <p>Пересылка данных от подчиненных процессов к главному</p>
+                    </div>
+                    <div class="task-item" data-task="2">
+                        <h3><i class="fas fa-sort-amount-down"></i> Задание MPIBegin12</h3>
+                        <p>Буферизованная отправка в обратном порядке</p>
+                    </div>
+                    <div class="task-item" data-task="3">
+                        <h3><i class="fas fa-search"></i> Задание MPIBegin15</h3>
+                        <p>Пересылка наборов данных с использованием MPI_Probe</p>
+                    </div>
+                </div>
+                
+                <div class="code-display" id="codeDisplay">
+                    <!-- Задание 1 -->
+                    <div id="task1" class="task-content active">
+                        <div class="task-header">
+                            <span class="task-number">1</span>
+                            <h2 class="task-title">Задание MPIBegin7</h2>
+                        </div>
+                        
+                        <div class="screenshot-placeholder">
+                            <img src="images/7.jpg" alt="MPIBegin7 задание">
+                        </div>
+                        
+                        <div class="task-description">
+                            <p><strong>Условие:</strong> В каждом подчиненном процессе дано целое число. Переслать эти числа в главный процесс, используя функции MPI_Send и MPI_Recv, и вывести их в главном процессе. Полученные числа выводить в порядке возрастания рангов переславших их процессов.</p>
+                        </div>
+                        
+                        <pre><code>#include <windows.h>
+#pragma hdrstop
+#include "pt4.h"
+#include "mpi.h"
+
+void Solve()
+{
+    Task("MPIBegin7");
+    int flag;
+    MPI_Initialized(&flag);
+    if (flag == 0)
+        return;
+    int rank, size;
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Status s;
+    
+    if (rank == 0) {
+        for (int i = 1; i < size; i++) {
+            int a;
+            MPI_Recv(&a, 1, MPI_INT, i, 0, MPI_COMM_WORLD, &s);
+            pt << a;
+        }
+    } else {
+        int a;
+        pt >> a;
+        MPI_Send(&a, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+    }
+}</code><button class="copy-btn" data-task="1"><i class="fas fa-copy"></i> Копировать</button></pre>
+                        
+                        <div class="explanation">
+                            <p><strong>Пошаговое выполнение:</strong></p>
+                            <ul>
+                                <li>Инициализация MPI и получение информации о процессах</li>
+                                <li>Главный процесс принимает сообщения от всех подчиненных процессов</li>
+                                <li>Подчиненные процессы отправляют свои данные главному процессу</li>
+                                <li>Использование блокирующих операций MPI_Send и MPI_Recv</li>
+                                <li>Главный процесс выводит полученные числа в порядке возрастания рангов</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Задание 2 -->
+                    <div id="task2" class="task-content">
+                        <div class="task-header">
+                            <span class="task-number">2</span>
+                            <h2 class="task-title">Задание MPIBegin12</h2>
+                        </div>
+                        
+                        <div class="screenshot-placeholder">
+                            <img src="images/12.jpg" alt="MPIBegin12 задание">
+                        </div>
+                        
+                        <div class="task-description">
+                            <p><strong>Условие:</strong> В главном процессе дан набор вещественных чисел; количество чисел равно количеству подчиненных процессов. С помощью функции MPI_BSend переслать по одному числу в каждый из подчиненных процессов, перебирая процессы в обратном порядке, и вывести в подчиненных процессах полученные числа.</p>
+                        </div>
+                        
+                        <pre><code>#include <windows.h>
+#pragma hdrstop
+#include "pt4.h"
+#include "mpi.h"
+
+void Solve()
+{
+    Task("MPIBegin12");
+    int flag;
+    MPI_Initialized(&flag);
+    if (flag == 0)
+        return;
+    int rank, size;
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Status s;
+    
+    if (rank == 0) {
+        for (int i = 0; i < size - 1; i++) {
+            double a;
+            pt >> a;
+            MPI_Send(&a, 1, MPI_DOUBLE, size - 1 - i, 0, MPI_COMM_WORLD);
+        }
+    } else {
+        double a;
+        MPI_Recv(&a, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &s);
+        pt << a;
+    }
+}</code><button class="copy-btn" data-task="2"><i class="fas fa-copy"></i> Копировать</button></pre>
+                        
+                        <div class="explanation">
+                            <p><strong>Пошаговое выполнение:</strong></p>
+                            <ul>
+                                <li>Инициализация MPI и получение информации о процессах</li>
+                                <li>Главный процесс читает набор чисел и отправляет их подчиненным</li>
+                                <li>Отправка происходит в обратном порядке (от последнего процесса к первому)</li>
+                                <li>Подчиненные процессы принимают данные и выводят их</li>
+                                <li>Использование буферизованной отправки MPI_Send</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Задание 3 -->
+                    <div id="task3" class="task-content">
+                        <div class="task-header">
+                            <span class="task-number">3</span>
+                            <h2 class="task-title">Задание MPIBegin15</h2>
+                        </div>
+                        
+                        <div class="screenshot-placeholder">
+                            <img src="images/mpibegin15.jpg" alt="MPIBegin15 задание">
+                        </div>
+                        
+                        <div class="task-description">
+                            <p><strong>Условие:</strong> В каждом подчиненном процессе дано целое число N, причем для одного процесса это число больше нуля, а для остальных равно нулю. В процессе с ненулевым N дан также набор из N чисел. Переслать данный набор чисел в главный процесс и вывести в главном процессе полученные числа и ранг процесса, переславшего этот набор.</p>
+                        </div>
+                        
+                        <pre><code>#include <windows.h>
+#pragma hdrstop
+#include "pt4.h"
+#include "mpi.h"
+
+void Solve()
+{
+    Task("MPIBegin15");
+    int flag;
+    MPI_Initialized(&flag);
+    if (flag == 0)
+        return;
+    int rank, size;
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Status s;
+    
+    if (rank == 0) {
+        for (int i = 1; i < size; i++) {
+            MPI_Probe(MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &s);
+            int source = s.MPI_SOURCE;
+            int n;
+            MPI_Recv(&n, 1, MPI_INT, source, 0, MPI_COMM_WORLD, &s);
+            if (n > 0) {
+                for (int j = 0; j < n; j++) {
+                    double x;
+                    MPI_Recv(&x, 1, MPI_DOUBLE, source, 0, MPI_COMM_WORLD, &s);
+                    pt << x;
+                }
+                pt << source;
+            }
+        }
+    } else {
+        int n;
+        pt >> n;
+        MPI_Send(&n, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        if (n > 0) {
+            for (int i = 0; i < n; i++) {
+                double x;
+                pt >> x;
+                MPI_Send(&x, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+            }
+        }
+    }
+}</code><button class="copy-btn" data-task="3"><i class="fas fa-copy"></i> Копировать</button></pre>
+                        
+                        <div class="explanation">
+                            <p><strong>Пошаговое выполнение:</strong></p>
+                            <ul>
+                                <li>Инициализация MPI и получение информации о процессах</li>
+                                <li>Главный процесс использует MPI_Probe для определения источника сообщения</li>
+                                <li>Подчиненные процессы отправляют число N и, если N > 0, набор чисел</li>
+                                <li>Главный процесс принимает данные и выводит их вместе с рангом отправителя</li>
+                                <li>Использование MPI_ANY_SOURCE для приема от любого процесса</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                <a href="index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Назад к модулям</a>
+                <button class="btn pulse" id="tryCodeBtn"><i class="fas fa-code"></i> Попробовать код в компиляторе</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Обучение PT4 Mini. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация прокрутки для хедера
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Переключение между заданиями
+        const taskItems = document.querySelectorAll('.task-item');
+        const taskContents = document.querySelectorAll('.task-content');
+        
+        taskItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Убираем активный класс у всех заданий
+                taskItems.forEach(i => i.classList.remove('active'));
+                // Добавляем активный класс текущему заданию
+                this.classList.add('active');
+                
+                // Скрываем все содержимое заданий
+                taskContents.forEach(content => content.classList.remove('active'));
+                
+                // Показываем содержимое выбранного задания
+                const taskId = this.getAttribute('data-task');
+                document.getElementById(`task${taskId}`).classList.add('active');
+                
+                // Обновляем прогресс
+                updateProgress(taskId);
+            });
+        });
+        
+        // Кнопка "Попробовать код в компиляторе"
+        document.getElementById('tryCodeBtn').addEventListener('click', function() {
+            // Получаем активное задание
+            const activeTask = document.querySelector('.task-item.active');
+            const taskId = activeTask.getAttribute('data-task');
+            
+            // Получаем код из активного задания
+            const codeElement = document.querySelector(`#task${taskId} code`);
+            const code = codeElement ? codeElement.textContent : '';
+            
+            // Сохраняем код в localStorage для использования на главной странице
+            localStorage.setItem('pt4code', code);
+            
+            // Переходим на главную страницу
+            window.location.href = 'index.html#compiler';
+        });
+        
+        // Функция для обновления прогресса
+        function updateProgress(currentTaskId) {
+            const totalTasks = taskItems.length;
+            const progressPercentage = (currentTaskId / totalTasks) * 100;
+            
+            const progressBar = document.getElementById('progressBar');
+            const completionPercentage = document.getElementById('completionPercentage');
+            
+            progressBar.style.width = `${progressPercentage}%`;
+            completionPercentage.textContent = `${Math.round(progressPercentage)}%`;
+        }
+        
+        // Инициализация прогресса
+        updateProgress(1);
+        
+        // Копирование кода в буфер обмена
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        const notification = document.getElementById('notification');
+        
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const taskId = this.getAttribute('data-task');
+                const codeElement = document.querySelector(`#task${taskId} code`);
+                const code = codeElement ? codeElement.textContent : '';
+                
+                // Копируем код в буфер обмена
+                navigator.clipboard.writeText(code).then(() => {
+                    // Показываем уведомление
+                    notification.classList.add('show');
+                    
+                    // Скрываем уведомление через 3 секунды
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 3000);
+                });
+            });
+        });
+        
+        // Анимация появления элементов при прокрутке
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.8s ease forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Наблюдаем за всеми элементами с классом section
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
