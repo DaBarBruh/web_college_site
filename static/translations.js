@@ -605,6 +605,7 @@ upd_form_5: 'Форма УПД для специальности 0612100 Ком�
   Certificates: "Сертификаты",
   Methodological_Tools: "Методические инструменты",
   Open_Memorandum_PDF: "Открыть меморандум PDF",
+  Compliance_service: "Служба комплаенс",
 
 
 
@@ -1240,6 +1241,7 @@ Sharing_Experience: "Sharing Experience",
 Certificates: "Certificates",
 Methodological_Tools: "Methodological Tools",
 Open_Memorandum_PDF: "Open Memorandum PDF",
+Compliance_service: "Compliance Service",
 
 
 
@@ -1854,6 +1856,7 @@ Sharing_Experience: "Тәжірибемен бөлісу",
 Certificates: "Сертификаттар",
 Methodological_Tools: "Әдістемелік құралдар",
 Open_Memorandum_PDF: "Меморандумды ашу (PDF)",
+Compliance_service: "Сәйкестік қызметі",
 
 
 
