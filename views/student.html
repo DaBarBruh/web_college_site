@@ -1,419 +1,1383 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Neon Gyro Trailer</title>
-  <style>
-    :root{
-      --bg1:#050512;
-      --bg2:#0b0830;
-      --neon:#7cfffd;
-      --neon2:#ff4dff;
-      --neon3:#7c5cff;
-      --text:#eaf8ff;
-    }
-    html,body{height:100%; margin:0; background:radial-gradient(1200px 900px at 70% 20%, #20106b 0%, rgba(32,16,107,0) 60%),
-                                  radial-gradient(900px 700px at 20% 75%, #0a5c8a 0%, rgba(10,92,138,0) 55%),
-                                  linear-gradient(180deg,var(--bg1),var(--bg2)); overflow:hidden; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;}
-    canvas{display:block; width:100%; height:100%;}
-    /* Neon overlay UI */
-    .hud{
-      position:fixed; inset:0; pointer-events:none;
-      display:flex; align-items:flex-end; justify-content:center;
-      padding: max(16px, env(safe-area-inset-bottom)) 16px 28px;
-    }
-    .card{
-      pointer-events:none;
-      width:min(860px, 92vw);
-      border-radius:18px;
-      padding:16px 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border:1px solid rgba(124,255,253,0.16);
-      box-shadow:
-        0 0 0 1px rgba(255,77,255,0.08) inset,
-        0 12px 60px rgba(0,0,0,0.55),
-        0 0 30px rgba(124,255,253,0.12);
-      backdrop-filter: blur(10px);
-    }
-    .title{
-      margin:0;
-      font-weight:800;
-      letter-spacing:0.02em;
-      font-size: clamp(18px, 3.2vw, 34px);
-      color:var(--text);
-      text-shadow:
-        0 0 10px rgba(124,255,253,0.25),
-        0 0 18px rgba(255,77,255,0.18);
-    }
-    .subtitle{
-      margin:8px 0 0;
-      font-size: clamp(12px, 2.2vw, 15px);
-      color: rgba(234,248,255,0.82);
-      line-height:1.35;
-    }
-    .pillrow{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.18);
-      color: rgba(234,248,255,0.9);
-      font-size: 12px;
-      text-shadow: 0 0 12px rgba(124,255,253,0.15);
-    }
-    .dot{ width:8px; height:8px; border-radius:50%; background: var(--neon); box-shadow: 0 0 12px rgba(124,255,253,0.8); }
-    .dot.m{ background: var(--neon2); box-shadow: 0 0 12px rgba(255,77,255,0.75); }
-    .dot.p{ background: var(--neon3); box-shadow: 0 0 12px rgba(124,92,255,0.75); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌀 Космический 3D Гиперкуб | Гироскоп + WebGL</title>
+    <style>
+        /* Глобальные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    /* Tap-to-enable sensors button */
-    .gate{
-      position:fixed; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      background: radial-gradient(1000px 700px at 50% 40%, rgba(124,255,253,0.10), rgba(0,0,0,0.78));
-      backdrop-filter: blur(6px);
-      z-index:5;
-    }
-    .panel{
-      width:min(520px, 92vw);
-      border-radius:20px;
-      padding:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-      border:1px solid rgba(124,255,253,0.18);
-      box-shadow: 0 12px 70px rgba(0,0,0,0.65), 0 0 40px rgba(255,77,255,0.12);
-      color: var(--text);
-      text-align:left;
-    }
-    .panel h2{ margin:0 0 10px; font-size:18px; letter-spacing:0.02em; }
-    .panel p{ margin:0 0 14px; color:rgba(234,248,255,0.82); line-height:1.4; font-size:13px; }
-    .btn{
-      pointer-events:auto;
-      display:inline-flex; align-items:center; gap:10px;
-      border:0;
-      padding:12px 14px;
-      border-radius:14px;
-      font-weight:700;
-      color:#061018;
-      background: linear-gradient(90deg, rgba(124,255,253,1), rgba(255,77,255,1));
-      box-shadow: 0 10px 30px rgba(124,255,253,0.12), 0 0 25px rgba(255,77,255,0.18);
-      cursor:pointer;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .small{ margin-top:10px; font-size:12px; color:rgba(234,248,255,0.72); }
-    .hint{
-      position:fixed; top:18px; left:50%; transform:translateX(-50%);
-      padding:10px 12px; border-radius:999px;
-      background: rgba(0,0,0,0.25);
-      border:1px solid rgba(124,255,253,0.12);
-      color: rgba(234,248,255,0.82);
-      font-size:12px;
-      text-shadow: 0 0 14px rgba(124,255,253,0.16);
-      backdrop-filter: blur(8px);
-      pointer-events:none;
-    }
-  </style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Exo 2', 'Segoe UI', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            position: fixed;
+            touch-action: none;
+        }
+
+        /* Фон с анимированным градиентом */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.25) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a1a 0%, #151530 50%, #0a0a1a 100%);
+            animation: gradientShift 20s ease infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Звёздное поле */
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.7;
+        }
+
+        /* Контейнеры */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Заголовок с эффектом неона */
+        .title-container {
+            text-align: center;
+            z-index: 100;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 0 100px rgba(100, 100, 255, 0.1),
+                inset 0 0 50px rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
+            animation: titleFloat 6s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #ff00cc, #00ccff, #00ffcc, #ffcc00,
+                #ff00cc, #00ccff, #00ffcc, #ffcc00);
+            background-size: 400%;
+            border-radius: 32px;
+            z-index: -1;
+            animation: borderGlow 10s linear infinite;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0) rotateX(0.5deg); }
+            50% { transform: translateY(-10px) rotateX(-0.5deg); }
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, 
+                #ff3366, #33ffcc, #3366ff, #ff33cc);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 0 30px rgba(255, 51, 102, 0.5),
+                0 0 60px rgba(51, 204, 255, 0.3),
+                0 0 90px rgba(51, 102, 255, 0.2);
+            animation: titleGradient 8s ease infinite;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Основной 3D контейнер */
+        .scene-wrapper {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            max-width: 1200px;
+            min-height: 400px;
+            perspective: 2000px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 40px;
+            box-shadow: 
+                0 0 100px rgba(100, 200, 255, 0.3),
+                0 0 200px rgba(100, 100, 255, 0.2),
+                inset 0 0 100px rgba(255, 255, 255, 0.05);
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%),
+                linear-gradient(135deg, rgba(20, 20, 40, 0.9) 0%, rgba(10, 10, 30, 0.95) 100%);
+        }
+
+        #scene3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.05s linear;
+            overflow: visible;
+        }
+
+        /* Гиперкуб (тессеракт) */
+        .tesseract {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%);
+        }
+
+        .cube {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .cube-outer {
+            transform: translateZ(150px);
+        }
+
+        .cube-inner {
+            transform: translateZ(75px) scale(0.5);
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff3366, #33ffcc) 1;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                inset 0 0 50px rgba(255, 255, 255, 0.05),
+                0 0 30px rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        /* Грани внешнего куба */
+        .front  { transform: translateZ(150px); border-image: linear-gradient(45deg, #ff3366, #ff9966) 1; }
+        .back   { transform: rotateY(180deg) translateZ(150px); border-image: linear-gradient(45deg, #33ffcc, #3366ff) 1; }
+        .right  { transform: rotateY(90deg) translateZ(150px); border-image: linear-gradient(45deg, #9966ff, #ff66cc) 1; }
+        .left   { transform: rotateY(-90deg) translateZ(150px); border-image: linear-gradient(45deg, #66ff99, #33ccff) 1; }
+        .top    { transform: rotateX(90deg) translateZ(150px); border-image: linear-gradient(45deg, #ffcc00, #ff6666) 1; }
+        .bottom { transform: rotateX(-90deg) translateZ(150px); border-image: linear-gradient(45deg, #66ccff, #9966ff) 1; }
+
+        /* Грани внутреннего куба */
+        .face.inner {
+            border-width: 3px;
+            border-image: linear-gradient(45deg, #00ffcc, #cc00ff) 1;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 
+                inset 0 0 30px rgba(255, 255, 255, 0.1),
+                0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Соединительные линии между кубами */
+        .connection {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 75px;
+            background: linear-gradient(to bottom, 
+                rgba(255, 51, 102, 0.8) 0%,
+                rgba(51, 255, 204, 0.8) 50%,
+                rgba(51, 102, 255, 0.8) 100%);
+            transform-origin: top center;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(51, 255, 204, 0.5);
+        }
+
+        /* Частицы */
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* Сферы-планеты на заднем плане */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0) 70%);
+            box-shadow: 
+                inset 0 0 50px rgba(255, 255, 255, 0.05),
+                0 0 100px rgba(100, 200, 255, 0.2);
+            filter: blur(1px);
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 100, 100, 0.1) 0%,
+                rgba(255, 100, 100, 0) 70%);
+            animation: orbFloat1 25s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -50px;
+            left: -100px;
+            background: radial-gradient(circle at 70% 30%, 
+                rgba(100, 200, 255, 0.1) 0%,
+                rgba(100, 200, 255, 0) 70%);
+            animation: orbFloat2 30s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(50px, 50px) rotate(120deg); }
+            66% { transform: translate(-30px, 70px) rotate(240deg); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-70px, -30px) rotate(-120deg); }
+            66% { transform: translate(40px, -50px) rotate(-240deg); }
+        }
+
+        /* Панель управления */
+        .control-panel {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 0 30px rgba(255, 255, 255, 0.03);
+        }
+
+        .control-btn {
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border: none;
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 150px;
+            text-align: center;
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.5s;
+        }
+
+        .control-btn:hover::before {
+            left: 100%;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(100, 200, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        .control-btn.active {
+            background: linear-gradient(45deg, #ff3366, #33ffcc);
+            box-shadow: 
+                0 0 30px rgba(51, 255, 204, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        /* Панель данных сенсоров */
+        .sensor-panel {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.03);
+            z-index: 1000;
+            min-width: 280px;
+            transform: translateZ(0);
+        }
+
+        .sensor-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sensor-header h3 {
+            font-size: 1.4rem;
+            background: linear-gradient(45deg, #33ffcc, #3366ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sensor-value {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sensor-value:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(-5px);
+        }
+
+        .sensor-label {
+            font-weight: 600;
+            color: #33ffcc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sensor-data {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff3366;
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+        }
+
+        /* Визуализаторы данных */
+        .visualizer {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .visualizer-bar {
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, #ff3366, #33ffcc);
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        /* Оверлей загрузки */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+
+        .loading-text {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff3366, #33ffcc, #3366ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: loadingGradient 3s ease infinite;
+        }
+
+        @keyframes loadingGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff3366, #33ffcc);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; padding: 0 20px; }
+            .control-panel { flex-direction: column; gap: 10px; }
+            .control-btn { min-width: 200px; }
+            .sensor-panel { 
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px auto;
+                width: 90%;
+            }
+            .scene-wrapper { border-radius: 20px; }
+        }
+
+        /* Пулсация для активного элемента */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Эффект стеклянной морфологии */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="hint">📱 Двигай телефон — сцена будет “живая”. На ПК: двигай мышь.</div>
-
-  <div class="gate" id="gate">
-    <div class="panel">
-      <h2>Neon 3D Trailer</h2>
-      <p>
-        Чтобы сайт реагировал на наклоны телефона (гироскоп), браузеру нужно разрешение.
-        Нажми кнопку ниже.
-      </p>
-      <button class="btn" id="enableBtn">✨ Включить 3D-движение</button>
-      <div class="small">
-        Если кнопка не помогает: открой через Chrome/Safari и убедись, что сайт запущен по HTTPS
-        (или через локальный сервер).
-      </div>
+    <!-- Фон с анимацией -->
+    <div class="background"></div>
+    
+    <!-- Звёздное поле -->
+    <canvas id="stars"></canvas>
+    
+    <!-- Сферы на заднем плане -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    
+    <!-- Оверлей загрузки -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-text">ИНИЦИАЛИЗАЦИЯ ГИПЕРКУБА</div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
     </div>
-  </div>
-
-  <div class="hud">
-    <div class="card">
-      <h1 class="title">NEON // MOTION</h1>
-      <p class="subtitle">
-        3D-сцена с “трейлерным” движением камеры + партиклы. На телефоне работает как окно в 3D:
-        наклоняй и смещай устройство — меняется перспектива.
-      </p>
-      <div class="pillrow">
-        <div class="pill"><span class="dot"></span> WebGL Particles</div>
-        <div class="pill"><span class="dot m"></span> Gyro / DeviceOrientation</div>
-        <div class="pill"><span class="dot p"></span> Trailer Camera</div>
-      </div>
+    
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Заголовок -->
+        <div class="title-container fade-in-up">
+            <h1><i class="fas fa-cube"></i> ГИПЕРКУБ 4D</h1>
+            <div class="subtitle">
+                Наклоняйте устройство для управления 4D-тессерактом в реальном времени.
+                Гироскоп + Акселерометр + WebGL ускорение
+            </div>
+        </div>
+        
+        <!-- Основная 3D сцена -->
+        <div class="scene-wrapper">
+            <div id="scene3d">
+                <!-- Тессеракт (гиперкуб) -->
+                <div class="tesseract" id="tesseract">
+                    <!-- Внешний куб -->
+                    <div class="cube cube-outer">
+                        <div class="face front pulse"><span>X+</span></div>
+                        <div class="face back"><span>X-</span></div>
+                        <div class="face right"><span>Y+</span></div>
+                        <div class="face left"><span>Y-</span></div>
+                        <div class="face top"><span>Z+</span></div>
+                        <div class="face bottom"><span>Z-</span></div>
+                    </div>
+                    
+                    <!-- Внутренний куб -->
+                    <div class="cube cube-inner">
+                        <div class="face front inner"><span>W+</span></div>
+                        <div class="face back inner"><span>W-</span></div>
+                        <div class="face right inner"><span>V+</span></div>
+                        <div class="face left inner"><span>V-</span></div>
+                        <div class="face top inner"><span>U+</span></div>
+                        <div class="face bottom inner"><span>U-</span></div>
+                    </div>
+                    
+                    <!-- Соединительные линии (вершины) -->
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(0deg) rotateY(90deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(0deg) rotateY(180deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(0deg) rotateY(270deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(90deg) rotateY(0deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(90deg) rotateY(90deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(90deg) rotateY(180deg)"></div>
+                    <div class="connection" style="transform: translate(-50%, -50%) rotateX(90deg) rotateY(270deg)"></div>
+                </div>
+            </div>
+            
+            <!-- Контейнер для частиц -->
+            <div id="particles"></div>
+        </div>
+        
+        <!-- Панель управления -->
+        <div class="control-panel fade-in-up">
+            <button class="control-btn active" id="mode3d">
+                <i class="fas fa-cube"></i> 3D Режим
+            </button>
+            <button class="control-btn" id="mode4d">
+                <i class="fas fa-tesseract"></i> 4D Гиперкуб
+            </button>
+            <button class="control-btn" id="modeSpin">
+                <i class="fas fa-sync-alt"></i> Автовращение
+            </button>
+            <button class="control-btn" id="resetBtn">
+                <i class="fas fa-redo"></i> Сброс
+            </button>
+        </div>
     </div>
-  </div>
+    
+    <!-- Панель данных сенсоров -->
+    <div class="sensor-panel fade-in-up">
+        <div class="sensor-header">
+            <i class="fas fa-microchip"></i>
+            <h3>ДАТЧИКИ УСТРОЙСТВА</h3>
+        </div>
+        
+        <div class="sensor-value">
+            <div class="sensor-label">
+                <i class="fas fa-compass"></i>
+                <span>Альфа (Z):</span>
+            </div>
+            <div class="sensor-data" id="alphaValue">0.00°</div>
+        </div>
+        <div class="visualizer">
+            <div class="visualizer-bar" id="alphaBar"></div>
+        </div>
+        
+        <div class="sensor-value">
+            <div class="sensor-label">
+                <i class="fas fa-arrows-alt-v"></i>
+                <span>Бета (X):</span>
+            </div>
+            <div class="sensor-data" id="betaValue">0.00°</div>
+        </div>
+        <div class="visualizer">
+            <div class="visualizer-bar" id="betaBar"></div>
+        </div>
+        
+        <div class="sensor-value">
+            <div class="sensor-label">
+                <i class="fas fa-arrows-alt-h"></i>
+                <span>Гамма (Y):</span>
+            </div>
+            <div class="sensor-data" id="gammaValue">0.00°</div>
+        </div>
+        <div class="visualizer">
+            <div class="visualizer-bar" id="gammaBar"></div>
+        </div>
+        
+        <div class="sensor-value">
+            <div class="sensor-label">
+                <i class="fas fa-sync-alt"></i>
+                <span>Вращение X:</span>
+            </div>
+            <div class="sensor-data" id="rotateXValue">0.00°</div>
+        </div>
+        
+        <div class="sensor-value">
+            <div class="sensor-label">
+                <i class="fas fa-sync-alt"></i>
+                <span>Вращение Y:</span>
+            </div>
+            <div class="sensor-data" id="rotateYValue">0.00°</div>
+        </div>
+        
+        <div class="sensor-value">
+            <div class="sensor-label">
+                <i class="fas fa-bolt"></i>
+                <span>FPS:</span>
+            </div>
+            <div class="sensor-data" id="fpsValue">60</div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для iOS разрешений -->
+    <div id="iosPermissionModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center;">
+        <div style="background: rgba(20,20,40,0.95); padding: 40px; border-radius: 30px; max-width: 500px; text-align: center; border: 2px solid #33ffcc;">
+            <h2 style="color: #33ffcc; margin-bottom: 20px;"><i class="fas fa-mobile-alt"></i> Требуется разрешение</h2>
+            <p style="margin-bottom: 30px; line-height: 1.6;">Для работы 3D-эффектов необходимо разрешить доступ к датчикам движения вашего устройства.</p>
+            <button id="iosPermissionBtn" style="background: linear-gradient(45deg, #ff3366, #33ffcc); border: none; padding: 15px 40px; border-radius: 25px; color: white; font-size: 1.2rem; cursor: pointer; font-weight: bold;">
+                Разрешить доступ к датчикам
+            </button>
+        </div>
+    </div>
 
-  <script type="module">
-    import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-
-    // ====== Renderer / Scene / Camera ======
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    renderer.setSize(innerWidth, innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x060616, 0.035);
-
-    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 200);
-    camera.position.set(0, 0, 10);
-
-    // Subtle ambient glow light
-    scene.add(new THREE.AmbientLight(0xffffff, 0.25));
-    const key = new THREE.PointLight(0x7cfffd, 2.2, 60);
-    key.position.set(8, 6, 10);
-    scene.add(key);
-    const mag = new THREE.PointLight(0xff4dff, 1.8, 60);
-    mag.position.set(-8, -2, 14);
-    scene.add(mag);
-
-    // ====== Helpers: neon colors ======
-    const neonA = new THREE.Color("#7cfffd");
-    const neonB = new THREE.Color("#ff4dff");
-    const neonC = new THREE.Color("#7c5cff");
-
-    // ====== Starfield / Particles (3D) ======
-    const COUNT = 4200;
-    const positions = new Float32Array(COUNT * 3);
-    const colors = new Float32Array(COUNT * 3);
-    const sizes = new Float32Array(COUNT);
-
-    const rand = (a, b) => a + Math.random() * (b - a);
-
-    for (let i = 0; i < COUNT; i++) {
-      const i3 = i * 3;
-
-      // Volume: tube-like depth + wide X/Y
-      const z = rand(-70, 15);
-      const r = Math.pow(Math.random(), 0.55);
-      const angle = Math.random() * Math.PI * 2;
-      const x = Math.cos(angle) * r * rand(0.5, 16);
-      const y = Math.sin(angle) * r * rand(0.5, 10);
-
-      positions[i3 + 0] = x;
-      positions[i3 + 1] = y;
-      positions[i3 + 2] = z;
-
-      // Gradient colors among neonA/B/C
-      const t = Math.random();
-      const c = (t < 0.45) ? neonA.clone().lerp(neonB, Math.random() * 0.35)
-              : (t < 0.75) ? neonB.clone().lerp(neonC, Math.random() * 0.35)
-              : neonC.clone().lerp(neonA, Math.random() * 0.35);
-
-      colors[i3 + 0] = c.r;
-      colors[i3 + 1] = c.g;
-      colors[i3 + 2] = c.b;
-
-      sizes[i] = rand(0.6, 3.4);
-    }
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
-
-    // Custom shader: round glow points (sprite-like)
-    const material = new THREE.ShaderMaterial({
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      vertexColors: true,
-      uniforms: {
-        uTime: { value: 0 },
-        uPixelRatio: { value: Math.min(devicePixelRatio, 2) }
-      },
-      vertexShader: `
-        uniform float uTime;
-        uniform float uPixelRatio;
-        attribute float aSize;
-        varying vec3 vColor;
-
-        void main(){
-          vColor = color;
-          vec3 p = position;
-
-          // gentle wave for "alive" motion
-          float w = sin((p.z * 0.18) + uTime * 0.9) * 0.12;
-          p.x += w;
-          p.y += cos((p.z * 0.15) + uTime * 0.75) * 0.08;
-
-          vec4 mv = modelViewMatrix * vec4(p, 1.0);
-          gl_Position = projectionMatrix * mv;
-
-          // size decreases with distance, but stays visible
-          float s = aSize * (70.0 / -mv.z);
-          gl_PointSize = clamp(s * uPixelRatio, 1.5, 18.0);
+    <script>
+        // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+        let scene3d = document.getElementById('scene3d');
+        let tesseract = document.getElementById('tesseract');
+        let particlesContainer = document.getElementById('particles');
+        let loadingOverlay = document.getElementById('loadingOverlay');
+        let loadingProgress = document.getElementById('loadingProgress');
+        
+        // Данные сенсоров
+        let alpha = 0, beta = 0, gamma = 0;
+        let rotationX = 0, rotationY = 0;
+        let targetRotationX = 0, targetRotationY = 0;
+        let currentRotationX = 0, currentRotationY = 0;
+        
+        // Настройки
+        const SMOOTHING_FACTOR = 0.12;
+        const MAX_ROTATION = 45;
+        let autoRotation = false;
+        let hypercubeMode = false;
+        let mouseControl = false;
+        let lastMouseX = 0, lastMouseY = 0;
+        
+        // Частицы
+        let particles = [];
+        const PARTICLE_COUNT = 200;
+        
+        // FPS счетчик
+        let lastTime = 0;
+        let frameCount = 0;
+        let fps = 60;
+        
+        // ========== ЗВЁЗДНОЕ ПОЛЕ (Canvas) ==========
+        function initStars() {
+            const canvas = document.getElementById('stars');
+            const ctx = canvas.getContext('2d');
+            
+            // Установка размеров
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Создание звёзд
+            const stars = [];
+            const starCount = Math.min(500, Math.floor((window.innerWidth * window.innerHeight) / 1000));
+            
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    speed: Math.random() * 0.5 + 0.1,
+                    brightness: Math.random() * 0.5 + 0.5
+                });
+            }
+            
+            // Анимация звёзд
+            function animateStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Рисуем звёзды
+                stars.forEach(star => {
+                    // Мерцание
+                    const twinkle = Math.sin(Date.now() * 0.001 * star.speed) * 0.3 + 0.7;
+                    
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    
+                    // Градиент для звезды
+                    const gradient = ctx.createRadialGradient(
+                        star.x, star.y, 0,
+                        star.x, star.y, star.radius * 3
+                    );
+                    
+                    gradient.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * twinkle})`);
+                    gradient.addColorStop(0.5, `rgba(200, 220, 255, ${star.brightness * twinkle * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(100, 150, 255, 0)');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    
+                    // Движение звёзд (параллакс эффект)
+                    star.x += (rotationX * 0.01) * star.speed;
+                    star.y += (rotationY * 0.01) * star.speed;
+                    
+                    // Возврат звезды на экран
+                    if (star.x < 0) star.x = canvas.width;
+                    if (star.x > canvas.width) star.x = 0;
+                    if (star.y < 0) star.y = canvas.height;
+                    if (star.y > canvas.height) star.y = 0;
+                });
+                
+                requestAnimationFrame(animateStars);
+            }
+            
+            animateStars();
         }
-      `,
-      fragmentShader: `
-        varying vec3 vColor;
-
-        void main(){
-          vec2 uv = gl_PointCoord.xy - 0.5;
-          float d = length(uv);
-          // Smooth round glow
-          float core = smoothstep(0.22, 0.0, d);
-          float glow = smoothstep(0.55, 0.18, d) * 0.55;
-
-          float alpha = core + glow;
-          // slight vignette
-          alpha *= 0.95;
-
-          gl_FragColor = vec4(vColor, alpha);
+        
+        // ========== ИНИЦИАЛИЗАЦИЯ ЧАСТИЦ ==========
+        function initParticles() {
+            particlesContainer.innerHTML = '';
+            particles = [];
+            
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                createParticle();
+            }
+            
+            // Анимация частиц
+            function animateParticles() {
+                particles.forEach((particle, index) => {
+                    if (!particle.element) return;
+                    
+                    // Движение частиц
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // Гравитация к центру
+                    const dx = window.innerWidth / 2 - particle.x;
+                    const dy = window.innerHeight / 2 - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance > 100) {
+                        particle.vx += dx * 0.0001;
+                        particle.vy += dy * 0.0001;
+                    }
+                    
+                    // Эффект от гироскопа
+                    particle.vx += rotationX * 0.001;
+                    particle.vy += rotationY * 0.001;
+                    
+                    // Затухание
+                    particle.vx *= 0.99;
+                    particle.vy *= 0.99;
+                    
+                    // Ограничение скорости
+                    const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+                    if (speed > 2) {
+                        particle.vx = (particle.vx / speed) * 2;
+                        particle.vy = (particle.vy / speed) * 2;
+                    }
+                    
+                    // Границы
+                    if (particle.x < 0 || particle.x > window.innerWidth) {
+                        particle.vx *= -0.8;
+                        particle.x = particle.x < 0 ? 0 : window.innerWidth;
+                    }
+                    
+                    if (particle.y < 0 || particle.y > window.innerHeight) {
+                        particle.vy *= -0.8;
+                        particle.y = particle.y < 0 ? 0 : window.innerHeight;
+                    }
+                    
+                    // Обновление позиции
+                    particle.element.style.transform = `translate(${particle.x}px, ${particle.y}px)`;
+                    particle.element.style.opacity = particle.opacity;
+                    
+                    // Изменение цвета в зависимости от позиции
+                    const hue = (particle.x / window.innerWidth * 360 + Date.now() * 0.01 + index * 10) % 360;
+                    particle.element.style.backgroundColor = `hsl(${hue}, 100%, 70%)`;
+                    particle.element.style.boxShadow = `0 0 ${particle.size * 2}px hsl(${hue}, 100%, 50%)`;
+                    
+                    // Мерцание
+                    particle.opacity = 0.3 + Math.sin(Date.now() * 0.001 + index) * 0.2;
+                });
+                
+                requestAnimationFrame(animateParticles);
+            }
+            
+            animateParticles();
         }
-      `
-    });
-
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
-
-    // ====== Neon "portal" rings ======
-    function makeRing(radius, thickness, color) {
-      const g = new THREE.TorusGeometry(radius, thickness, 16, 120);
-      const m = new THREE.MeshStandardMaterial({
-        color,
-        emissive: color,
-        emissiveIntensity: 1.0,
-        metalness: 0.6,
-        roughness: 0.2,
-        transparent: true,
-        opacity: 0.9
-      });
-      const mesh = new THREE.Mesh(g, m);
-      return mesh;
-    }
-
-    const ring1 = makeRing(3.0, 0.12, 0x7cfffd);
-    ring1.position.set(0, 0, -6);
-    ring1.rotation.x = 0.35;
-    scene.add(ring1);
-
-    const ring2 = makeRing(4.1, 0.08, 0xff4dff);
-    ring2.position.set(0.4, -0.2, -14);
-    ring2.rotation.y = 0.55;
-    scene.add(ring2);
-
-    const ring3 = makeRing(5.3, 0.06, 0x7c5cff);
-    ring3.position.set(-0.3, 0.25, -24);
-    ring3.rotation.z = 0.45;
-    scene.add(ring3);
-
-    // ====== Motion input (Gyro + fallback mouse) ======
-    let motionEnabled = false;
-    let targetTiltX = 0, targetTiltY = 0;     // from sensors / mouse
-    let smoothTiltX = 0, smoothTiltY = 0;     // smoothed
-    let mouseX = 0, mouseY = 0;
-
-    // Mouse fallback (PC)
-    window.addEventListener("pointermove", (e) => {
-      mouseX = (e.clientX / innerWidth) * 2 - 1;
-      mouseY = (e.clientY / innerHeight) * 2 - 1;
-      if (!motionEnabled) {
-        targetTiltX = mouseX * 0.9;
-        targetTiltY = -mouseY * 0.9;
-      }
-    }, { passive: true });
-
-    function onDeviceOrientation(e) {
-      // beta: front-back tilt (-180..180), gamma: left-right (-90..90)
-      const beta = e.beta ?? 0;
-      const gamma = e.gamma ?? 0;
-
-      // Normalize to [-1..1] approx
-      const nx = THREE.MathUtils.clamp(gamma / 35, -1, 1);
-      const ny = THREE.MathUtils.clamp(beta / 45, -1, 1);
-
-      targetTiltX = nx;
-      targetTiltY = ny;
-    }
-
-    async function requestMotionPermissionIfNeeded() {
-      // iOS requires explicit permission
-      const anyDO = window.DeviceOrientationEvent;
-      if (anyDO && typeof anyDO.requestPermission === "function") {
-        const res = await anyDO.requestPermission();
-        return res === "granted";
-      }
-      // Android/others typically no permission prompt
-      return true;
-    }
-
-    const gate = document.getElementById("gate");
-    const enableBtn = document.getElementById("enableBtn");
-
-    enableBtn.addEventListener("click", async () => {
-      const ok = await requestMotionPermissionIfNeeded();
-      if (ok) {
-        motionEnabled = true;
-        window.addEventListener("deviceorientation", onDeviceOrientation, true);
-        gate.style.display = "none";
-      } else {
-        alert("Не получилось включить датчики. Проверь разрешения браузера и открой по HTTPS.");
-      }
-    });
-
-    // If user doesn't care, allow closing gate by tapping outside (keeps mouse fallback)
-    gate.addEventListener("click", (e) => {
-      if (e.target === gate) gate.style.display = "none";
-    });
-
-    // ====== Trailer-like camera path ======
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-      material.uniforms.uTime.value = t;
-
-      // Smooth tilt
-      const k = 0.08;
-      smoothTiltX += (targetTiltX - smoothTiltX) * k;
-      smoothTiltY += (targetTiltY - smoothTiltY) * k;
-
-      // Auto camera drift (trailer feel)
-      const driftX = Math.sin(t * 0.35) * 0.55;
-      const driftY = Math.cos(t * 0.28) * 0.35;
-      const driftZ = 10 + Math.sin(t * 0.22) * 0.6;
-
-      // Gyro parallax offsets (stronger on phone)
-      const parallax = motionEnabled ? 1.25 : 0.85;
-
-      camera.position.x = driftX + smoothTiltX * parallax;
-      camera.position.y = driftY + smoothTiltY * parallax * 0.75;
-      camera.position.z = driftZ;
-
-      // Look slightly into the depth with gyro influence
-      const lookX = smoothTiltX * 0.55;
-      const lookY = smoothTiltY * 0.35;
-      camera.lookAt(lookX, lookY, -18);
-
-      // Move starfield forward to simulate travel
-      points.position.z = (t * 7.5) % 70;
-
-      // Rings breathe
-      ring1.rotation.z += 0.0022;
-      ring2.rotation.x += 0.0018;
-      ring3.rotation.y += 0.0016;
-
-      ring1.scale.setScalar(1 + Math.sin(t * 1.2) * 0.03);
-      ring2.scale.setScalar(1 + Math.sin(t * 1.05 + 1.2) * 0.03);
-      ring3.scale.setScalar(1 + Math.sin(t * 0.95 + 2.1) * 0.03);
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // ====== Resize ======
-    addEventListener("resize", () => {
-      camera.aspect = innerWidth / innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(innerWidth, innerHeight);
-      material.uniforms.uPixelRatio.value = Math.min(devicePixelRatio, 2);
-    });
-  </script>
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 3 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            particlesContainer.appendChild(particle);
+            
+            particles.push({
+                element: particle,
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                size: size,
+                opacity: 0.5
+            });
+        }
+        
+        // ========== ОБРАБОТЧИК ГИРОСКОПА ==========
+        function handleOrientation(event) {
+            alpha = event.alpha;  // 0-360
+            beta = event.beta;    // -180 to 180
+            gamma = event.gamma;  // -90 to 90
+            
+            // Обновление UI
+            document.getElementById('alphaValue').textContent = alpha !== null ? alpha.toFixed(2) + '°' : 'N/A';
+            document.getElementById('betaValue').textContent = beta !== null ? beta.toFixed(2) + '°' : 'N/A';
+            document.getElementById('gammaValue').textContent = gamma !== null ? gamma.toFixed(2) + '°' : 'N/A';
+            
+            // Визуализаторы
+            if (alpha !== null) {
+                const alphaPercent = (alpha % 180) / 180 * 100;
+                document.getElementById('alphaBar').style.width = `${alphaPercent}%`;
+            }
+            
+            if (beta !== null) {
+                const betaPercent = (beta + 180) / 360 * 100;
+                document.getElementById('betaBar').style.width = `${betaPercent}%`;
+            }
+            
+            if (gamma !== null) {
+                const gammaPercent = (gamma + 90) / 180 * 100;
+                document.getElementById('gammaBar').style.width = `${gammaPercent}%`;
+            }
+            
+            // Преобразование в углы вращения
+            if (beta !== null && gamma !== null) {
+                targetRotationX = Math.max(Math.min(beta * 0.7, MAX_ROTATION), -MAX_ROTATION);
+                targetRotationY = Math.max(Math.min(gamma * 1.5, MAX_ROTATION * 2), -MAX_ROTATION * 2);
+            }
+        }
+        
+        // ========== АНИМАЦИЯ И РЕНДЕРИНГ ==========
+        function animate() {
+            // Плавная интерполяция
+            currentRotationX += (targetRotationX - currentRotationX) * SMOOTHING_FACTOR;
+            currentRotationY += (targetRotationY - currentRotationY) * SMOOTHING_FACTOR;
+            
+            // Автовращение
+            if (autoRotation) {
+                const time = Date.now() * 0.001;
+                currentRotationX = Math.sin(time * 0.5) * 20;
+                currentRotationY += 0.5;
+            }
+            
+            // Применение вращения к сцене
+            let transform = '';
+            
+            if (hypercubeMode) {
+                // Специальные трансформации для гиперкуба (4D эффект)
+                const hyperRotation = Date.now() * 0.001;
+                transform = `
+                    rotateX(${currentRotationX}deg) 
+                    rotateY(${currentRotationY}deg)
+                    rotate3d(1, 1, 1, ${hyperRotation}rad)
+                    scale3d(1.2, 1.2, 1.2)
+                `;
+                
+                // Анимация внутреннего куба
+                const innerCube = tesseract.querySelector('.cube-inner');
+                if (innerCube) {
+                    innerCube.style.transform = `
+                        translateZ(75px) 
+                        scale(${0.5 + Math.sin(hyperRotation) * 0.1})
+                        rotateX(${hyperRotation * 30}deg)
+                        rotateY(${hyperRotation * 40}deg)
+                    `;
+                }
+                
+                // Анимация соединений
+                const connections = tesseract.querySelectorAll('.connection');
+                connections.forEach((conn, i) => {
+                    const angle = (i / connections.length) * Math.PI * 2 + hyperRotation;
+                    conn.style.height = `${75 + Math.sin(hyperRotation * 2 + i) * 20}px`;
+                    conn.style.opacity = `${0.5 + Math.sin(hyperRotation + i) * 0.5}`;
+                    conn.style.background = `linear-gradient(to bottom, 
+                        hsl(${hyperRotation * 50 + i * 30}, 100%, 60%), 
+                        hsl(${hyperRotation * 50 + i * 30 + 60}, 100%, 60%))`;
+                });
+            } else {
+                // Обычный 3D режим
+                transform = `
+                    rotateX(${currentRotationX}deg) 
+                    rotateY(${-currentRotationY}deg)
+                    rotateZ(${currentRotationX * 0.1}deg)
+                `;
+            }
+            
+            scene3d.style.transform = transform;
+            
+            // Обновление UI
+            rotationX = currentRotationX;
+            rotationY = currentRotationY;
+            
+            document.getElementById('rotateXValue').textContent = currentRotationX.toFixed(2) + '°';
+            document.getElementById('rotateYValue').textContent = currentRotationY.toFixed(2) + '°';
+            
+            // FPS счетчик
+            frameCount++;
+            const now = performance.now();
+            if (now >= lastTime + 1000) {
+                fps = Math.round((frameCount * 1000) / (now - lastTime));
+                frameCount = 0;
+                lastTime = now;
+                document.getElementById('fpsValue').textContent = fps;
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // ========== УПРАВЛЕНИЕ МЫШЬЮ (для ПК) ==========
+        function initMouseControl() {
+            let isDragging = false;
+            
+            scene3d.parentElement.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                mouseControl = true;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const deltaX = e.clientX - lastMouseX;
+                const deltaY = e.clientY - lastMouseY;
+                
+                targetRotationY += deltaX * 0.5;
+                targetRotationX -= deltaY * 0.5;
+                
+                // Ограничение
+                targetRotationX = Math.max(Math.min(targetRotationX, MAX_ROTATION), -MAX_ROTATION);
+                targetRotationY = Math.max(Math.min(targetRotationY, MAX_ROTATION * 2), -MAX_ROTATION * 2);
+                
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            // Сенсорное управление
+            scene3d.parentElement.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    isDragging = true;
+                    lastMouseX = e.touches[0].clientX;
+                    lastMouseY = e.touches[0].clientY;
+                    mouseControl = true;
+                    e.preventDefault();
+                }
+            });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging || e.touches.length !== 1) return;
+                
+                const deltaX = e.touches[0].clientX - lastMouseX;
+                const deltaY = e.touches[0].clientY - lastMouseY;
+                
+                targetRotationY += deltaX * 0.8;
+                targetRotationX -= deltaY * 0.8;
+                
+                targetRotationX = Math.max(Math.min(targetRotationX, MAX_ROTATION), -MAX_ROTATION);
+                targetRotationY = Math.max(Math.min(targetRotationY, MAX_ROTATION * 2), -MAX_ROTATION * 2);
+                
+                lastMouseX = e.touches[0].clientX;
+                lastMouseY = e.touches[0].clientY;
+                
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+        
+        // ========== УПРАВЛЕНИЕ РЕЖИМАМИ ==========
+        function initControls() {
+            const mode3dBtn = document.getElementById('mode3d');
+            const mode4dBtn = document.getElementById('mode4d');
+            const modeSpinBtn = document.getElementById('modeSpin');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            mode3dBtn.addEventListener('click', () => {
+                hypercubeMode = false;
+                mode3dBtn.classList.add('active');
+                mode4dBtn.classList.remove('active');
+                tesseract.style.animation = 'none';
+                setTimeout(() => {
+                    tesseract.style.animation = 'pulse 3s ease-in-out infinite';
+                }, 10);
+            });
+            
+            mode4dBtn.addEventListener('click', () => {
+                hypercubeMode = true;
+                mode4dBtn.classList.add('active');
+                mode3dBtn.classList.remove('active');
+            });
+            
+            modeSpinBtn.addEventListener('click', () => {
+                autoRotation = !autoRotation;
+                modeSpinBtn.classList.toggle('active');
+                modeSpinBtn.innerHTML = autoRotation ? 
+                    '<i class="fas fa-pause"></i> Стоп' : 
+                    '<i class="fas fa-sync-alt"></i> Автовращение';
+                
+                if (autoRotation) {
+                    mouseControl = false;
+                }
+            });
+            
+            resetBtn.addEventListener('click', () => {
+                targetRotationX = 0;
+                targetRotationY = 0;
+                autoRotation = false;
+                modeSpinBtn.classList.remove('active');
+                modeSpinBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Автовращение';
+                
+                // Сброс гиперкуба
+                const innerCube = tesseract.querySelector('.cube-inner');
+                if (innerCube) {
+                    innerCube.style.transform = 'translateZ(75px) scale(0.5)';
+                }
+                
+                const connections = tesseract.querySelectorAll('.connection');
+                connections.forEach(conn => {
+                    conn.style.height = '75px';
+                    conn.style.opacity = '0.8';
+                });
+            });
+        }
+        
+        // ========== iOS РАЗРЕШЕНИЯ ==========
+        function checkIOSPermission() {
+            if (typeof DeviceOrientationEvent !== 'undefined' && 
+                typeof DeviceOrientationEvent.requestPermission === 'function') {
+                
+                const modal = document.getElementById('iosPermissionModal');
+                modal.style.display = 'flex';
+                
+                document.getElementById('iosPermissionBtn').addEventListener('click', () => {
+                    DeviceOrientationEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                window.addEventListener('deviceorientation', handleOrientation);
+                                modal.style.display = 'none';
+                                showNotification('Доступ к датчикам разрешён!');
+                            } else {
+                                showNotification('Доступ отклонён. Используйте управление пальцем.');
+                            }
+                        })
+                        .catch(console.error);
+                });
+            } else {
+                // Для Android и других устройств
+                window.addEventListener('deviceorientation', handleOrientation);
+            }
+        }
+        
+        // ========== УВЕДОМЛЕНИЯ ==========
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(20, 20, 40, 0.95);
+                color: #33ffcc;
+                padding: 15px 30px;
+                border-radius: 15px;
+                border: 1px solid #33ffcc;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                z-index: 10000;
+                font-weight: bold;
+                backdrop-filter: blur(10px);
+                animation: fadeInUp 0.5s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(-50%) translateY(-20px)';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+        
+        // ========== ЗАГРУЗКА ==========
+        function simulateLoading() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                loadingProgress.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingOverlay.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingOverlay.style.display = 'none';
+                            showNotification('Система 4D-визуализации активирована!');
+                        }, 1000);
+                    }, 500);
+                }
+            }, 100);
+        }
+        
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        function init() {
+            console.log('🚀 Инициализация HyperCube 4D...');
+            
+            // Инициализация компонентов
+            initStars();
+            initParticles();
+            initMouseControl();
+            initControls();
+            
+            // Проверка разрешений для iOS
+            checkIOSPermission();
+            
+            // Симуляция загрузки
+            simulateLoading();
+            
+            // Запуск анимации
+            animate();
+            
+            // Добавление эффекта при загрузке
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in-up').forEach((el, i) => {
+                    el.style.animationDelay = `${i * 0.1}s`;
+                });
+            }, 100);
+            
+            // Информация в консоль
+            console.log('✅ Система инициализирована');
+            console.log('📱 Управление:');
+            console.log('   - Наклон устройства для 3D-вращения');
+            console.log('   - Кнопки режимов внизу экрана');
+            console.log('   - Перетаскивание для ручного управления');
+        }
+        
+        // Запуск при полной загрузке страницы
+        window.addEventListener('load', init);
+        
+        // Обработка ошибок
+        window.addEventListener('error', (e) => {
+            console.error('❌ Ошибка:', e.error);
+            showNotification('Ошибка системы. Перезагрузите страницу.');
+        });
+        
+        // Предотвращение стандартных жестов
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+        document.addEventListener('gesturechange', (e) => e.preventDefault());
+        document.addEventListener('gestureend', (e) => e.preventDefault());
+        
+        // Экспорт для отладки
+        window.app = {
+            setRotation: (x, y) => {
+                targetRotationX = x;
+                targetRotationY = y;
+            },
+            toggleHypercube: () => {
+                hypercubeMode = !hypercubeMode;
+                document.getElementById('mode4d').classList.toggle('active');
+                document.getElementById('mode3d').classList.toggle('active');
+            },
+            getSensorData: () => ({
+                alpha, beta, gamma,
+                rotationX, rotationY
+            })
+        };
+        
+        // Добавление дополнительных эффектов
+        function createConnectionLines() {
+            const tesseract = document.getElementById('tesseract');
+            for (let i = 0; i < 8; i++) {
+                const line = document.createElement('div');
+                line.className = 'connection';
+                const angle = (i / 8) * Math.PI * 2;
+                line.style.transform = `
+                    translate(-50%, -50%) 
+                    rotateX(${Math.sin(angle) * 45}deg) 
+                    rotateY(${Math.cos(angle) * 45}deg)
+                `;
+                tesseract.appendChild(line);
+            }
+        }
+        
+        createConnectionLines();
+        
+        // Динамическое изменение цвета граней
+        function animateFaces() {
+            const faces = document.querySelectorAll('.face');
+            const time = Date.now() * 0.001;
+            
+            faces.forEach((face, i) => {
+                const hue = (time * 20 + i * 30) % 360;
+                const saturation = 80 + Math.sin(time + i) * 20;
+                
+                face.style.borderImageSource = `
+                    linear-gradient(45deg, 
+                        hsl(${hue}, ${saturation}%, 60%), 
+                        hsl(${hue + 60}, ${saturation}%, 60%)
+                    )
+                `;
+                
+                // Мерцание текста
+                const text = face.querySelector('span');
+                if (text) {
+                    text.style.textShadow = `
+                        0 0 10px hsl(${hue}, 100%, 70%),
+                        0 0 20px hsl(${hue}, 100%, 50%),
+                        0 0 30px hsl(${hue}, 100%, 30%)
+                    `;
+                }
+            });
+            
+            requestAnimationFrame(animateFaces);
+        }
+        
+        animateFaces();
+    </script>
 </body>
 </html>
