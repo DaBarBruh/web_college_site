@@ -3,8 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hackathon | Алматы</title>
 
+<!-- ================= SEO + SHARE ================= -->
+<title>Hackathon | Алматы | 24–25 ақпан</title>
+
+<meta name="description"
+  content="Алматы қаласының колледж студенттері арасында өтетін қалалық байқау «Hackathon». 24–25 ақпан. Қатысу үшін өтінім беріңіз.">
+
+<!-- Open Graph (WhatsApp, Telegram, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hackathon | Алматы қалалық байқауы">
+<meta property="og:description"
+  content="Алматы қаласының колледж студенттері арасында өтетін қалалық байқау. 24–25 ақпан. Қатысуға өтінім беріңіз.">
+<meta property="og:image"
+  content="https://YOUR_DOMAIN.kz/static/images/hackathon_preview.jpg">
+<meta property="og:url" content="https://YOUR_DOMAIN.kz/hackathon">
+<meta property="og:site_name" content="Hackathon Almaty">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hackathon | Алматы">
+<meta name="twitter:description"
+  content="Алматы қаласының колледж студенттері арасында өтетін қалалық Hackathon.">
+<meta name="twitter:image"
+  content="https://YOUR_DOMAIN.kz/static/images/hackathon_preview.jpg">
+
+<!-- ================= STYLES ================= -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap');
 
@@ -54,9 +78,7 @@ video{
   text-shadow:0 0 25px #00f7ff;
 }
 
-.hero span{
-  color:#00f7ff;
-}
+.hero span{color:#00f7ff}
 
 .date{
   margin:20px 0;
@@ -185,12 +207,14 @@ const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyzaGdu1eJM2aSulICbO4S
 function openForm(){modal.style.display="flex";}
 function closeForm(){modal.style.display="none";}
 
+modal.addEventListener("click",e=>{
+  if(e.target===modal) closeForm();
+});
+
 document.getElementById("form").addEventListener("submit",e=>{
   e.preventDefault();
-  fetch(SCRIPT_URL,{
-    method:"POST",
-    body:new FormData(e.target)
-  }).then(()=>{
+  fetch(SCRIPT_URL,{method:"POST",body:new FormData(e.target)})
+  .then(()=>{
     alert("Өтінім қабылданды!");
     e.target.reset();
     closeForm();
