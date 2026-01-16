@@ -7,7 +7,7 @@
     --red: #0dcaf0;
     --neon: #00f0ff;
     --light: #e0e0e0;
-    
+
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     --font-main: 'Rajdhani', 'Segoe UI', sans-serif;
 }
@@ -16,31 +16,33 @@
 
 body {
     width: 100%;
-    height: auto;
+    overflow-x: hidden;
 }
+
 .circle-wrapper {
     display: inline-block;
     position: relative;
     width: 50px;
     height: 50px;
-  }
-  
-  .outer-circle {
+}
+
+.outer-circle {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .inner-img {
+}
+
+.inner-img {
     width: 22px;
     height: 22px;
     border-radius: 50%;
     object-fit: cover;
-  }
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .circle-wrapper {
         width: 40px;
         height: 40px;
@@ -68,19 +70,19 @@ body {
 .info-bar {
     background: var(--coal);
     color: var(--light);
-    padding: 8px 5%;
+    padding: clamp(4px, 1vw, 8px) 0;
     display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
+    justify-content: center;
+    font-size: clamp(0.65rem, 0.8vw, 0.8rem);
     border-bottom: 1px solid var(--metal);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: clamp(0.5px, 0.5vw, 1px);
     font-weight: 500;
 }
 
 .info-container {
     display: flex;
-    gap: 30px;
+    gap: clamp(10px, 2vw, 30px);
 }
 
 .info-item {
@@ -101,19 +103,105 @@ header {
     position: sticky;
     top: 0;
     z-index: 888;
-    padding: 0 5%;
+
+}
+
+#header-placeholder {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for cloned dropdowns appended to body */
+body>.dropdown-menu {
+    background: var(--coal);
+    width: 240px;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--metal);
+    border-top: none;
+}
+
+body>.dropdown-menu .dropdown-item {
+    border-bottom: 1px solid var(--metal);
+}
+
+body>.dropdown-menu .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+body>.dropdown-menu .dropdown-link {
+    display: block;
+    padding: 12px 20px;
+    color: var(--light);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body>.dropdown-menu .dropdown-link:hover {
+    background: rgba(0, 240, 255, 0.1);
+    padding-left: 25px;
+    color: var(--neon);
+}
+
+body>.dropdown-menu .sub-dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: var(--coal);
+    width: 220px;
+    border-radius: 4px 0 4px 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 10000;
+    border: 1px solid var(--metal);
+    pointer-events: none;
+}
+
+body>.dropdown-menu .sub-dropdown-link {
+    display: block;
+    padding: 12px 20px;
+    color: var(--light);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body>.dropdown-menu .sub-dropdown-link:hover {
+    background: rgba(0, 240, 255, 0.15);
+    padding-right: 25px;
+    color: var(--neon);
+    box-shadow: inset -2px 0 0 var(--neon);
 }
 
 .header-container {
     display: flex;
-    align-items: center;     /* Центрирование по вертикали */
-    justify-content: center; /* Центрирование по горизонтали */
-    height: 80px;
-    max-width: 1200px;       /* Ограничиваем максимальную ширину */
-    margin: 0 auto;          /* Центрируем контейнер по горизонтали */
-    width: 100%;             /* Чтобы он занимал всю доступную ширину */
+    align-items: center;
+    height: clamp(60px, 8vw, 80px);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    justify-content: center;
+    padding: 0 clamp(10px, 2vw, 20px);
 }
 
+.info-bar-inner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 clamp(10px, 2vw, 20px);
+}
 
 /* Логотип - стиль для горизонтального расположения */
 .logo {
@@ -129,7 +217,7 @@ header {
 }
 
 .logo img {
-    height: 45px;
+    height: clamp(30px, 4vw, 40px);
     filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.3));
     transition: var(--transition);
     display: block;
@@ -148,8 +236,9 @@ header {
 .desktop-menu {
     display: flex;
     align-items: center;
-    gap: 2px;
-    margin-left: 0;
+    gap: clamp(0px, 0.5vw, 2px);
+    margin-left: auto;
+    flex-wrap: nowrap;
 }
 
 .desktop-menu .menu-item {
@@ -159,17 +248,27 @@ header {
 .desktop-menu .menu-link {
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    padding: clamp(8px, 1.5vw, 15px) clamp(8px, 1.5vw, 20px);
     color: var(--light);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
     text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: clamp(0.6rem, 0.9vw, 0.85rem);
+    letter-spacing: clamp(0.3px, 0.5vw, 1px);
     border-radius: 0;
     position: relative;
+    white-space: nowrap;
 }
+
+.slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
 
 .desktop-menu .menu-link:hover {
     color: var(--neon);
@@ -204,7 +303,7 @@ header {
     background: var(--coal);
     width: 240px;
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -249,14 +348,14 @@ header {
 .desktop-menu .sub-dropdown-menu {
     position: absolute;
     top: 0;
-    right: 100%;
+    left: 100%;
     background: var(--coal);
     width: 220px;
-    border-radius: 4px 0 4px 4px;
+    border-radius: 0 4px 4px 4px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-10px);
+    transform: translateX(10px);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     z-index: 100;
     border: 1px solid var(--metal);
@@ -373,7 +472,8 @@ header {
 
 .mobile-menu.active {
     right: 0;
-    z-index: 9999999999999999;
+    z-index: 999999;
+    pointer-events: auto;
 }
 
 .mobile-menu .menu-item {
@@ -389,6 +489,8 @@ header {
 .mobile-menu .menu-link {
     display: flex;
     align-items: center;
+    justify-content: center;
+    /* Center content */
     color: var(--light);
     text-decoration: none;
     font-size: 1rem;
@@ -410,10 +512,17 @@ header {
     color: #555;
 }
 
+.mobile-menu .dropdown-arrow {
+    margin-left: 10px;
+    /* Remove auto margin to keep it close to center */
+}
+
 .mobile-menu .dropdown-menu {
     display: none;
     padding-left: 37px;
     margin-top: 10px;
+    position: relative;
+    z-index: 10000000;
 }
 
 .mobile-menu .dropdown-menu.active {
@@ -446,20 +555,32 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 988;
     display: none;
+    visibility: hidden;
+    pointer-events: auto;
 }
 
 .overlay.active {
     display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Анимации */
 @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
 }
 
 .pulse {
@@ -467,69 +588,109 @@ header {
 }
 
 /* Медиа-запросы для мобильной версии */
+@media (max-width: 1200px) and (min-width: 993px) {
+    .desktop-menu .menu-link {
+        padding: 10px 8px;
+        font-size: 0.7rem;
+        letter-spacing: 0.3px;
+    }
+
+    .header-container {
+        padding: 0 10px;
+        height: clamp(60px, 8vw, 80px);
+    }
+
+    .logo img {
+        height: 40px !important;
+    }
+}
+
 @media (max-width: 992px) {
     .header-container {
-        height: 50px;
+        height: clamp(60px, 8vw, 80px);
         padding: 0 15px;
         justify-content: space-between;
     }
-    
+
     .desktop-menu {
         display: none;
     }
-    
+
     .logo {
-        margin-left: 10px; /* Отступ слева для логотипов */
+        margin-left: 10px;
+        /* Отступ слева для логотипов */
     }
-    
+
     .mobile-menu-toggle {
         display: flex;
         margin-left: auto;
-        margin-right: 10px; /* Отступ справа для бургер-меню */
+        margin-right: 10px;
+        /* Отступ справа для бургер-меню */
     }
-    
+
     .logo img {
-        height: 50px;
-        height: 50px !important; /* Переопределяем инлайновый стиль */
+        height: 40px !important;
+        /* Переопределяем инлайновый стиль */
         width: auto;
         max-width: 100%;
         object-fit: contain;
     }
+
     logo button img {
-        height: 18px !important; /* Переопределяем инлайновый стиль */
+        height: 18px !important;
+        /* Переопределяем инлайновый стиль */
     }
 }
 
 @media (max-width: 480px) {
+
+    html,
+    body {
+        width: 100vw;
+        overflow-x: hidden !important;
+    }
+
+    #header-placeholder {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .logo {
-        margin-left: 8px; /* Меньший отступ для меньших экранов */
+        margin-left: 8px;
+        /* Меньший отступ для меньших экранов */
     }
-    
+
     .logo img {
-        height: 55px !important;
+        height: 35px !important;
     }
-    
+
     .logo button img {
         height: 30px !important;
     }
-    
+
     .mobile-menu-toggle {
-        margin-right: 8px; /* Меньший отступ для меньших экранов */
+        margin-right: 8px;
+        /* Меньший отступ для меньших экранов */
     }
-    
+
     .mobile-menu {
         width: 90%;
     }
-    
+
     .info-bar {
         flex-direction: column;
         gap: 10px;
         padding: 8px 15px;
     }
-    
+
     .info-container {
         gap: 15px;
         justify-content: space-between;
         width: 100%;
+    }
+
+    #header-placeholder {
+        width: 100%;
+        position: relative;
     }
 }

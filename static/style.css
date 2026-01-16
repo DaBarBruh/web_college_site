@@ -2,7 +2,8 @@
     /* ========== БАЗОВЫЕ ЦВЕТА ========== */
     --bs-blue: #0d6efd;
     --bs-indigo: #991919;
-    --bs-purple: #1e3a8a; /* Обновлено: Темно-синий */
+    --bs-purple: #1e3a8a;
+    /* Обновлено: Темно-синий */
     --bs-pink: #d63384;
     --bs-red: #530507;
     --bs-orange: #fd7e14;
@@ -12,7 +13,7 @@
     --bs-cyan: #0dcaf0;
     --bs-black: #000000;
     --bs-white: #ffffff;
-  
+
     /* ========== ГРАДИЕНТЫ СЕРОГО ========== */
     --bs-gray-100: #f8f9fa;
     --bs-gray-200: #e9ecef;
@@ -23,7 +24,7 @@
     --bs-gray-700: #495057;
     --bs-gray-800: #343a40;
     --bs-gray-900: #212529;
-  
+
     /* ========== СЕМАНТИЧЕСКИЕ ЦВЕТА ========== */
     --bs-primary: #0d6efd;
     --bs-secondary: #6c757d;
@@ -34,7 +35,7 @@
     ;
     --bs-light: #f8f9fa;
     --bs-dark: #212529;
-  
+
     /* ========== RGB-ПРЕДСТАВЛЕНИЕ ========== */
     --bs-primary-rgb: 13, 110, 253;
     --bs-secondary-rgb: 108, 117, 125;
@@ -44,7 +45,7 @@
     --bs-danger-rgb: 255, 77, 79;
     --bs-light-rgb: 248, 249, 250;
     --bs-dark-rgb: 33, 37, 41;
-  
+
     /* ========== КАСТОМНЫЕ ЦВЕТА ПРОЕКТА ========== */
     --neon: #00f0ff;
     --neon-rgb: 0, 240, 255;
@@ -54,11 +55,14 @@
     --light: #ffffff;
     --dark: #121212;
     --electric-blue: #0066ff;
-    --deep-purple: #1e40af; /* Обновлено */
-    --bright-purple: #00eaff; /* Обновлено */
+    --deep-purple: #1e40af;
+    /* Обновлено */
+    --bright-purple: #00eaff;
+    /* Обновлено */
     --bordeaux: #b066ff;
-    --light-purple: #66fcf1; /* Обновлено */
-  
+    --light-purple: #66fcf1;
+    /* Обновлено */
+
     /* ========== ПРОЗРАЧНОСТЬ ========== */
     --glass-white-10: rgba(255, 255, 255, 0.1);
     --glass-white-20: rgba(255, 255, 255, 0.2);
@@ -67,28 +71,30 @@
     --glass-black-50: rgba(0, 0, 0, 0.5);
     --glass-black-70: rgba(0, 0, 0, 0.7);
     --glass-black-95: rgba(15, 15, 15, 0.95);
-  
+
     /* ========== ТЕНИ ========== */
     --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
     --shadow-neon: 0 0 10px rgba(0, 240, 255, 0.5);
-    --shadow-purple: 0 0 20px rgba(0, 234, 255, 0.8); /* Обновлено */
+    --shadow-purple: 0 0 20px rgba(0, 234, 255, 0.8);
+    /* Обновлено */
     --shadow-white: 0 0 10px rgba(255, 255, 255, 0.5);
     --shadow-white-lg: 0 15px 30px rgba(255, 255, 255, 0.3);
-  
+
     /* ========== ГРАДИЕНТЫ ========== */
     --gradient-blue: linear-gradient(135deg, #0066ff 0%, #00f0ff 100%);
-    --gradient-purple: linear-gradient(135deg, #1e3a8a 0%, #00eaff 100%); /* Обновлено */
+    --gradient-purple: linear-gradient(135deg, #1e3a8a 0%, #00eaff 100%);
+    /* Обновлено */
     --gradient-dark: linear-gradient(135deg, #121212 0%, #000000 100%);
     --gradient-radial: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0) 80%);
-  
+
     /* ========== ШРИФТЫ ========== */
     --font-main: 'Montserrat', sans-serif;
     --font-heading: 'Arial', sans-serif;
     --font-mono: 'Courier New', monospace;
     --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
+
     /* ========== РАЗМЕРЫ ========== */
     --header-height: 80px;
     --sidebar-width: 280px;
@@ -97,15 +103,21 @@
     --border-radius-lg: 12px;
     --border-radius-xl: 16px;
     --border-radius-circle: 50%;
-  
+
     /* ========== АНИМАЦИИ ========== */
     --transition-fast: 0.15s ease;
     --transition: 0.3s ease;
     --transition-slow: 0.5s ease;
     --animation-marquee: 30s linear infinite;
     --animation-fadeIn: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 html {
     scroll-behavior: smooth;
@@ -178,7 +190,8 @@ nav ul li a:hover {
     border-radius: var(--border-radius-lg);
     padding: 20px;
     position: relative;
-    box-shadow: var(--shadow-purple); /* Обновлено */
+    box-shadow: var(--shadow-purple);
+    /* Обновлено */
     animation: modalFadeIn var(--transition-fast) ease-out;
 }
 
@@ -199,7 +212,8 @@ nav ul li a:hover {
     font-weight: bold;
     cursor: pointer;
     color: var(--glass-white-70);
-    background: rgba(138, 43, 226, 0.8); /* Обновлено */
+    background: rgba(138, 43, 226, 0.8);
+    /* Обновлено */
     border-radius: var(--border-radius-circle);
     width: 30px;
     height: 30px;
@@ -210,7 +224,8 @@ nav ul li a:hover {
 }
 
 .close:hover {
-    background: rgba(138, 43, 226, 1); /* Обновлено */
+    background: rgba(138, 43, 226, 1);
+    /* Обновлено */
     color: var(--bs-white);
 }
 
@@ -264,6 +279,7 @@ nav ul li a:hover {
         transform: scale(0.8);
         opacity: 0;
     }
+
     to {
         transform: scale(1);
         opacity: 1;
@@ -280,14 +296,23 @@ nav ul li a:hover {
     }
 } */
 @keyframes marquee {
-    0%, 20% {
-        transform: translateX(0); /* Пауза в начале (10 секунд) */
+
+    0%,
+    20% {
+        transform: translateX(0);
+        /* Пауза в начале (10 секунд) */
     }
-    40%, 60% {
-        transform: translateX(calc(-100% + 1200px)); /* Движение влево и пауза (10 секунд) */
+
+    40%,
+    60% {
+        transform: translateX(calc(-100% + 1200px));
+        /* Движение влево и пауза (10 секунд) */
     }
-    80%, 100% {
-        transform: translateX(0); /* Возврат в начало и пауза (10 секунд) */
+
+    80%,
+    100% {
+        transform: translateX(0);
+        /* Возврат в начало и пауза (10 секунд) */
     }
 }
 
@@ -300,8 +325,10 @@ nav ul li a:hover {
     background: transparent;
     padding: 50px 5%;
     text-align: center;
-    overflow: visible; /* Добавлено */
-    position: relative; /* На всякий случай */
+    overflow: visible;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
 }
 
 .majors h2 {
@@ -319,7 +346,7 @@ nav ul li a:hover {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden; /* Снимаем ограничения — будем делать маски сами */
+    overflow: hidden;
 }
 
 .majors-container::before,
@@ -332,6 +359,7 @@ nav ul li a:hover {
     z-index: 2;
     pointer-events: none;
 }
+
 .majors-list .major-card p {
     color: var(--bs-white) !important;
 }
@@ -354,11 +382,35 @@ nav ul li a:hover {
     gap: 20px;
     animation: marquee 60s linear infinite;
     width: calc(300px * 12);
-    overflow: visible; /* Добавлено */
+    overflow: visible;
+    /* Добавлено */
 }
 
 .majors-list:hover {
     animation-play-state: paused;
+}
+
+.major-btn-container {
+    padding: 20px;
+}
+
+button.specialty-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+}
+
+.major-content {
+    height: 100px;
+    margin-bottom: 20px;
 }
 
 .majors-list .major-card {
@@ -369,6 +421,7 @@ nav ul li a:hover {
     text-align: center;
     transition: var(--transition);
     flex: 0 0 300px;
+    border-radius: 32px;
 }
 
 .majors-list .major-card:hover {
@@ -404,12 +457,15 @@ nav ul li a:hover {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 .majors-list {
-    animation: none; /* Отключаем CSS-анимацию */
+    animation: none;
+    /* Отключаем CSS-анимацию */
 }
 
 .majors-list .major-card .specialty-btn {
-    background: var(--bs-danger); /* Теперь фиолетовый */
+    background: var(--bs-danger);
+    /* Теперь фиолетовый */
     color: var(--light);
     border: none;
     padding: 10px 20px;
@@ -420,12 +476,13 @@ nav ul li a:hover {
     cursor: pointer;
     transition: var(--transition);
     margin-top: 15px;
+    border-radius: 6px;
 }
 
 .majors-list .major-card .specialty-btn:hover {
     background: var(--neon);
     color: var(--dark);
-    
+
 }
 
 
@@ -470,7 +527,8 @@ nav ul li a:hover {
 }
 
 .specialtyPopup-header {
-    border-left: 4px solid var(--bs-danger); /* Теперь фиолетовый */
+    border-left: 4px solid var(--bs-danger);
+    /* Теперь фиолетовый */
     padding-left: 15px;
     margin-bottom: 20px;
 }
@@ -523,7 +581,8 @@ nav ul li a:hover {
 }
 
 .detail-item i {
-    color: var(--bs-danger); /* Теперь фиолетовый */
+    color: var(--bs-danger);
+    /* Теперь фиолетовый */
     font-size: 1.2rem;
 }
 
@@ -547,7 +606,8 @@ nav ul li a:hover {
 
 .hero h1 {
     font-size: 42px;
-    color: var(--bright-purple); /* Обновлено */
+    color: var(--bright-purple);
+    /* Обновлено */
     margin-bottom: 10px;
     text-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff, 0 0 30px #00bfff;
 }
@@ -556,7 +616,7 @@ nav ul li a:hover {
     font-size: 20px;
     margin-bottom: 0;
     padding-bottom: 0;
-   
+
 }
 
 .hero-text {
@@ -575,7 +635,8 @@ nav ul li a:hover {
     max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
-    flex-wrap: wrap; /* позволяет содержимому переходить на новую строку при необходимости */
+    flex-wrap: wrap;
+    /* позволяет содержимому переходить на новую строку при необходимости */
 }
 
 /* Адаптация под устройства шириной 768px и меньше (обычные планшеты и телефоны) */
@@ -597,7 +658,8 @@ nav ul li a:hover {
 .buttons button {
     margin: 15px;
     padding: 30px 80px;
-    border: 2px solid var(--bright-purple); /* Обновлено */
+    border: 2px solid var(--bright-purple);
+    /* Обновлено */
     background: transparent;
     color: var(--bs-white);
     font-size: 28px;
@@ -607,12 +669,10 @@ nav ul li a:hover {
 }
 
 .buttons button:hover {
-    background: var(--bright-purple); /* Обновлено */
+    background: var(--bright-purple);
+    /* Обновлено */
     color: var(--bs-white);
 }
-
-
-
 
 .news {
     background: var(--bs-white);
@@ -836,89 +896,90 @@ nav ul li a:hover {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .footer {
-  background-color: #111111c7;
-  color: #eee;
-  font-family: 'Inter', sans-serif;
-  padding: 50px 20px;
-  border-top: 2px solid #33333342;
+    background-color: #111111c7;
+    color: #eee;
+    font-family: 'Inter', sans-serif;
+    padding: 50px 20px;
+    border-top: 2px solid #33333342;
 }
 
 .footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .footer-section {
-  flex: 1 1 300px;
-  min-width: 280px;
+    flex: 1 1 300px;
+    min-width: 280px;
 }
 
 .footer-section h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-  color: #fff;
-  border-bottom: 1px solid #444444;
-  padding-bottom: 5px;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #fff;
+    border-bottom: 1px solid #444444;
+    padding-bottom: 5px;
 }
 
 .footer-section p,
 .footer-section a {
-  font-size: 0.95rem;
-  color: #ccc;
-  line-height: 1.6;
-  text-decoration: none;
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.6;
+    text-decoration: none;
 }
 
 .footer-section a:hover {
-  color: #1da1f2;
+    color: #1da1f2;
 }
 
 .icon {
-  margin-right: 6px;
+    margin-right: 6px;
 }
 
 .social-icons {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .social-icons img {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: grayscale(100%) brightness(0.8);
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: grayscale(100%) brightness(0.8);
 }
 
 .social-icons img:hover {
-  transform: scale(1.15) rotate(3deg);
-  filter: none;
+    transform: scale(1.15) rotate(3deg);
+    filter: none;
 }
 
 .dev-button {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 18px;
-  background-color: #1da1f2;
-  color: #fff;
-  border-radius: 8px;
-  font-weight: 600;
-  text-align: center;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #1da1f2;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .dev-button:hover {
-  background-color: #0d8ddf;
-  transform: translateY(-2px);
+    background-color: #0d8ddf;
+    transform: translateY(-2px);
 }
 
 /* Статус загрузки */
 #fetchStatus {
-    color: var(--bs-danger); /* Теперь фиолетовый */
+    color: var(--bs-danger);
+    /* Теперь фиолетовый */
     text-align: center;
     margin-top: 20px;
 }
@@ -942,172 +1003,202 @@ nav ul li a:hover {
     }
 }
 
-/* Медиа-запросы */
-@media (max-width: 1600px) {
-    .buttons button {
-        padding: 30px 130px;
-    }
-}
+/* Медиа-запросы - reorganized and improved */
 
+/* Large screens (1400px+) - Full layout */
 @media (max-width: 1400px) {
     .hero {
-        max-width: 70%;
-        margin-left: 100px;
-        margin-top: 250px;
+        margin: 150px auto 0;
+        text-align: center;
+        max-width: 90%;
     }
+
     .hero .hero-text * {
         white-space: normal;
     }
+
     .buttons button {
-        padding: 30px 70px;
+        padding: 25px 60px;
+        font-size: 24px;
     }
 }
 
+/* Desktop (1024px - 1400px) */
 @media (max-width: 1024px) {
-    body {
-        background-size: 100%;
-        background-position: 200px 100px;
-    }
-    header nav {
-        justify-content: space-between;
-        width: 100%;
-    }
-    header nav ul {
-        display: none;
-    }
-    .burger {
-        display: flex;
-    }
-    .buttons button {
-        padding: 30px 50px;
-        margin: 10px;
-    }
-    #news-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
     .hero {
-        max-width: 78%;
-        margin-left: 20px;
-        margin-top: 210px;
-    }
-    .video-content video {
-        max-width: 90%;
-    }
-}
-
-@media (max-width: 885px) {
-    .buttons button {
-        padding: 20px 30px;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        background-position: 0 100px;
-    }
-    .logo {
-        margin-left: 0;
-    }
-    .hero {
-        margin: 360px auto 0;
-        text-align: center;
-    }
-    .buttons {
-        max-width: 50%;
         margin: 100px auto 0;
-        flex-direction: column;
-        gap: 15px;
+        max-width: 95%;
     }
-    .majors-container {
-        width: 95%;
-    }
-    .cards-container {
-        flex-wrap: wrap;
-        gap: 25px;
-    }
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
-    #news-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .video-content {
-        display: none;
-    }
-    .college-tour {
-        flex-direction: column;
-        text-align: center;
-    }
-    .text-content {
-        max-width: 100%;
-    }
-    body {
-        background: var(--bs-black);
-    }
-    .hero {
-        margin-top: 60px;
-    }
-    header {
-        height: 50px;
-        padding: 5px 20px;
-    }
-    .logo {
-        left: 20px;
-    }
-}
 
-@media (max-width: 690px) {
     .hero h1 {
         font-size: 36px;
     }
+
     .buttons {
-        max-width: 70%;
+        margin-top: 150px;
+    }
+
+    .buttons button {
+        padding: 20px 40px;
+        font-size: 20px;
+        margin: 10px;
+    }
+
+    .college-tour {
+        padding: 60px 5%;
+        width: 95%;
+    }
+
+    .partners {
+        width: 95%;
+        padding: 40px 5%;
+    }
+
+    .map-section h2,
+    .partners-content h2 {
+        font-size: 28px;
     }
 }
 
-@media (max-width: 600px) {
+/* Tablet (768px - 1024px) */
+@media (max-width: 768px) {
     body {
-        background-size: 125%;
-        background-position: 50% 100px;
+        background: var(--bs-black);
     }
-    .menu ul li a {
-        font-size: 18px;
-    }
-}
 
-@media (max-width: 500px) {
+    .hero {
+        margin: 80px auto 0;
+        padding: 15px;
+    }
+
     .hero h1 {
         font-size: 28px;
     }
+
     .hero p {
-        font-size: 18px;
+        font-size: 16px;
     }
+
+    .buttons {
+        max-width: 90%;
+        margin: 80px auto 0;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .buttons button {
+        padding: 18px 30px;
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .majors-container {
+        width: 100%;
+    }
+
+    .college-tour {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .text-content {
+        max-width: 100%;
+    }
+
+    .text-content h2 {
+        font-size: 28px;
+    }
+
+    .video-content {
+        display: none;
+    }
+
+    .partners {
+        width: 100%;
+        padding: 30px 15px;
+    }
+
+    .partners-content h2 {
+        font-size: 24px;
+    }
+
+    .map-section {
+        padding: 30px 15px;
+    }
+
+    .map-section h2 {
+        font-size: 24px;
+    }
+
+    .map-container iframe {
+        height: 350px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    #news-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile (480px - 768px) */
+@media (max-width: 480px) {
+    .hero {
+        margin: 60px auto 0;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .buttons {
+        max-width: 95%;
+        margin: 60px auto 0;
+    }
+
     .buttons button {
         padding: 15px 20px;
         font-size: 16px;
     }
-    /* .major-card p {
-        font-size: 14px;
-    } */
-    .partners-slider {
-        overflow: hidden;
+
+    .cards-container {
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 10px 15px;
     }
+
     .partners-track {
-        display: flex;
+        gap: 30px;
     }
-    .partners-track.top {
-        margin-bottom: 20px;
+
+    .partner-card {
+        width: 100px;
+        height: 70px;
     }
-    .partners-track img {
-        margin: 0 15px;
+
+    .map-container iframe {
+        height: 280px;
     }
+
     #news-container {
         grid-template-columns: 1fr;
+    }
+
+    .news {
+        padding: 20px;
+    }
+
+    .news p {
+        font-size: 15px;
     }
 }
 
@@ -1115,65 +1206,77 @@ nav ul li a:hover {
     .news {
         padding: 20px;
     }
+
     .news p {
         font-size: 15px;
     }
+
     .news img {
         max-height: 200px;
     }
 }
+
 /* Адаптация для мобильных устройств */
 @media (max-width: 480px) {
     .hero_img {
-        display: none; /* Скрываем элемент на мобильных устройствах */
+        display: none;
+        /* Скрываем элемент на мобильных устройствах */
     }
 }
+
 /* ========== MOBILE ADAPTATION (<=480px) ========== */
 @media (max-width: 480px) {
+
     /* Упрощаем header/Nav */
     header {
-      padding: 10px;
-      height: auto;
+        padding: 10px;
+        height: auto;
     }
+
     .logo {
-      max-width: 120px;
-      margin: 0 auto;
-      display: block;
+        max-width: 120px;
+        margin: 0 auto;
+        display: block;
     }
+
     nav ul {
-      display: none;
+        display: none;
     }
+
     .burger {
-      display: flex;
+        display: flex;
     }
-  
+
     /* Герой */
     .hero {
-      margin-top: 40px;
-      padding: 10px;
+        margin-top: 40px;
+        padding: 10px;
     }
+
     .hero h1 {
-      font-size: 24px;
-      line-height: 1.2;
-      text-shadow: 0 0 8px #00bfff;
+        font-size: 24px;
+        line-height: 1.2;
+        text-shadow: 0 0 8px #00bfff;
     }
+
     .hero p {
-      font-size: 14px;
+        font-size: 14px;
     }
-  
+
     /* Кнопки */
     .buttons {
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 80px;
-      padding: 0 10px;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 80px;
+        padding: 0 10px;
     }
+
     .buttons button {
-      width: 100%;
-      padding: 12px 0;
-      font-size: 16px;
+        width: 100%;
+        padding: 12px 0;
+        font-size: 16px;
     }
-  
+
     /* Список специальностей — делаем вертикальный скролл */
     /* .majors-container {
       overflow: visible;
@@ -1191,87 +1294,113 @@ nav ul li a:hover {
    */
     /* Новости */
     .news {
-      padding: 15px;
-      margin-bottom: 20px;
+        padding: 15px;
+        margin-bottom: 20px;
     }
+
     .news p {
-      font-size: 14px;
+        font-size: 14px;
     }
+
     .news img {
-      max-height: 180px;
+        max-height: 180px;
     }
-  
+
     /* Партнёры — горизонтальный скролл */
     .partners-track {
-      gap: 20px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+        gap: 20px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
+
     .partner-card {
-      flex: 0 0 120px;
-      margin-right: 10px;
+        flex: 0 0 120px;
+        margin-right: 10px;
     }
-  
+
     /* Карта */
     .map-container {
-      height: 250px;
+        height: 250px;
     }
+
     .map-container iframe {
-      height: 100%;
+        height: 100%;
     }
-  
+
     /* Футер */
     .footer-container {
-      flex-direction: column;
-      gap: 20px;
-      padding: 0 10px;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px;
     }
+
     .footer-section {
-      width: 100%;
+        width: 100%;
     }
-  }
-  
-  /* ========== EXTRA SMALL (<=360px) ========== */
-  @media (max-width: 360px) {
+}
+
+/* ========== EXTRA SMALL (<=360px) ========== */
+@media (max-width: 360px) {
     .hero h1 {
-      font-size: 20px;
+        font-size: 20px;
     }
+
     .hero p,
     .news p,
     .footer-section p,
     .footer-section a {
-      font-size: 12px;
+        font-size: 12px;
     }
+
     .buttons button {
-      font-size: 14px;
-      padding: 10px 0;
+        font-size: 14px;
+        padding: 10px 0;
     }
-  }
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
+
     /* Контейнер — включаем только горизонтальный скролл */
     .majors-container {
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      padding: 0 10px; /* чтобы карточки не упирались вплотную в края */
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 10px;
+        max-width: 100%;
     }
-  
+
+    /* Hide fade masks on mobile */
+    .majors-container::before,
+    .majors-container::after {
+        display: none;
+    }
+
     /* Сама лента — flex по строке, без анимации */
     .majors-list {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 15px;
-      animation: none;      /* отключаем marquee */
-      width: auto;          /* ширина по содержимому */
-      overflow-x: auto;
-      overflow-y: hidden;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 15px;
+        animation: none !important;
+        width: auto;
+        overflow: visible;
     }
-  
+
     /* Карточки фиксированной ширины, чтобы было удобно скроллить */
     .majors-list .major-card {
-      flex: 0 0 auto;
-      width: 200px;         /* или подкорректируй под свой дизайн */
-      margin: 0;
-      transform: none;      /* отключаем любые hover-трансформации, если надо */
+        flex: 0 0 auto;
+        width: 300px;
+        min-width: 220px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-  }
+
+    .majors-list .major-card:hover {
+        transform: none;
+    }
+
+    .major-btn-container {
+        padding: 10px;
+    }
+}
