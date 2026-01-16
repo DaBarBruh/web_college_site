@@ -149,8 +149,8 @@ function initComponents() {
 // Run once DOM is ready
 window.addEventListener('DOMContentLoaded', async () => {
     try {
-        await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
-        await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
+        await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader_v4');
+        await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter_v4');
         initComponents();
     } catch (e) {
         console.error('loadLayout.js failed to initialize:', e);
