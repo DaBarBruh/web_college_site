@@ -669,9 +669,10 @@ button.specialty-btn {
 }
 
 .buttons button:hover {
-    background: var(--bright-purple);
-    /* Обновлено */
+    background: var(--gradient-blue);
     color: var(--bs-white);
+    opacity: 0.9;
+
 }
 
 .news {
@@ -896,7 +897,6 @@ button.specialty-btn {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .footer {
-    background-color: #111111c7;
     color: #eee;
     font-family: 'Inter', sans-serif;
     padding: 50px 20px;
@@ -928,13 +928,13 @@ button.specialty-btn {
 .footer-section p,
 .footer-section a {
     font-size: 0.95rem;
-    color: #ccc;
+    color: #fff;
     line-height: 1.6;
     text-decoration: none;
 }
 
 .footer-section a:hover {
-    color: #1da1f2;
+    color: #fff;
 }
 
 .icon {
@@ -945,6 +945,7 @@ button.specialty-btn {
     display: flex;
     gap: 15px;
     margin-top: 10px;
+    justify-content: center;
 }
 
 .social-icons img {
@@ -971,15 +972,8 @@ button.specialty-btn {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.dev-button:hover {
-    background-color: #0d8ddf;
-    transform: translateY(-2px);
-}
-
-/* Статус загрузки */
 #fetchStatus {
     color: var(--bs-danger);
-    /* Теперь фиолетовый */
     text-align: center;
     margin-top: 20px;
 }
@@ -1108,10 +1102,6 @@ button.specialty-btn {
 
     .text-content h2 {
         font-size: 28px;
-    }
-
-    .video-content {
-        display: none;
     }
 
     .partners {
@@ -1403,4 +1393,42 @@ button.specialty-btn {
     .major-btn-container {
         padding: 10px;
     }
+}
+
+/* Scroll Up Button */
+.scroll-up-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--neon);
+    /* Using project variable */
+    color: var(--dark);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: var(--shadow-neon);
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.scroll-up-button.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-up-button:hover {
+    background-color: var(--bs-white);
+    color: var(--neon);
+    box-shadow: 0 0 15px var(--neon);
+    transform: translateY(-5px);
 }

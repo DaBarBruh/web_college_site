@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +11,12 @@
     <link rel="stylesheet" href="/static/online_assistant.css">
     <link rel="stylesheet" href="/static/tour_frame_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-
-    <!-- Подключение библиотеки particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="/static/header/styles.css">
 
     <title>График приема граждан</title>
     <style>
-        /* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
-            visibility: hidden;
-            }
         body {
             background-color: #000;
             color: #fff;
@@ -32,15 +24,19 @@
             text-align: center;
             /* padding: 20px; */
         }
+
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            max-width: 700px; /* Ограничиваем ширину контейнера */
-            margin: 0 auto; /* Центрируем контейнер */
-              padding: 20px;
+            max-width: 700px;
+            /* Ограничиваем ширину контейнера */
+            margin: 0 auto;
+            /* Центрируем контейнер */
+            padding: 20px;
         }
+
         .card {
             background-color: #222;
             padding: 20px;
@@ -49,246 +45,37 @@
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
             text-align: left;
         }
+
         .title {
             font-size: 18px;
             font-weight: bold;
         }
+
         .position {
             font-size: 14px;
             margin-bottom: 10px;
         }
+
         .schedule {
             color: #ff4d4d;
             font-weight: bold;
         }
+
+        .mobile-menu .dropdown-item {
+            display: flex;
+            margin-bottom: 12px;
+            flex-direction: column;
+            align-items: flex-start;
+        }
     </style>
 </head>
+
 <body>
     <div id="particle-background"></div>
 
     <div id="header-placeholder"></div>
 
-    <!-- <script>
-    // Функция для загрузки и инициализации хедера
-    async function loadHeader() {
-        try {
-            // Загружаем HTML хедера
-            const response = await fetch('/views/header.html');
-            const html = await response.text();
-            
-            // Вставляем HTML в страницу
-            document.getElementById('header-placeholder').innerHTML = html;
-            
-            // Загружаем ВСЕ скрипты из хедера
-            await loadScriptsFromHeader(html);
-            
-            // Инициализируем компоненты
-            initComponents();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки хедера:', error);
-        }
-    }
-    
-    // Функция для извлечения и загрузки скриптов из HTML хедера
-    function loadScriptsFromHeader(html) {
-        return new Promise((resolve) => {
-            const scriptTags = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/gi) || [];
-            let loadedCount = 0;
-            
-            if (scriptTags.length === 0) return resolve();
-    
-            scriptTags.forEach(scriptTag => {
-                const srcMatch = scriptTag.match(/src="([^"]*)"/i);
-                if (srcMatch && srcMatch[1]) {
-                    const script = document.createElement('script');
-                    script.src = srcMatch[1];
-                    script.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === scriptTags.length) resolve();
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    loadedCount++;
-                    if (loadedCount === scriptTags.length) resolve();
-                }
-            });
-        });
-    }
-    
-    // Функция инициализации всех компонентов
-    function initComponents() {
-        // 1. Инициализация даты и времени
-        function initDateTime() {
-            const dateElement = document.getElementById('current-date');
-            const timeElement = document.getElementById('current-time');
-            
-            function updateTime() {
-                const now = new Date();
-                const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (dateElement) dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-                if (timeElement) timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-            }
-    
-            setInterval(updateTime, 1000);
-            updateTime();
-        }
-    
-        // 2. Инициализация IP-адреса
-        function initIPAddress() {
-            const ipElement = document.getElementById('ip-address');
-            if (!ipElement) return;
-            
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    ipElement.textContent = data.ip;
-                })
-                .catch(() => {
-                    ipElement.textContent = 'Не удалось загрузить IP';
-                });
-        }
-    
-        // 3. Инициализация переключателя языка
-        function initLanguageSwitcher() {
-            const languageSelect = document.getElementById('language-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', (event) => {
-                    const selectedLanguage = event.target.value;
-                    console.log('Selected language:', selectedLanguage);
-                    // Логика для смены языка
-                });
-            }
-        }
-    
-        // 4. Инициализация мобильного меню
-        function initMobileMenu() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-    
-            if (menuToggle && mobileMenu && overlay) {
-                // Обработчик клика по бургер-иконке
-                menuToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                });
-    
-                // Обработчик клика по оверлею
-                overlay.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                });
-    
-                // Обработчик клика по пунктам меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-            }
-        }
-    
-        // 5. Инициализация подменю в мобильной версии
-        function initMobileSubmenus() {
-            document.querySelectorAll('.mobile-menu .dropdown-arrow').forEach(arrow => {
-                arrow.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const menuItem = this.closest('.menu-item');
-                    const dropdownMenu = menuItem.querySelector('.dropdown-menu');
-                    
-                    // Закрываем все другие открытые подменю
-                    document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                            menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotated');
-                        }
-                    });
-                    
-                    // Переключаем текущее подменю
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('rotated');
-                });
-            });
-        }
-    
-        // Вызываем все функции инициализации
-        initDateTime();
-        initIPAddress();
-        initLanguageSwitcher();
-        initMobileMenu();
-        initMobileSubmenus();
-    }
-    
-    // Загружаем хедер при полной загрузке DOM
-    document.addEventListener('DOMContentLoaded', loadHeader);
-    
-    // Добавляем стили для мобильного меню
-    const mobileMenuStyles = `
-        .no-scroll {
-            overflow: hidden;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-            z-index: 9999999999999999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .dropdown-arrow.rotated {
-            transform: rotate(180deg);
-        }
-        
-        @media (max-width: 992px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = mobileMenuStyles;
-    document.head.appendChild(styleElement);
-    </script> -->
-
-    <!-- CHANGED -->
-    <!-- now trying to load the header and the content all together -->
-     <script src="/static/loadLayout.js"></script>
-
-
-    
+    <script src="/static/loadLayout.js"></script>
 
     <h1>График приема граждан</h1>
     <div class="container">
@@ -317,136 +104,22 @@
             <div class="position">Заместитель директора по воспитательной работе</div>
             <div class="schedule">Среда - 14:30 до 16:30<br>Пятница - 14:30 до 16:30</div>
         </div>
-      
+
     </div>
-    
-    <!--CHANGED new line for loadlayout-->
-        <div id="footer-placeholder"></div>
-      
-      <!-- <footer class="footer">
-        <div class="footer-container">
-          
-          <div class="footer-section">
-            <h3 data-translate="about_site">Сайт туралы</h3>
-            <p id="copyright-year"></p>
-            <script>
-              const currentYear = new Date().getFullYear();
-              document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-            </script>
-            <p data-translate="college_name">
-              Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-            </p>
-      
-            <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                <img src="/static/images/flot/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                <img src="/static/images/flot/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                <img src="/static/images/flot/youtube.png" alt="YouTube" />
-              </a>
-              <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-              </a>
-            </div>
-          </div>
-      
-          
-          <div class="footer-section">
-            <h3 data-translate="contact_label">Байланыс</h3>
-            <p>
-              <span class="icon">📍</span>
-              <strong data-translate="address_label">Мекенжай:</strong><br />
-              <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-            </p>
-            <p>
-              <span class="icon">📞</span>
-              <strong data-translate="contact_label">Байланыс:</strong><br />
-              <span data-translate="phone">Тел.: 8 727 229 18 32 </span><br />
-          <span data-translate="phone_whatsapp">Whatsapp: 8 707 171 08 00 </span><br />
-              <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-            </p>
-            <p>
-              <span class="icon">✉️</span>
-              <strong data-translate="email_label">Пошта:</strong><br />
-              <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-            </p>
-          </div>
-      
-      
-          <div class="footer-section">
-            <h3 data-translate="developers">Разработчики сайта</h3>
-            <p>
-              <span class="icon">👨‍💻</span>
-              <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-              <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-            </p>
-            
-            <a href="https://t.me/wikipediasoso_bot" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
-          </div>
-        </div>
-      </footer>  -->
+    <div id="footer-placeholder"></div>
 
-      <!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-            // Load layout first
-            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
-            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
+    <!-- Подключение скриптов -->
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/virtualTour.js"></script>
+    <script src="/static/online_assistant.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/major-body.js"></script>
+    <script src="/static/partners-scroll.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/modal-page/js/specialtyPopup.js"></script>
 
-            // Initialize header dropdown and any custom UI logic
-            initComponents();
-            initDropdownMenus(); // <- this is your custom function from the script you posted
-
-            // Finally, reveal the body
-            document.body.classList.remove('loading');
-        });
-
-        function initDropdownMenus() {
-            const dropdownItems = document.querySelectorAll(".dropdown-item");
-
-            dropdownItems.forEach(item => {
-                const submenu = item.querySelector(".sub-dropdown-menu");
-
-                if (!submenu) return;
-
-                item.addEventListener("mouseenter", () => {
-                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
-
-                    submenu.style.visibility = "hidden";
-                    submenu.style.display = "block";
-
-                    const rect = submenu.getBoundingClientRect();
-                    const isOverflowing = rect.right > window.innerWidth;
-
-                    submenu.style.display = "";
-                    submenu.style.visibility = "";
-
-                    if (isOverflowing) {
-                        submenu.classList.add("sub-dropdown-menu-left");
-                    } else {
-                        submenu.classList.add("sub-dropdown-menu");
-                    }
-                });
-            });
-        }
-        </script>
-      
-           <!-- Подключение скриптов -->
-           <script src="/static/translations.js"></script>
-           <script src="/static/languageSwitcher.js"></script>
-           <script src="/static/virtualTour.js"></script>
-           <script src="/static/online_assistant.js"></script>
-           <script src="/static/script.js"></script>
-           <script src="/static/particles_config.js"></script>
-           <script src="/static/major-body.js"></script>
-           <script src="/static/partners-scroll.js"></script>
-           <script src="/static/header/main.js"></script>
-           <script src="/static/modal-page/js/specialtyPopup.js"></script>
-   
 </body>
+
 </html>

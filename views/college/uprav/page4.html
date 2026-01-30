@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,225 +21,173 @@
   <link rel="stylesheet" href="/static/header/styles.css">
   <title>Положения колледжа</title>
   <style>
-
     /* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
-            visibility: hidden;
-            }
+    /* forcing to load the script buy having an invisible element to be loaded with the content too */
+    body.loading {
+      visibility: hidden;
+    }
 
-  .regulations-section {
-  background-color: #00000000;
-  color: #fff;
-  padding: 30px 20px;
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  justify-content: center;
-}
+    .regulations-section {
+      background-color: #00000000;
+      color: #fff;
+      padding: 30px 20px;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
 
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1000px; /* было 800px */
-  width: 100%;
-}
-
-
-.regulations-section h1 {
-  font-size: 1.8em;
-  font-weight: bold;
-  text-align: center;
-  color: #a6d8ff;
-  text-shadow: 2px 2px 8px #33ccff;
-  margin-bottom: 30px;
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  background-color: #33ccff;
-  color: #000;
-  padding: 10px 15px;
-  margin: 10px 0 20px;
-  border: none;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  font-size: 14px;
-  
-}
-
-.download-btn:hover {
-  background-color: #00aaff;
-}
-
-.download-btn svg {
-  margin-right: 8px;
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
-/* Адаптивность */
-@media (max-width: 600px) {
-  .regulations-section h1 {
-    font-size: 1.3em;
-  }
-
-  .download-btn {
-    font-size: 13px;
-    padding: 8px 12px;
-  }
-}
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1000px;
+      /* было 800px */
+      width: 100%;
+    }
 
 
-.download-btn {
-  display: inline-flex;
-  justify-content: center; /* Центрирует текст по горизонтали */
-  align-items: center;     /* Центрирует текст по вертикали */
-  background-color: #33ccff;
-  color: #000;
-  padding: 12px 15px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  font-size: 14px;
-  width: 100%;
-  max-width: 600px;
-  box-sizing: border-box;
-  text-align: center; /* Подстраховка */
-}
+    .regulations-section h1 {
+      font-size: 1.8em;
+      font-weight: bold;
+      text-align: center;
+      color: #a6d8ff;
+      text-shadow: 2px 2px 8px #33ccff;
+      margin-bottom: 30px;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: #33ccff;
+      color: #000;
+      padding: 10px 15px;
+      margin: 10px 0 20px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      font-size: 14px;
+
+    }
+
+    .download-btn:hover {
+      background-color: #00aaff;
+    }
+
+    .download-btn svg {
+      margin-right: 8px;
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 600px) {
+      .regulations-section h1 {
+        font-size: 1.3em;
+      }
+
+      .download-btn {
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+    }
 
 
-.regulations-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-}
+    .download-btn {
+      display: inline-flex;
+      justify-content: center;
+      /* Центрирует текст по горизонтали */
+      align-items: center;
+      /* Центрирует текст по вертикали */
+      background-color: #33ccff;
+      color: #000;
+      padding: 12px 15px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      font-size: 14px;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+      text-align: center;
+      /* Подстраховка */
+    }
 
 
-
-
+    .regulations-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
   </style>
 </head>
+
 <body>
-    <div id="particle-background"></div>
+  <div id="particle-background"></div>
 
-    <div id="header-placeholder"></div>
-
-
-     <script src="/static/loadLayout.js"></script>
+  <div id="header-placeholder"></div>
 
 
-<div class="regulations-section">
-  <div class="content-wrapper">
-    <h1 data-translate="regulations_title">Положения, регламентирующие основные виды деятельности колледжа</h1>
 
-    <div class="regulations-form">
+  <!-- CHANGED -->
+  <!-- now trying to load the header and the content all together -->
+  <script src="/static/loadLayout.js"></script>
 
 
-  <a class="download-btn" href="/views/college/otdelenie/page6.html" target="_blank" data-translate="otdelenie_6">
-    «Есептеу техникасы және ақпараттық желілер» жұмысшы біліктілік бөлімі
-  </a>
+  <!-- Секция "Положения колледжа" -->
+  <div class="regulations-section">
+    <div class="content-wrapper">
+      <h1 data-translate="regulations_title">Положения, регламентирующие основные виды деятельности колледжа</h1>
 
-  <a class="download-btn" href="/views/college/otdelenie/page7.html" target="_blank" data-translate="otdelenie_1">
-    «Есептеу техникасы және ақпараттық желілер» бөлімі
-  </a>
-
-  <a class="download-btn" href="/views/college/otdelenie/page8.html" target="_blank" data-translate="otdelenie_2">
-    «Бағдарламалық қамтамасыздандыру және РЭТ» бөлімі
-  </a>
-
-    <a class="download-btn" href="/views/college/otdelenie/page9.html" target="_blank" data-translate="otdelenie_3">
-    «Ақпараттық жүйелер» бөлімі
-  </a>
+      <div class="regulations-form">
+        <a class="download-btn" href="/views/college/otdelenie/page1.html" target="_blank" data-translate="otdelenie_1">
+          Бағдарламалық қамтамасыз ету және ақпараттық қауіпсіздік жүйелері
+        </a>
 
 
 
 
-</div>
 
+        <a class="download-btn" href="/views/college/otdelenie/page2.html" target="_blank" data-translate="otdelenie_2">
+          Бағдарламалық қамтамасыз ету
+        </a>
+
+
+        <a class="download-btn" href="/views/college/otdelenie/page4.html" target="_blank" data-translate="otdelenie_4">
+          Радиотехника, электроника және телекоммуникациялар мен ақпараттық жүйелер
+        </a>
+
+
+
+
+
+        <a class="download-btn" href="/views/college/otdelenie/page5.html" target="_blank" data-translate="otdelenie_5">
+          Бағдарламалы қамтамасыздандыру және мехатроника
+        </a>
+
+
+        <a class="download-btn" href="/views/college/otdelenie/page3.html" target="_blank" data-translate="otdelenie_3">
+          Ақылы оқыту
+        </a>
+
+      </div>
+
+    </div>
   </div>
-</div>
 
 
 
-<!--CHANGED new line for loadlayout-->
-      <div id="footer-placeholder"></div>
-      
-      <!-- <footer class="footer">
-        <div class="footer-container">
-          
-          <div class="footer-section">
-            <h3 data-translate="about_site">Сайт туралы</h3>
-            <p id="copyright-year"></p>
-            <script>
-              const currentYear = new Date().getFullYear();
-              document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-            </script>
-            <p data-translate="college_name">
-              Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-            </p>
-      
-            <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                <img src="/static/images/flot/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                <img src="/static/images/flot/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                <img src="/static/images/flot/youtube.png" alt="YouTube" />
-              </a>
-              <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-              </a>
-            </div>
-          </div>
-      
-          
-          <div class="footer-section">
-            <h3 data-translate="contact_label">Байланыс</h3>
-            <p>
-              <span class="icon">📍</span>
-              <strong data-translate="address_label">Мекенжай:</strong><br />
-              <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-            </p>
-            <p>
-              <span class="icon">📞</span>
-              <strong data-translate="contact_label">Байланыс:</strong><br />
-              <span data-translate="phone">Тел.: 8 727 229 18 32 </span><br />
-          <span data-translate="phone_whatsapp">Whatsapp: 8 707 171 08 00 </span><br />
-              <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-            </p>
-            <p>
-              <span class="icon">✉️</span>
-              <strong data-translate="email_label">Пошта:</strong><br />
-              <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-            </p>
-          </div>
-      
-      
-          <div class="footer-section">
-            <h3 data-translate="developers">Разработчики сайта</h3>
-            <p>
-              <span class="icon">👨‍💻</span>
-              <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-              <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-            </p>
-            
-            <a href="https://t.me/wikipediasoso_bot" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
-          </div>
-        </div>
-      </footer>  -->
+  <!--CHANGED new line for loadlayout-->
+  <div id="footer-placeholder"></div>
+
+
 
 
   <script src="/static/translations.js"></script>
@@ -255,50 +204,8 @@
 
 
   <!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-            // Load layout first
-            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
-            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
+  <!-- Unified dom conent loader (does not work no effect) -->
 
-            // Initialize header dropdown and any custom UI logic
-            initComponents();
-            initDropdownMenus(); // <- this is your custom function from the script you posted
-
-            // Finally, reveal the body
-            document.body.classList.remove('loading');
-        });
-
-        function initDropdownMenus() {
-            const dropdownItems = document.querySelectorAll(".dropdown-item");
-
-            dropdownItems.forEach(item => {
-                const submenu = item.querySelector(".sub-dropdown-menu");
-
-                if (!submenu) return;
-
-                item.addEventListener("mouseenter", () => {
-                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
-
-                    submenu.style.visibility = "hidden";
-                    submenu.style.display = "block";
-
-                    const rect = submenu.getBoundingClientRect();
-                    const isOverflowing = rect.right > window.innerWidth;
-
-                    submenu.style.display = "";
-                    submenu.style.visibility = "";
-
-                    if (isOverflowing) {
-                        submenu.classList.add("sub-dropdown-menu-left");
-                    } else {
-                        submenu.classList.add("sub-dropdown-menu");
-                    }
-                });
-            });
-        }
-        </script>
 
 </body>
 

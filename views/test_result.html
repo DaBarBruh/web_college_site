@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="college">Polytech College</title>
     <link rel="stylesheet" href="/static/why_us.css">
     <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon">
@@ -17,764 +17,472 @@
     <link rel="stylesheet" href="/static/header/styles.css">
 
 </head>
+
 <body>
     <div id="particle-background"></div>
 
     <div id="header-placeholder"></div>
 
-    <script>
-    // Функция для загрузки и инициализации хедера
-    async function loadHeader() {
-        try {
-            // Загружаем HTML хедера
-            const response = await fetch('/views/header.html');
-            const html = await response.text();
-            
-            // Вставляем HTML в страницу
-            document.getElementById('header-placeholder').innerHTML = html;
-            
-            // Загружаем ВСЕ скрипты из хедера
-            await loadScriptsFromHeader(html);
-            
-            // Инициализируем компоненты
-            initComponents();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки хедера:', error);
-        }
-    }
-    
-    // Функция для извлечения и загрузки скриптов из HTML хедера
-    function loadScriptsFromHeader(html) {
-        return new Promise((resolve) => {
-            const scriptTags = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/gi) || [];
-            let loadedCount = 0;
-            
-            if (scriptTags.length === 0) return resolve();
-    
-            scriptTags.forEach(scriptTag => {
-                const srcMatch = scriptTag.match(/src="([^"]*)"/i);
-                if (srcMatch && srcMatch[1]) {
-                    const script = document.createElement('script');
-                    script.src = srcMatch[1];
-                    script.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === scriptTags.length) resolve();
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    loadedCount++;
-                    if (loadedCount === scriptTags.length) resolve();
-                }
-            });
-        });
-    }
-    
-    // Функция инициализации всех компонентов
-    function initComponents() {
-        // 1. Инициализация даты и времени
-        function initDateTime() {
-            const dateElement = document.getElementById('current-date');
-            const timeElement = document.getElementById('current-time');
-            
-            function updateTime() {
-                const now = new Date();
-                const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (dateElement) dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-                if (timeElement) timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-            }
-    
-            setInterval(updateTime, 1000);
-            updateTime();
-        }
-    
-        // 2. Инициализация IP-адреса
-        function initIPAddress() {
-            const ipElement = document.getElementById('ip-address');
-            if (!ipElement) return;
-            
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    ipElement.textContent = data.ip;
-                })
-                .catch(() => {
-                    ipElement.textContent = 'Не удалось загрузить IP';
-                });
-        }
-    
-        // 3. Инициализация переключателя языка
-        function initLanguageSwitcher() {
-            const languageSelect = document.getElementById('language-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', (event) => {
-                    const selectedLanguage = event.target.value;
-                    console.log('Selected language:', selectedLanguage);
-                    // Логика для смены языка
-                });
-            }
-        }
-    
-        // 4. Инициализация мобильного меню
-        function initMobileMenu() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-    
-            if (menuToggle && mobileMenu && overlay) {
-                // Обработчик клика по бургер-иконке
-                menuToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                });
-    
-                // Обработчик клика по оверлею
-                overlay.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                });
-    
-                // Обработчик клика по пунктам меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-            }
-        }
-    
-        // 5. Инициализация подменю в мобильной версии
-        function initMobileSubmenus() {
-            document.querySelectorAll('.mobile-menu .dropdown-arrow').forEach(arrow => {
-                arrow.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const menuItem = this.closest('.menu-item');
-                    const dropdownMenu = menuItem.querySelector('.dropdown-menu');
-                    
-                    // Закрываем все другие открытые подменю
-                    document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                            menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotated');
-                        }
-                    });
-                    
-                    // Переключаем текущее подменю
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('rotated');
-                });
-            });
-        }
-    
-        // Вызываем все функции инициализации
-        initDateTime();
-        initIPAddress();
-        initLanguageSwitcher();
-        initMobileMenu();
-        initMobileSubmenus();
-    }
-    
-    // Загружаем хедер при полной загрузке DOM
-    document.addEventListener('DOMContentLoaded', loadHeader);
-    
-    // Добавляем стили для мобильного меню
-    const mobileMenuStyles = `
-        .no-scroll {
-            overflow: hidden;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-            z-index: 9999999999999999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .dropdown-arrow.rotated {
-            transform: rotate(180deg);
-        }
-        
-        @media (max-width: 992px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = mobileMenuStyles;
-    document.head.appendChild(styleElement);
-    </script>
-
-    
-
-        <section class="hero">
-            
-            <div class="hero-text">
-
-                </div>
-                <h1 data-translate="welcome">ALMATY POLYTECHNIC COLLEGE ҚОШ КЕЛДІҢІЗ!</h1>
-                <p data-translate="slogan">ӨЗ ЖЕТІСТІГІҢІЗДІ БАҒДАРЛАМАЛАҢЫЗ-ПОЛИТЕХҚА ТҮСІҢІЗ!</p>
-                <div class="buttons">
-                    <button id="scrollToWhyUs" data-translate="why_us">Неге біз?</button>
-                    <button id="openModal" data-translate="take_tour">Виртуалды тур</button>
-                    <button id="applyNow" data-translate="apply_now">Түсім келеді</button>
+    <script src="/static/loadLayout.js"></script>
 
 
-                    <div class="chat-icon" onclick="toggleChat()">💬</div>
 
-                    <div id="chatBox" class="chat-box">
-                        <div class="chat-header" data-translate="assistant">Ассистент</div>
-                        <div id="chatContent" class="chat-content"></div>
-                        <div id="chatQuestions" class="chat-questions"></div>
-                    </div>
-                </div>
-            </div>
+    <section class="hero">
 
-            <div id="modal" class="modal-overlay">
-                <div class="modal-content">
-                    <button id="closeModal" class="close-btn">×</button>
-                    <iframe src="https://pano3d.kz/PolyTech/" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-        </section>
+        <div class="hero-text">
+
+        </div>
+        <h1 data-translate="welcome">ALMATY POLYTECHNIC COLLEGE ҚОШ КЕЛДІҢІЗ!</h1>
+        <p data-translate="slogan">ӨЗ ЖЕТІСТІГІҢІЗДІ БАҒДАРЛАМАЛАҢЫЗ-ПОЛИТЕХҚА ТҮСІҢІЗ!</p>
+        <div class="buttons">
+            <button id="scrollToWhyUs" data-translate="why_us">Неге біз?</button>
+            <button id="openModal" data-translate="take_tour">Виртуалды тур</button>
+            <button id="applyNow" data-translate="apply_now">Түсім келеді</button>
 
 
-  <!-- Секция с мамандықтар -->
-  <section class="majors">
-    <h2 data-translate="our_majors">Біздің мамандықтар</h2>
-    <div class="majors-container">
-        <div class="majors-list">
-            <div class="major-card">
-                <img src="/static/images/job/spec_3.png" alt="Major 1">
-                <p>06130100</p>
-                <p data-translate="major_0715100">АҚПАРАТТЫҚ ҚАУІПСІЗДІК ЖҮЙЕЛЕРІ</p>
-                <button class="specialty-btn" data-specialty="cybersecurity" data-translate="more">Көбірек</button>
-            </div>
-            <div class="major-card">
-                <img src="/static/images/job/spec_2.png" alt="Major 2">
-                <p>06120200</p>
-                <p data-translate="major_0612100">ЕСЕПТЕУ ТЕХНИКАСЫ ЖӘНЕ АҚПАРАТТЫҚ ЖЕЛІЛЕР</p>
-                <button class="specialty-btn" data-specialty="computing" data-translate="more">Көбірек</button>
-            </div>
-            <div class="major-card">
-                <img src="/static/images/job/spec_1.png" alt="Major 3">
-                <p>06130100</p>
-                <p data-translate="major_0353100">БАҒДАРЛАМАЛЫҚ ҚАМТАМАСЫЗ ЕТУ</p>
-                <button class="specialty-btn" data-specialty="software" data-translate="more">Көбірек</button>
-            </div>
-            <div class="major-card">
-                <img src="/static/images/job/spec_4.png" alt="Major 4">
-                <p>07140900</p>
-                <p data-translate="major_05315100">РАДИОТЕХНИКА, ЭЛЕКТРОНИКА ЖӘНЕ ТЕЛЕКОММУНИКАЦИЯЛАР</p>
-                <button class="specialty-btn" data-specialty="radio" data-translate="more">Көбірек</button>
-            </div>
-            <div class="major-card">
-                <img src="/static/images/job/spec_5.png" alt="Major 5">
-                <p>07151100</p>
-                <p data-translate="major_0345300">Машиналар мен жабдықтарды пайдалану және техникалық қызмет көрсету</p>
-                <button class="specialty-btn" data-specialty="machinery" data-translate="more">Көбірек</button>
+            <div class="chat-icon" onclick="toggleChat()">💬</div>
+
+            <div id="chatBox" class="chat-box">
+                <div class="chat-header" data-translate="assistant">Ассистент</div>
+                <div id="chatContent" class="chat-content"></div>
+                <div id="chatQuestions" class="chat-questions"></div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Модальное окно -->
-<div class="specialtyPopup" id="specialtyPopup">
-    <div class="specialtyPopup-content">
-        <span class="specialtyPopup-close">×</span>
-        <div class="specialtyPopup-header">
-            <h2 id="specialtyTitle"></h2>
-            <p class="specialtyPopup-subtitle" id="specialtySubtitle"></p>
         </div>
-        <div class="specialtyPopup-body" id="specialtyDescription"></div>
-        <div class="specialtyPopup-details" id="specialtyDetails"></div>
+
+        <div id="modal" class="modal-overlay">
+            <div class="modal-content">
+                <button id="closeModal" class="close-btn">×</button>
+                <iframe src="https://pano3d.kz/PolyTech/" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Секция с мамандықтар -->
+    <section class="majors">
+        <h2 data-translate="our_majors">Біздің мамандықтар</h2>
+        <div class="majors-container">
+            <div class="majors-list">
+                <div class="major-card">
+                    <img src="/static/images/job/spec_3.png" alt="Major 1">
+                    <p>06130100</p>
+                    <p data-translate="major_0715100">АҚПАРАТТЫҚ ҚАУІПСІЗДІК ЖҮЙЕЛЕРІ</p>
+                    <button class="specialty-btn" data-specialty="cybersecurity" data-translate="more">Көбірек</button>
+                </div>
+                <div class="major-card">
+                    <img src="/static/images/job/spec_2.png" alt="Major 2">
+                    <p>06120200</p>
+                    <p data-translate="major_0612100">ЕСЕПТЕУ ТЕХНИКАСЫ ЖӘНЕ АҚПАРАТТЫҚ ЖЕЛІЛЕР</p>
+                    <button class="specialty-btn" data-specialty="computing" data-translate="more">Көбірек</button>
+                </div>
+                <div class="major-card">
+                    <img src="/static/images/job/spec_1.png" alt="Major 3">
+                    <p>06130100</p>
+                    <p data-translate="major_0353100">БАҒДАРЛАМАЛЫҚ ҚАМТАМАСЫЗ ЕТУ</p>
+                    <button class="specialty-btn" data-specialty="software" data-translate="more">Көбірек</button>
+                </div>
+                <div class="major-card">
+                    <img src="/static/images/job/spec_4.png" alt="Major 4">
+                    <p>07140900</p>
+                    <p data-translate="major_05315100">РАДИОТЕХНИКА, ЭЛЕКТРОНИКА ЖӘНЕ ТЕЛЕКОММУНИКАЦИЯЛАР</p>
+                    <button class="specialty-btn" data-specialty="radio" data-translate="more">Көбірек</button>
+                </div>
+                <div class="major-card">
+                    <img src="/static/images/job/spec_5.png" alt="Major 5">
+                    <p>07151100</p>
+                    <p data-translate="major_0345300">Машиналар мен жабдықтарды пайдалану және техникалық қызмет көрсету
+                    </p>
+                    <button class="specialty-btn" data-specialty="machinery" data-translate="more">Көбірек</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно -->
+    <div class="specialtyPopup" id="specialtyPopup">
+        <div class="specialtyPopup-content">
+            <span class="specialtyPopup-close">×</span>
+            <div class="specialtyPopup-header">
+                <h2 id="specialtyTitle"></h2>
+                <p class="specialtyPopup-subtitle" id="specialtySubtitle"></p>
+            </div>
+            <div class="specialtyPopup-body" id="specialtyDescription"></div>
+            <div class="specialtyPopup-details" id="specialtyDetails"></div>
+        </div>
     </div>
-</div>
 
-        </section>
+    </section>
 
-        <section class="why-us">
-            <h2 data-translate="why_us">Неге біз?</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <img src="/static/images/why us/13.png" alt="Идея" data-translate="idea_image">
-                    <h3 data-translate="non_standard_approach">Стандартты емес тәсіл</h3>
-                    <p data-translate="non_standard_approach_desc">Сабақтарды өткізудің жоғары сапасын қамтамасыз ету үшін жаңа форматтар мен құралдарды қолданамыз.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/14.png" alt="Человек" data-translate="person_image">
-                    <h3 data-translate="personal_approach">Жеке көзқарас</h3>
-                    <p data-translate="personal_approach_desc">Біз әркімге өзінің табыс траекториясын құруға көмектесеміз. Біз әрқашан ашық және сенімді қарым-қатынаста боламыз.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/18.png" alt="Сұраныс" data-translate="demand_image">
-                    <h3 data-translate="demand">Сұраныс</h3>
-                    <p data-translate="demand_desc">Әр бағдарлама жыл сайын түлектердің күтілетін жұмыс берушілердің қажеттіліктеріне қанағаттандыру үшін жаңартылып отырады.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/2.png" alt="Технология" data-translate="tech_image">
-                    <h3 data-translate="modern_tech">Қазіргі заманғы технологиялар</h3>
-                    <p data-translate="modern_tech_desc">Оқыту барысында жаңа IT технологияларды пайдаланамыз.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/5.png" alt="Қолдау" data-translate="support_image">
-                    <h3 data-translate="one_team">Бір команда</h3>
-                    <p data-translate="one_team_desc">Біздің студенттерге тәлімгерлер мен оқытушылар әрқашан көмек көрсетуге дайын.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/7.png" alt="Жаһандық" data-translate="global_image">
-                    <h3 data-translate="global_perspectives">Жаһандық перспективалар</h3>
-                    <p data-translate="global_perspectives_desc">Біздің түлектер әлемдік нарықта сұранысқа ие мамандар.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/15.png" alt="Мансап" data-translate="career_image">
-                    <h3 data-translate="career_opportunities">Мансап мүмкіндіктері</h3>
-                    <p data-translate="career_opportunities_desc">Түлектеріміз ең үздік компанияларда жұмыс таба алады.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/6.png" alt="Тәжірибе" data-translate="experience_image">
-                    <h3 data-translate="practical_knowledge">Тәжірибелік білім</h3>
-                    <p data-translate="practical_knowledge_desc">Көптеген практикалық жобалар арқылы білімді жетілдіреміз.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/3.png" alt="Желі" data-translate="network_image">
-                    <h3 data-translate="professional_connections">Кәсіби байланыстар</h3>
-                    <p data-translate="professional_connections_desc">Біз студенттерімізге ірі компаниялармен байланыс орнатуға көмектесеміз.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/12.png" alt="Команда" data-translate="team_image">
-                    <h3 data-translate="teamwork">Командалық жұмыс</h3>
-                    <p data-translate="teamwork_desc">Біз студенттерімізді командалық жұмысты үйретеміз.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/1.png" alt="Инновация" data-translate="innovation_image">
-                    <h3 data-translate="innovative_methods">Инновациялық әдістер</h3>
-                    <p data-translate="innovative_methods_desc">Білім беру үдерісі үздіксіз жаңартылып отырады.</p>
-                </div>
-                <div class="card">
-                    <img src="/static/images/why us/16.png" alt="Болашақ" data-translate="future_image">
-                    <h3 data-translate="future_preparation">Болашаққа дайындық</h3>
-                    <p data-translate="future_preparation_desc">Біздің бағдарлама түлектерді болашаққа дайындайды.</p>
-                </div>
+    <section class="why-us">
+        <h2 data-translate="why_us">Неге біз?</h2>
+        <div class="cards-container">
+            <div class="card">
+                <img src="/static/images/why us/13.png" alt="Идея" data-translate="idea_image">
+                <h3 data-translate="non_standard_approach">Стандартты емес тәсіл</h3>
+                <p data-translate="non_standard_approach_desc">Сабақтарды өткізудің жоғары сапасын қамтамасыз ету үшін
+                    жаңа форматтар мен құралдарды қолданамыз.</p>
             </div>
-            <div class="slider-dots">
-                <span class="dot active" data-translate="dot_1"></span>
-                <span class="dot" data-translate="dot_2"></span>
-                <span class="dot" data-translate="dot_3"></span>
-                <span class="dot" data-translate="dot_4"></span>
+            <div class="card">
+                <img src="/static/images/why us/14.png" alt="Человек" data-translate="person_image">
+                <h3 data-translate="personal_approach">Жеке көзқарас</h3>
+                <p data-translate="personal_approach_desc">Біз әркімге өзінің табыс траекториясын құруға көмектесеміз.
+                    Біз әрқашан ашық және сенімді қарым-қатынаста боламыз.</p>
             </div>
-        </section>
-        
+            <div class="card">
+                <img src="/static/images/why us/18.png" alt="Сұраныс" data-translate="demand_image">
+                <h3 data-translate="demand">Сұраныс</h3>
+                <p data-translate="demand_desc">Әр бағдарлама жыл сайын түлектердің күтілетін жұмыс берушілердің
+                    қажеттіліктеріне қанағаттандыру үшін жаңартылып отырады.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/2.png" alt="Технология" data-translate="tech_image">
+                <h3 data-translate="modern_tech">Қазіргі заманғы технологиялар</h3>
+                <p data-translate="modern_tech_desc">Оқыту барысында жаңа IT технологияларды пайдаланамыз.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/5.png" alt="Қолдау" data-translate="support_image">
+                <h3 data-translate="one_team">Бір команда</h3>
+                <p data-translate="one_team_desc">Біздің студенттерге тәлімгерлер мен оқытушылар әрқашан көмек көрсетуге
+                    дайын.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/7.png" alt="Жаһандық" data-translate="global_image">
+                <h3 data-translate="global_perspectives">Жаһандық перспективалар</h3>
+                <p data-translate="global_perspectives_desc">Біздің түлектер әлемдік нарықта сұранысқа ие мамандар.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/15.png" alt="Мансап" data-translate="career_image">
+                <h3 data-translate="career_opportunities">Мансап мүмкіндіктері</h3>
+                <p data-translate="career_opportunities_desc">Түлектеріміз ең үздік компанияларда жұмыс таба алады.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/6.png" alt="Тәжірибе" data-translate="experience_image">
+                <h3 data-translate="practical_knowledge">Тәжірибелік білім</h3>
+                <p data-translate="practical_knowledge_desc">Көптеген практикалық жобалар арқылы білімді жетілдіреміз.
+                </p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/3.png" alt="Желі" data-translate="network_image">
+                <h3 data-translate="professional_connections">Кәсіби байланыстар</h3>
+                <p data-translate="professional_connections_desc">Біз студенттерімізге ірі компаниялармен байланыс
+                    орнатуға көмектесеміз.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/12.png" alt="Команда" data-translate="team_image">
+                <h3 data-translate="teamwork">Командалық жұмыс</h3>
+                <p data-translate="teamwork_desc">Біз студенттерімізді командалық жұмысты үйретеміз.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/1.png" alt="Инновация" data-translate="innovation_image">
+                <h3 data-translate="innovative_methods">Инновациялық әдістер</h3>
+                <p data-translate="innovative_methods_desc">Білім беру үдерісі үздіксіз жаңартылып отырады.</p>
+            </div>
+            <div class="card">
+                <img src="/static/images/why us/16.png" alt="Болашақ" data-translate="future_image">
+                <h3 data-translate="future_preparation">Болашаққа дайындық</h3>
+                <p data-translate="future_preparation_desc">Біздің бағдарлама түлектерді болашаққа дайындайды.</p>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" data-translate="dot_1"></span>
+            <span class="dot" data-translate="dot_2"></span>
+            <span class="dot" data-translate="dot_3"></span>
+            <span class="dot" data-translate="dot_4"></span>
+        </div>
+    </section>
 
-        <section class="college-tour">
-            <div class="text-content">
-                <h2 data-translate="welcome_to_college">Добро пожаловать в наш колледж!</h2>
-                <p data-translate="tour_invitation">Мы рады каждому новому гостю! Записывайся на экскурсию и познакомься с нашими возможностями.</p>
-                <a href="https://wa.me/77071710800?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%20%D0%A5%D0%BE%D1%82%D0%B5%D0%BB(%D0%B0)%20%D0%B1%D1%8B%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BF%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8...", "_blank"" class="tour-button" data-translate="book_tour">Записаться на экскурсию</a>
-            </div>
-            <div class="video-content">
-                <video autoplay muted loop playsinline>
+
+    <section class="college-tour">
+        <div class="text-content">
+            <h2 data-translate="welcome_to_college">Добро пожаловать в наш колледж!</h2>
+            <p data-translate="tour_invitation">Мы рады каждому новому гостю! Записывайся на экскурсию и познакомься с
+                нашими возможностями.</p>
+            <a href="https://wa.me/77071710800?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%20%D0%A5%D0%BE%D1%82%D0%B5%D0%BB(%D0%B0)%20%D0%B1%D1%8B%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BF%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B8..."
+                , "_blank"" class=" tour-button" data-translate="book_tour">Записаться на экскурсию</a>
+        </div>
+        <div class="video-content">
+            <video autoplay muted loop playsinline>
                 <source src="/static/videos/output.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
 
-            </div>
-        </section>
-        <section id="news-title">
-            <h2>Колледж жаңалықтары</h2>
-          </section>
-          <div id="news-gallery"></div>
-          
-          <style>
-#news-title {
-    padding: 2rem 1rem;
-    text-align: center;
-    background: transparent;
-    color: var(--light);
-    max-width: 1000px;
-    margin: 0 auto 2rem;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-}
+        </div>
+    </section>
+    <section id="news-title">
+        <h2>Колледж жаңалықтары</h2>
+    </section>
+    <div id="news-gallery"></div>
 
-/* Эффект неона при наведении */
-#news-title:hover {
-    color: var(--neon);
-    text-shadow:
-        0 0 5px var(--neon),
-        0 0 10px var(--neon),
-        0 0 20px var(--neon),
-        var(--shadow-purple);
-    border-color: var(--neon);
-}
+    <style>
+        #news-title {
+            padding: 2rem 1rem;
+            text-align: center;
+            background: transparent;
+            color: var(--light);
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
 
-        
-            #news-gallery {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-              gap: 1.5rem;
-              padding: 1rem;
-              max-width: 1000px;
-              margin: 0 auto;
-            }
-        
-            .news-item {
-              background-color: white;
-              border-radius: 12px;
-              box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
-              padding: 1rem;
-              transition: transform 0.2s ease, box-shadow 0.2s ease;
-              display: flex;
-              flex-direction: column;
-            }
-        
-            .news-item:hover {
-              transform: translateY(-5px);
-              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            }
-        
-            .news-item h3 {
-              margin-top: 0;
-              font-size: 1.1rem;
-              color: #0077cc;
-            }
-        
-            .news-image {
-              width: 100%;
-              height: 160px;
-              object-fit: cover;
-              border-radius: 8px;
-              margin: 0.8rem 0;
-            }
-        
-            .news-item p {
-              font-size: 0.95rem;
-              line-height: 1.4;
-              margin: 0.5rem 0;
-              max-height: 5.6em;
-              overflow: hidden;
-              transition: max-height 0.3s ease;
-            }
-        
-            .news-item.expanded p {
-              max-height: 500px;
-            }
-        
-            .news-item small {
-              color: #666;
-              font-size: 0.8rem;
-              display: block;
-            }
-        
-            .read-more-btn {
-              background: none;
-              border: none;
-              color: #0077cc;
-              font-size: 0.9rem;
-              cursor: pointer;
-              margin-top: 0.3rem;
-              align-self: flex-start;
-            }
-        
-            .read-more-btn:hover {
-              text-decoration: underline;
-            }
-        
-            @media (prefers-color-scheme: dark) {
-              body {
+        /* Эффект неона при наведении */
+        #news-title:hover {
+            color: var(--neon);
+            text-shadow:
+                0 0 5px var(--neon),
+                0 0 10px var(--neon),
+                0 0 20px var(--neon),
+                var(--shadow-purple);
+            border-color: var(--neon);
+        }
+
+
+        #news-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .news-item {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+            padding: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: #0077cc;
+        }
+
+        .news-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+        }
+
+        .news-item p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin: 0.5rem 0;
+            max-height: 5.6em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .news-item.expanded p {
+            max-height: 500px;
+        }
+
+        .news-item small {
+            color: #666;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #0077cc;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 0.3rem;
+            align-self: flex-start;
+        }
+
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
                 background-color: #111;
                 color: #eee;
-              }
-        
-              .news-item {
+            }
+
+            .news-item {
                 background-color: #1e1e1e;
                 box-shadow: 0 4px 12px rgba(255, 255, 255, 0.04);
-              }
-        
-              .news-item h3 {
-                color: #3ea6ff;
-              }
-        
-              .news-item small {
-                color: #aaa;
-              }
-        
-              .read-more-btn {
-                color: #3ea6ff;
-              }
             }
-          </style>
-          
-          
-          <script>
-            const container = document.getElementById('news-gallery');
-        
-            fetch('https://almatypolytech.edu.kz/api/items/news?fields=title,content,date_created,image.id')
-              .then(res => res.json())
-              .then(data => {
+
+            .news-item h3 {
+                color: #3ea6ff;
+            }
+
+            .news-item small {
+                color: #aaa;
+            }
+
+            .read-more-btn {
+                color: #3ea6ff;
+            }
+        }
+    </style>
+
+
+    <script>
+        const container = document.getElementById('news-gallery');
+
+        fetch('https://almatypolytech.edu.kz/api/items/news?fields=title,content,date_created,image.id')
+            .then(res => res.json())
+            .then(data => {
                 const newsItems = data.data;
-        
+
                 newsItems.forEach(item => {
-                  const { title, content, date_created, image } = item;
-        
-                  const wrapper = document.createElement('div');
-                  wrapper.className = 'news-item';
-        
-                  const titleEl = document.createElement('h3');
-                  titleEl.textContent = title;
-        
-                  const contentEl = document.createElement('p');
-                  contentEl.textContent = content;
-        
-                  const img = document.createElement('img');
-                  img.alt = title;
-                  img.className = 'news-image';
-                  img.loading = 'lazy';
-        
-                  if (image && image.id) {
-                    img.src = `https://almatypolytech.edu.kz/api/assets/${image.id}?key=system-large-contain`;
-                  } else {
-                    img.src = 'https://via.placeholder.com/400x160?text=ФОТО+ЖОҚ';
-                  }
-        
-                  img.onerror = () => {
-                    img.src = 'https://via.placeholder.com/400x160?text=ФОТО+ЖОҚ';
-                  };
-        
-                  const dateEl = document.createElement('small');
-                  const date = new Date(date_created);
-                  dateEl.textContent = `Жарияланған күні: ${date.toLocaleDateString('kk-KZ', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}`;
-        
-                  const toggleBtn = document.createElement('button');
-                  toggleBtn.className = 'read-more-btn';
-                  toggleBtn.textContent = 'Толығырақ';
-        
-                  toggleBtn.addEventListener('click', () => {
-                    const isExpanded = wrapper.classList.toggle('expanded');
-                    toggleBtn.textContent = isExpanded ? 'Жасыру' : 'Толығырақ';
-                  });
-        
-                  wrapper.appendChild(titleEl);
-                  wrapper.appendChild(contentEl);
-                  wrapper.appendChild(img);
-                  wrapper.appendChild(dateEl);
-                  wrapper.appendChild(toggleBtn);
-        
-                  container.appendChild(wrapper);
-                });
-              })
-              .catch(error => {
-                console.error('Қате:', error);
-              });
-          </script>
-        
-           
-        <section class="partners">
-            <div class="partners-content">
-                <h2 data-translate="partner_universities">Вузы-партнёры</h2>
-                <p data-translate="partner_program">Учись дальше на специальных условиях! По партнёрской программе «После колледжа — в вуз» ты можешь сократить срок обучения или поступить на льготных условиях.</p>
-            </div>
-            <div class="partners-slider">
-                <div class="partners-track top">
-                    <div class="partner-card"><img src="/static/images/partners/1.png" alt="Partner 1"></div>
-                    <div class="partner-card"><img src="/static/images/partners/2.png" alt="Partner 2"></div>
-                    <div class="partner-card"><img src="/static/images/partners/3.png" alt="Partner 3"></div>
-                    <div class="partner-card"><img src="/static/images/partners/4.png" alt="Partner 4"></div>
-                    <div class="partner-card"><img src="/static/images/partners/5.png" alt="Partner 5"></div>
-                    <div class="partner-card"><img src="/static/images/partners/6.png" alt="Partner 6"></div>
-                    <div class="partner-card"><img src="/static/images/partners/7.png" alt="Partner 7"></div>
-                    <div class="partner-card"><img src="/static/images/partners/8.png" alt="Partner 8"></div>
-                    <div class="partner-card"><img src="/static/images/partners/9.png" alt="Partner 9"></div>
-                    <div class="partner-card"><img src="/static/images/partners/10.png" alt="Partner 10"></div>
-                    <div class="partner-card"><img src="/static/images/partners/11.png" alt="Partner 11"></div>
-                    <div class="partner-card"><img src="/static/images/partners/12.png" alt="Partner 12"></div>
-                    <!-- <div class="partner-card"><img src="/static/images/partners/13.png" alt="Partner 13"></div> -->
-                    <div class="partner-card"><img src="/static/images/partners/14.png" alt="Partner 14"></div>
-                </div>
-                    <div class="partners-track bottom">
+                    const { title, content, date_created, image } = item;
 
-                    <div class="partner-card"><img src="/static/images/partners/16.png" alt="Partner 16"></div>
-                    <div class="partner-card"><img src="/static/images/partners/17.png" alt="Partner 17"></div>
-                    <div class="partner-card"><img src="/static/images/partners/18.png" alt="Partner 18"></div>
-                    <div class="partner-card"><img src="/static/images/partners/19.png" alt="Partner 19"></div>
-                    <div class="partner-card"><img src="/static/images/partners/20.png" alt="Partner 20"></div>
-                    <div class="partner-card"><img src="/static/images/partners/21.png" alt="Partner 21"></div>
-                    <div class="partner-card"><img src="/static/images/partners/22.png" alt="Partner 22"></div>
-                    <div class="partner-card"><img src="/static/images/partners/23.png" alt="Partner 23"></div>
-                    <div class="partner-card"><img src="/static/images/partners/24.png" alt="Partner 24"></div>
-                    <div class="partner-card"><img src="/static/images/partners/25.png" alt="Partner 25"></div>
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'news-item';
 
-                </div>
-            </div>
-        </section>
+                    const titleEl = document.createElement('h3');
+                    titleEl.textContent = title;
 
-      
+                    const contentEl = document.createElement('p');
+                    contentEl.textContent = content;
 
-        <section class="map-section">
-            <h2 data-translate="hurry_to_join">Біздің студент болуға асығыңыз, бізді табу оңай!</h2>
-            <p data-translate="find_your_specialty">Іздеген мамандыққа мүмкіндігіңізді алыңыз <strong>ALMATY POLYTECHNIC COLLEGE</strong></p>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13430.918379679084!2d76.8432397472676!3d43.246454808350855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3883699af1c02faf%3A0xc474ee44a1baa11c!2sPolytechnic%20College!5e0!3m2!1skk!2skz!4v1744026887068!5m2!1skk!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>        </section>
+                    const img = document.createElement('img');
+                    img.alt = title;
+                    img.className = 'news-image';
+                    img.loading = 'lazy';
 
-        <div class="hero_img">
-            <img src="/static/images/down-0.svg" alt="upImg">
+                    if (image && image.id) {
+                        img.src = `https://almatypolytech.edu.kz/api/assets/${image.id}?key=system-large-contain`;
+                    } else {
+                        img.src = 'https://via.placeholder.com/400x160?text=ФОТО+ЖОҚ';
+                    }
 
-        </div>
+                    img.onerror = () => {
+                        img.src = 'https://via.placeholder.com/400x160?text=ФОТО+ЖОҚ';
+                    };
 
-        
-        <footer class="footer">
-            <div class="footer-container">
-              <!-- О сайте -->
-              <div class="footer-section">
-                <h3 data-translate="about_site">Сайт туралы</h3>
-                <p id="copyright-year"></p>
-                <script>
-                  const currentYear = new Date().getFullYear();
-                  document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-                </script>
-                <p data-translate="college_name">
-                  Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-                </p>
-          
-                <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-                <div class="social-icons">
-                  <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                    <img src="/static/images/flot/instagram.png" alt="Instagram" />
-                  </a>
-                  <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                    <img src="/static/images/flot/facebook.png" alt="Facebook" />
-                  </a>
-                  <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                    <img src="/static/images/flot/youtube.png" alt="YouTube" />
-                  </a>
-                  <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                    <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-                  </a>
-                </div>
-              </div>
-          
-              <!-- Контакты -->
-              <div class="footer-section">
-                <h3 data-translate="contact_label">Байланыс</h3>
-                <p>
-                  <span class="icon">📍</span>
-                  <strong data-translate="address_label">Мекенжай:</strong><br />
-                  <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-                </p>
-                <p>
-                  <span class="icon">📞</span>
-                  <strong data-translate="contact_label">Байланыс:</strong><br />
-                  <span data-translate="phone">Тел.: 229 18 32/span><br />
-                  <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-                </p>
-                <p>
-                  <span class="icon">✉️</span>
-                  <strong data-translate="email_label">Пошта:</strong><br />
-                  <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-                </p>
-              </div>
-          
-              <!-- Разработчики -->
-              <div class="footer-section">
-                <h3 data-translate="developers">Разработчики сайта</h3>
-                <p>
-                  <span class="icon">👨‍💻</span>
-                  <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-                  <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-                </p>
-                
-                <a href="https://t.me/CollegeSupportBot "class="dev-button" data-translate="contact_developer" target="_blank" >Связаться с разработчиком</a>
-              </div>
-            </div>
-          </footer>
-          
-        <!-- Подключение скриптов -->
-        <script src="/static/translations.js"></script>
-        <script src="/static/languageSwitcher.js"></script> 
-        <script src="/static/virtualTour.js"></script>
-        <script src="/static/online_assistant.js"></script>
-        <script src="/static/script.js"></script>
-        <script src="/static/particles_config.js"></script>
-        <script src="/static/major-body.js"></script>
-        <script src="/static/partners-scroll.js"></script>
-        <script src="/static/header/main.js"></script>
-        <script src="/static/modal-page/js/specialtyPopup.js"></script>
+                    const dateEl = document.createElement('small');
+                    const date = new Date(date_created);
+                    dateEl.textContent = `Жарияланған күні: ${date.toLocaleDateString('kk-KZ', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })}`;
 
+                    const toggleBtn = document.createElement('button');
+                    toggleBtn.className = 'read-more-btn';
+                    toggleBtn.textContent = 'Толығырақ';
 
-
-
-
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const dropdownItems = document.querySelectorAll(".dropdown-item");
-            
-                dropdownItems.forEach(item => {
-                    const submenu = item.querySelector(".sub-dropdown-menu");
-            
-                    if (!submenu) return;
-            
-                    item.addEventListener("mouseenter", () => {
-                        // Сброс предыдущих классов
-                        submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
-            
-                        // Временно показать для измерения
-                        submenu.style.visibility = "hidden";
-                        submenu.style.display = "block";
-            
-                        const rect = submenu.getBoundingClientRect();
-                        const isOverflowing = rect.right > window.innerWidth;
-            
-                        submenu.style.display = "";
-                        submenu.style.visibility = "";
-            
-                        if (isOverflowing) {
-                            submenu.classList.add("sub-dropdown-menu-left");
-                        } else {
-                            submenu.classList.add("sub-dropdown-menu");
-                        }
+                    toggleBtn.addEventListener('click', () => {
+                        const isExpanded = wrapper.classList.toggle('expanded');
+                        toggleBtn.textContent = isExpanded ? 'Жасыру' : 'Толығырақ';
                     });
+
+                    wrapper.appendChild(titleEl);
+                    wrapper.appendChild(contentEl);
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(dateEl);
+                    wrapper.appendChild(toggleBtn);
+
+                    container.appendChild(wrapper);
                 });
+            })
+            .catch(error => {
+                console.error('Қате:', error);
             });
-            </script>
-            
+    </script>
+
+
+    <section class="partners">
+        <div class="partners-content">
+            <h2 data-translate="partner_universities">Вузы-партнёры</h2>
+            <p data-translate="partner_program">Учись дальше на специальных условиях! По партнёрской программе «После
+                колледжа — в вуз» ты можешь сократить срок обучения или поступить на льготных условиях.</p>
+        </div>
+        <div class="partners-slider">
+            <div class="partners-track top">
+                <div class="partner-card"><img src="/static/images/partners/1.png" alt="Partner 1"></div>
+                <div class="partner-card"><img src="/static/images/partners/2.png" alt="Partner 2"></div>
+                <div class="partner-card"><img src="/static/images/partners/3.png" alt="Partner 3"></div>
+                <div class="partner-card"><img src="/static/images/partners/4.png" alt="Partner 4"></div>
+                <div class="partner-card"><img src="/static/images/partners/5.png" alt="Partner 5"></div>
+                <div class="partner-card"><img src="/static/images/partners/6.png" alt="Partner 6"></div>
+                <div class="partner-card"><img src="/static/images/partners/7.png" alt="Partner 7"></div>
+                <div class="partner-card"><img src="/static/images/partners/8.png" alt="Partner 8"></div>
+                <div class="partner-card"><img src="/static/images/partners/9.png" alt="Partner 9"></div>
+                <div class="partner-card"><img src="/static/images/partners/10.png" alt="Partner 10"></div>
+                <div class="partner-card"><img src="/static/images/partners/11.png" alt="Partner 11"></div>
+                <div class="partner-card"><img src="/static/images/partners/12.png" alt="Partner 12"></div>
+                <!-- <div class="partner-card"><img src="/static/images/partners/13.png" alt="Partner 13"></div> -->
+                <div class="partner-card"><img src="/static/images/partners/14.png" alt="Partner 14"></div>
+            </div>
+            <div class="partners-track bottom">
+
+                <div class="partner-card"><img src="/static/images/partners/16.png" alt="Partner 16"></div>
+                <div class="partner-card"><img src="/static/images/partners/17.png" alt="Partner 17"></div>
+                <div class="partner-card"><img src="/static/images/partners/18.png" alt="Partner 18"></div>
+                <div class="partner-card"><img src="/static/images/partners/19.png" alt="Partner 19"></div>
+                <div class="partner-card"><img src="/static/images/partners/20.png" alt="Partner 20"></div>
+                <div class="partner-card"><img src="/static/images/partners/21.png" alt="Partner 21"></div>
+                <div class="partner-card"><img src="/static/images/partners/22.png" alt="Partner 22"></div>
+                <div class="partner-card"><img src="/static/images/partners/23.png" alt="Partner 23"></div>
+                <div class="partner-card"><img src="/static/images/partners/24.png" alt="Partner 24"></div>
+                <div class="partner-card"><img src="/static/images/partners/25.png" alt="Partner 25"></div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="map-section">
+        <h2 data-translate="hurry_to_join">Біздің студент болуға асығыңыз, бізді табу оңай!</h2>
+        <p data-translate="find_your_specialty">Іздеген мамандыққа мүмкіндігіңізді алыңыз <strong>ALMATY POLYTECHNIC
+                COLLEGE</strong></p>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13430.918379679084!2d76.8432397472676!3d43.246454808350855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3883699af1c02faf%3A0xc474ee44a1baa11c!2sPolytechnic%20College!5e0!3m2!1skk!2skz!4v1744026887068!5m2!1skk!2skz"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <div class="hero_img">
+        <img src="/static/images/down-0.svg" alt="upImg">
+
+    </div>
+
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Подключение скриптов -->
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/virtualTour.js"></script>
+    <script src="/static/online_assistant.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/major-body.js"></script>
+    <script src="/static/partners-scroll.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/modal-page/js/specialtyPopup.js"></script>
+
+
+
+
+
+
+
+
 </body>
 
 </html>

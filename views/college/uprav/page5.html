@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,377 +14,147 @@
     <link rel="stylesheet" href="/static/header/styles.css">
     <title>Индустриялдық кеңес</title>
     <style>
-
         /* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
+        /* forcing to load the script buy having an invisible element to be loaded with the content too */
+        body.loading {
             visibility: hidden;
-            }
+        }
 
         .regulations-section {
-          background-color: #00000000;
-          color: #fff;
-          padding: 30px 20px;
-          font-family: 'Segoe UI', sans-serif;
-          display: flex;
-          justify-content: center;
+            background-color: #00000000;
+            color: #fff;
+            padding: 30px 20px;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
         }
 
         .content-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          max-width: 1000px;
-          width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
         }
 
         .regulations-section h1 {
-          font-size: 1.8em;
-          font-weight: bold;
-          text-align: center;
-          color: #a6d8ff;
-          text-shadow: 2px 2px 8px #33ccff;
-          margin-bottom: 30px;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            color: #a6d8ff;
+            text-shadow: 2px 2px 8px #33ccff;
+            margin-bottom: 30px;
         }
 
         .accordion {
-          width: 100%;
+            width: 100%;
         }
 
         .accordion-item {
-          background-color: #1b1b1b;
-          border-radius: 8px;
-          margin-bottom: 15px;
-          overflow: hidden;
-          box-shadow: 0 0 10px rgba(0, 145, 255, 0.15);
+            background-color: #1b1b1b;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 145, 255, 0.15);
         }
 
         .accordion-header {
-          padding: 20px 24px;
-          cursor: pointer;
-          position: relative;
-          font-size: 18px;
-          font-weight: 600;
-          color: #9fdfff;
-          background-color: #1f1f1f;
-          transition: background-color 0.3s;
+            padding: 20px 24px;
+            cursor: pointer;
+            position: relative;
+            font-size: 18px;
+            font-weight: 600;
+            color: #9fdfff;
+            background-color: #1f1f1f;
+            transition: background-color 0.3s;
         }
 
         .accordion-header:hover {
-          background-color: #22222200;
+            background-color: #22222200;
         }
 
         .accordion-header::after {
-          content: "▼";
-          position: absolute;
-          right: 20px;
-          transition: transform 0.3s;
+            content: "▼";
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s;
         }
 
         .accordion-header.active::after {
-          transform: rotate(180deg);
+            transform: rotate(180deg);
         }
 
         .accordion-content {
-          max-height: 0;
-          overflow: hidden;
-          background-color: #12121200;
-          padding: 0 20px;
-          transition: max-height 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            background-color: #12121200;
+            padding: 0 20px;
+            transition: max-height 0.3s ease;
         }
 
         .accordion-content p {
-          margin: 15px 0 10px;
-          font-size: 14px;
-          color: #cdeeff;
+            margin: 15px 0 10px;
+            font-size: 14px;
+            color: #cdeeff;
         }
 
         .download-btn {
-          display: inline-flex;
-          align-items: center;
-          background-color: #33ccff;
-          color: #000;
-          padding: 10px 15px;
-          margin: 10px 0 20px;
-          border: none;
-          border-radius: 6px;
-          text-decoration: none;
-          font-weight: bold;
-          transition: background-color 0.3s;
-          font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            background-color: #33ccff;
+            color: #000;
+            padding: 10px 15px;
+            margin: 10px 0 20px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            font-size: 14px;
         }
 
         .download-btn:hover {
-          background-color: #00aaff;
+            background-color: #00aaff;
         }
 
         .download-btn svg {
-          margin-right: 8px;
-          width: 18px;
-          height: 18px;
-          fill: currentColor;
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* Адаптивность */
         @media (max-width: 600px) {
-          .regulations-section h1 {
-            font-size: 1.3em;
-          }
+            .regulations-section h1 {
+                font-size: 1.3em;
+            }
 
-          .accordion-header {
-            font-size: 15px;
-            padding: 14px 16px;
-          }
+            .accordion-header {
+                font-size: 15px;
+                padding: 14px 16px;
+            }
 
-          .accordion-content p {
-            font-size: 13px;
-          }
+            .accordion-content p {
+                font-size: 13px;
+            }
 
-          .download-btn {
-            font-size: 13px;
-            padding: 8px 12px;
-          }
-        }
-
-        /* Basic footer styling for visibility */
-        footer {
-            background-color: #222; /* Примерный темный фон */
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 30px; /* Добавьте отступ сверху, если нужно */
+            .download-btn {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="particle-background"></div>
 
- 
+
     <div id="header-placeholder"></div>
 
-    <!-- <script>
-    // Функция для загрузки и инициализации хедера
-    async function loadHeader() {
-        try {
-            // Загружаем HTML хедера
-            const response = await fetch('/views/header.html');
-            const html = await response.text();
-            
-            // Вставляем HTML в страницу
-            document.getElementById('header-placeholder').innerHTML = html;
-            
-            // Загружаем ВСЕ скрипты из хедера
-            await loadScriptsFromHeader(html);
-            
-            // Инициализируем компоненты
-            initComponents();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки хедера:', error);
-        }
-    }
-    
-    // Функция для извлечения и загрузки скриптов из HTML хедера
-    function loadScriptsFromHeader(html) {
-        return new Promise((resolve) => {
-            const scriptTags = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/gi) || [];
-            let loadedCount = 0;
-            
-            if (scriptTags.length === 0) return resolve();
-    
-            scriptTags.forEach(scriptTag => {
-                const srcMatch = scriptTag.match(/src="([^"]*)"/i);
-                if (srcMatch && srcMatch[1]) {
-                    const script = document.createElement('script');
-                    script.src = srcMatch[1];
-                    script.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === scriptTags.length) resolve();
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    loadedCount++;
-                    if (loadedCount === scriptTags.length) resolve();
-                }
-            });
-        });
-    }
-    
-    // Функция инициализации всех компонентов
-    function initComponents() {
-        // 1. Инициализация даты и времени
-        function initDateTime() {
-            const dateElement = document.getElementById('current-date');
-            const timeElement = document.getElementById('current-time');
-            
-            function updateTime() {
-                const now = new Date();
-                const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (dateElement) dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-                if (timeElement) timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-            }
-    
-            setInterval(updateTime, 1000);
-            updateTime();
-        }
-    
-        // 2. Инициализация IP-адреса
-        function initIPAddress() {
-            const ipElement = document.getElementById('ip-address');
-            if (!ipElement) return;
-            
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    ipElement.textContent = data.ip;
-                })
-                .catch(() => {
-                    ipElement.textContent = 'Не удалось загрузить IP';
-                });
-        }
-    
-        // 3. Инициализация переключателя языка
-        function initLanguageSwitcher() {
-            const languageSelect = document.getElementById('language-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', (event) => {
-                    const selectedLanguage = event.target.value;
-                    console.log('Selected language:', selectedLanguage);
-                    // Логика для смены языка
-                });
-            }
-        }
-    
-        // 4. Инициализация мобильного меню
-        function initMobileMenu() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-    
-            if (menuToggle && mobileMenu && overlay) {
-                // Обработчик клика по бургер-иконке
-                menuToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                });
-    
-                // Обработчик клика по оверлею
-                overlay.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                });
-    
-                // Обработчик клика по пунктам меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-            }
-        }
-    
-        // 5. Инициализация подменю в мобильной версии
-        function initMobileSubmenus() {
-            document.querySelectorAll('.mobile-menu .dropdown-arrow').forEach(arrow => {
-                arrow.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const menuItem = this.closest('.menu-item');
-                    const dropdownMenu = menuItem.querySelector('.dropdown-menu');
-                    
-                    // Закрываем все другие открытые подменю
-                    document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                            menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotated');
-                        }
-                    });
-                    
-                    // Переключаем текущее подменю
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('rotated');
-                });
-            });
-        }
-    
-        // Вызываем все функции инициализации
-        initDateTime();
-        initIPAddress();
-        initLanguageSwitcher();
-        initMobileMenu();
-        initMobileSubmenus();
-    }
-    
-    // Загружаем хедер при полной загрузке DOM
-    document.addEventListener('DOMContentLoaded', loadHeader);
-    
-    // Добавляем стили для мобильного меню
-    const mobileMenuStyles = `
-        .no-scroll {
-            overflow: hidden;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-            z-index: 9999999999999999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .dropdown-arrow.rotated {
-            transform: rotate(180deg);
-        }
-        
-        @media (max-width: 992px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = mobileMenuStyles;
-    document.head.appendChild(styleElement);
-    </script> -->
+    <script src="/static/loadLayout.js"></script>
 
-    <!-- CHANGED -->
-    <!-- now trying to load the header and the content all together -->
-     <script src="/static/loadLayout.js"></script>
-
-<!----------------------------------------------------------------------------------------------------->
-
-
-	<!-- Секция "Положения колледжа" -->
     <div class="regulations-section">
         <div class="content-wrapper">
             <h1 data-translate="industr_rules">
@@ -391,10 +162,7 @@
             </h1>
 
             <div class="accordion">
-                <!-- Элемент аккордеона 1 -->
-                
-                    
-                <!-- Элемент аккордеона 3 -->
+
                 <div class="accordion-item">
                     <div class="accordion-header" data-translate="industr_1">
                         План работы индустриального совета
@@ -402,9 +170,7 @@
                     <div class="accordion-content">
                         <a class="download-btn" target="_blank" href="https://disk.yandex.ru/i/PJsGvkKoMYjJxw" download>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z"
-                                />
+                                <path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z" />
                             </svg>
                             <span data-translate="download_pdf">Скачать PDF</span>
                         </a>
@@ -414,10 +180,6 @@
 
 
             <div class="accordion">
-                <!-- Элемент аккордеона 1 -->
-                
-                    
-                <!-- Элемент аккордеона 3 -->
                 <div class="accordion-item">
                     <div class="accordion-header" data-translate="industr_2">
                         Приказ индустриального совета
@@ -425,23 +187,17 @@
                     <div class="accordion-content">
                         <a class="download-btn" target="_blank" href="https://disk.yandex.ru/i/vrLJdiaHvcrXVw" download>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z"
-                                />
+                                <path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z" />
                             </svg>
                             <span data-translate="download_pdf">Скачать PDF</span>
                         </a>
                     </div>
                 </div>
             </div>
-            
+
 
 
             <div class="accordion">
-                <!-- Элемент аккордеона 1 -->
-                
-                    
-                <!-- Элемент аккордеона 3 -->
                 <div class="accordion-item">
                     <div class="accordion-header" data-translate="industr_3">
                         Протокол индустриального совета
@@ -449,9 +205,7 @@
                     <div class="accordion-content">
                         <a class="download-btn" target="_blank" href="https://disk.yandex.ru/i/_OJWkbaH1nbYEg" download>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z"
-                                />
+                                <path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z" />
                             </svg>
                             <span data-translate="download_pdf">Скачать PDF</span>
                         </a>
@@ -459,28 +213,22 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 
-
-
-<!----------------------------------------------------------------------------------------------------->
-   
-
-        <!-- Подключение скриптов -->
-        <script src="/static/translations.js"></script>
-        <script src="/static/languageSwitcher.js"></script>
-        <script src="/static/virtualTour.js"></script>
-        <script src="/static/online_assistant.js"></script>
-        <script src="/static/script.js"></script>
-        <script src="/static/particles_config.js"></script>
-        <script src="/static/major-body.js"></script>
-        <script src="/static/partners-scroll.js"></script>
-        <script src="/static/header/main.js"></script>
-        <script src="/static/modal-page/js/specialtyPopup.js"></script>
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/virtualTour.js"></script>
+    <script src="/static/online_assistant.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/major-body.js"></script>
+    <script src="/static/partners-scroll.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/modal-page/js/specialtyPopup.js"></script>
     <script>
-        // JavaScript for Accordion
+
         const accordionHeaders = document.querySelectorAll('.accordion-header');
 
         accordionHeaders.forEach(header => {
@@ -489,7 +237,6 @@
                 const accordionContent = accordionItem.querySelector('.accordion-content');
                 const isActive = header.classList.contains('active');
 
-                // Close all other open accordion items
                 document.querySelectorAll('.accordion-item').forEach(item => {
                     const content = item.querySelector('.accordion-content');
                     const head = item.querySelector('.accordion-header');
@@ -499,7 +246,6 @@
                     }
                 });
 
-                // Toggle the clicked accordion item
                 header.classList.toggle('active');
                 if (isActive) {
                     accordionContent.style.maxHeight = 0;
@@ -511,29 +257,25 @@
     </script>
 
 
-<div id="footer-placeholder" style="margin-top: 200px;"></div> 
+    <div id="footer-placeholder" style="margin-top: 200px;"></div>
 
-<script>
-  fetch('/views/footer.html')  // заменил / на ./ для относительного пути
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-placeholder').innerHTML = data;
-    });
-</script>
+    <script>
+        fetch('/views/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
 
-<!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-            // Load layout first
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+
             await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
             await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
 
-            // Initialize header dropdown and any custom UI logic
             initComponents();
-            initDropdownMenus(); // <- this is your custom function from the script you posted
+            initDropdownMenus();
 
-            // Finally, reveal the body
             document.body.classList.remove('loading');
         });
 
@@ -565,8 +307,9 @@
                 });
             });
         }
-        </script>
+    </script>
 
 
 </body>
+
 </html>

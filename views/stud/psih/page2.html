@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="/static/header/styles.css">
     <style>
-        /* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
-            visibility: hidden;
-            }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
@@ -26,11 +22,13 @@
             color: #e0e0e0;
             line-height: 1.6;
         }
+
         .container {
             max-width: 1100px;
             margin: 3rem auto;
             padding: 0 1.5rem;
         }
+
         .section {
             background-color: #1e1e1e;
             padding: 2.5rem;
@@ -39,15 +37,18 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
         }
+
         .section:hover {
             transform: translateY(-5px);
         }
+
         h2 {
             color: #40c4ff;
             font-size: 2rem;
             margin-bottom: 1.5rem;
             position: relative;
         }
+
         h2::after {
             content: '';
             position: absolute;
@@ -57,20 +58,30 @@
             height: 3px;
             background-color: #40c4ff;
         }
-        .service-list, .approach-list, .contact-list {
+
+        .service-list,
+        .approach-list,
+        .contact-list {
             list-style-type: none;
             padding: 0;
         }
-        .service-list li, .approach-list li, .contact-list li {
+
+        .service-list li,
+        .approach-list li,
+        .contact-list li {
             background-color: #2a2a2a;
             margin: 0.75rem 0;
             padding: 1.25rem;
             border-radius: 8px;
             transition: background-color 0.3s ease;
         }
-        .service-list li:hover, .approach-list li:hover, .contact-list li:hover {
+
+        .service-list li:hover,
+        .approach-list li:hover,
+        .contact-list li:hover {
             background-color: #333333;
         }
+
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -78,7 +89,9 @@
             max-width: 600px;
             margin-top: 1.5rem;
         }
-        .contact-form input, .contact-form textarea {
+
+        .contact-form input,
+        .contact-form textarea {
             padding: 0.75rem;
             border: none;
             border-radius: 8px;
@@ -87,15 +100,19 @@
             font-size: 1rem;
             transition: background-color 0.3s ease;
         }
-        .contact-form input:focus, .contact-form textarea:focus {
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
             outline: none;
             background-color: #333333;
             box-shadow: 0 0 0 2px #40c4ff;
         }
+
         .contact-form textarea {
             resize: vertical;
             min-height: 120px;
         }
+
         .contact-form button {
             background-color: #40c4ff;
             color: #121212;
@@ -107,315 +124,141 @@
             font-weight: 600;
             transition: background-color 0.3s ease;
         }
+
         .contact-form button:hover {
             background-color: #0288d1;
         }
+
         @media (max-width: 768px) {
             .container {
                 margin: 1.5rem;
                 padding: 0 1rem;
             }
+
             .section {
                 padding: 1.5rem;
             }
+
             h2 {
                 font-size: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <div id="particle-background"></div>
 
     <div id="header-placeholder"></div>
 
-    <!-- <script>
-    // Функция для загрузки и инициализации хедера
-    async function loadHeader() {
-        try {
-            // Загружаем HTML хедера
-            const response = await fetch('/views/header.html');
-            const html = await response.text();
-            
-            // Вставляем HTML в страницу
-            document.getElementById('header-placeholder').innerHTML = html;
-            
-            // Загружаем ВСЕ скрипты из хедера
-            await loadScriptsFromHeader(html);
-            
-            // Инициализируем компоненты
-            initComponents();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки хедера:', error);
-        }
-    }
-    
-    // Функция для извлечения и загрузки скриптов из HTML хедера
-    function loadScriptsFromHeader(html) {
-        return new Promise((resolve) => {
-            const scriptTags = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/gi) || [];
-            let loadedCount = 0;
-            
-            if (scriptTags.length === 0) return resolve();
-    
-            scriptTags.forEach(scriptTag => {
-                const srcMatch = scriptTag.match(/src="([^"]*)"/i);
-                if (srcMatch && srcMatch[1]) {
-                    const script = document.createElement('script');
-                    script.src = srcMatch[1];
-                    script.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === scriptTags.length) resolve();
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    loadedCount++;
-                    if (loadedCount === scriptTags.length) resolve();
-                }
-            });
-        });
-    }
-    
-    // Функция инициализации всех компонентов
-    function initComponents() {
-        // 1. Инициализация даты и времени
-        function initDateTime() {
-            const dateElement = document.getElementById('current-date');
-            const timeElement = document.getElementById('current-time');
-            
-            function updateTime() {
-                const now = new Date();
-                const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (dateElement) dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-                if (timeElement) timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-            }
-    
-            setInterval(updateTime, 1000);
-            updateTime();
-        }
-    
-        // 2. Инициализация IP-адреса
-        function initIPAddress() {
-            const ipElement = document.getElementById('ip-address');
-            if (!ipElement) return;
-            
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    ipElement.textContent = data.ip;
-                })
-                .catch(() => {
-                    ipElement.textContent = 'Не удалось загрузить IP';
-                });
-        }
-    
-        // 3. Инициализация переключателя языка
-        function initLanguageSwitcher() {
-            const languageSelect = document.getElementById('language-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', (event) => {
-                    const selectedLanguage = event.target.value;
-                    console.log('Selected language:', selectedLanguage);
-                    // Логика для смены языка
-                });
-            }
-        }
-    
-        // 4. Инициализация мобильного меню
-        function initMobileMenu() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-    
-            if (menuToggle && mobileMenu && overlay) {
-                // Обработчик клика по бургер-иконке
-                menuToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                });
-    
-                // Обработчик клика по оверлею
-                overlay.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                });
-    
-                // Обработчик клика по пунктам меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-            }
-        }
-    
-        // 5. Инициализация подменю в мобильной версии
-        function initMobileSubmenus() {
-            document.querySelectorAll('.mobile-menu .dropdown-arrow').forEach(arrow => {
-                arrow.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const menuItem = this.closest('.menu-item');
-                    const dropdownMenu = menuItem.querySelector('.dropdown-menu');
-                    
-                    // Закрываем все другие открытые подменю
-                    document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                            menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotated');
-                        }
-                    });
-                    
-                    // Переключаем текущее подменю
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('rotated');
-                });
-            });
-        }
-    
-        // Вызываем все функции инициализации
-        initDateTime();
-        initIPAddress();
-        initLanguageSwitcher();
-        initMobileMenu();
-        initMobileSubmenus();
-    }
-    
-    // Загружаем хедер при полной загрузке DOM
-    document.addEventListener('DOMContentLoaded', loadHeader);
-    
-    // Добавляем стили для мобильного меню
-    const mobileMenuStyles = `
-        .no-scroll {
-            overflow: hidden;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-            z-index: 9999999999999999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .dropdown-arrow.rotated {
-            transform: rotate(180deg);
-        }
-        
-        @media (max-width: 992px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = mobileMenuStyles;
-    document.head.appendChild(styleElement);
-    </script> -->
+    <div class="scroll-up-button" onclick="scrollToTop()">↑</div>
 
-    <!-- CHANGED -->
-    <!-- now trying to load the header and the content all together -->
-     <script src="/static/loadLayout.js"></script>
+    <div class="container">
+        <div class="section" id="role">
+            <h2 data-translate="college_psychology_service_title">Колледждің психологиялық қызметі</h2>
+            <p data-translate="college_psychology_service_desc">
+                Колледждің психологиялық қызметі - қолайлы психологиялық климат құру, жағдай жасау, студенттерге жеке
+                және кәсіби өсуді ынталандыратын психологиялық көмек көрсету, білім алушылардың, оқытушылар мен
+                қызметкерлердің психологиялық қорғалуын қамтамасыз ету, олардың психикалық денсаулығын қолдау және
+                нығайту.
+                Психологиялық қызметтің мақсаты - студенттердің кәсіп алу, мансапты дамыту, өмірде жетістікке жету үшін
+                қажетті психологиялық білім, Дағдылар мен дағдыларды игеруіне ықпал ету. Студенттерге қабілеттеріне,
+                бейімділіктеріне, қызығушылықтарына, денсаулық жағдайына қарай өз мүмкіндіктерін анықтауда көмек
+                көрсету.
+            </p>
+        </div>
 
-<div class="container">
-    <div class="section" id="role" >
-        <h2 data-translate="college_psychology_service_title">Колледждің психологиялық қызметі</h2>
-        <p data-translate="college_psychology_service_desc">
-            Колледждің психологиялық қызметі - қолайлы психологиялық климат құру, жағдай жасау, студенттерге жеке және кәсіби өсуді ынталандыратын психологиялық көмек көрсету, білім алушылардың, оқытушылар мен қызметкерлердің психологиялық қорғалуын қамтамасыз ету, олардың психикалық денсаулығын қолдау және нығайту.
-            Психологиялық қызметтің мақсаты - студенттердің кәсіп алу, мансапты дамыту, өмірде жетістікке жету үшін қажетті психологиялық білім, Дағдылар мен дағдыларды игеруіне ықпал ету. Студенттерге қабілеттеріне, бейімділіктеріне, қызығушылықтарына, денсаулық жағдайына қарай өз мүмкіндіктерін анықтауда көмек көрсету.
-        </p>
-    </div>
-    
-    <div class="section" id="services" >
-        <h2 data-translate="psychologist_questions_title">Колледждің педагог-психологына жүгінуге болатын және қажет сұрақтар:</h2>
-        <ul class="service-list">
-            <li data-translate="study_difficulties">
-                <strong>Оқудағы қиындықтар</strong>: Кейбір студенттер өздері қалағандай жақсы оқымайды. Мұның себептері көп болуы мүмкін. Мысалы, жақсы есте сақтау немесе назардан тыс қалу немесе қалаудың болмауы емес, мұғаліммен проблемалар туындауы мүмкін және мұның бәрі не үшін қажет екенін түсінбеуі мүмкін. Кеңес беру кезінде біз оның себебін және оны қалай түзетуге болатынын анықтауға тырысамыз, басқаша айтқанда, жақсырақ үйрену үшін нені және қалай дамыту керектігін табуға тырысамыз.
-            </li>
-            <li data-translate="group_relations">
-                <strong>Топтағы қатынастар</strong>: Басқалармен оңай байланыс орнататын, кез-келген, тіпті бейтаныс компанияда оңай байланысатын адамдар бар. Танысу қиын, жақсы қарым-қатынас орнату, достар табу және топта оңай және еркін сезіну қиын. Психологтың көмегімен сіз әртүрлі жағдайларда адамдармен үйлесімді қарым-қатынас орнатудың тәсілдері мен жеке ресурстарын таба аласыз.
-            </li>
-            <li data-translate="parent_relations">
-                <strong>Ата-аналармен қарым-қатынас</strong>: Кейде біздің ең жақын адамдарымызбен — ата-анамызбен ортақ тіл мен жылы қарым-қатынас жоғалады. Жанжалдар, жанжалдар, өзара түсіністіктің болмауы — отбасындағы мұндай жағдай әдетте балаларға да, ата-аналарға да зиян тигізеді. Кейбіреулер шешім жолдарын табады, ал басқалары үшін бұл өте қиын. Психолог Сізге ата-анаңызбен жаңа қарым-қатынас орнатуды және оларды түсінуді үйренуді және ата-анаңыздың сізді қалай түсінетінін және қабылдайтынын үйретеді.
-            </li>
-            <li data-translate="career_choice">
-                <strong>Өмір жолын таңдау</strong>: Поддержка в выборе профессии, планировании карьеры и подготовке к собеседованиям.
-            </li>
-            <li data-translate="self_development">
-                <strong>Өзін-өзі басқару және өзін-өзі дамыту</strong>: Біздің өміріміз соншалықты қызықты және көп қырлы, ол бізге үнемі көптеген міндеттер қояды. Олардың көпшілігі керемет күш-жігерді және әртүрлі жеке қасиеттерді, Дағдылар мен дағдыларды дамытуды талап етеді. Көшбасшылық немесе дау-дамай дағдыларын, логикалық ойлауды немесе шығармашылықты дамытуға болады. Есте сақтау қабілетін, зейінін, қиялын жақсарту. Сіз өз өміріңізді басқаруды, мақсат қоюды және оларға тиімді қол жеткізуді үйрене аласыз.
-            </li>
-            <li data-translate="adaptation_programs">
-                <strong>Программы адаптации</strong>: Помощь первокурсникам в привыкании к новой учебной среде.
-            </li>
-            <li data-translate="preventive_measures">
-                <strong>Профилактические мероприятия</strong>: Беседы и тренинги по предотвращению буллинга, дискриминации и киберугроз.
-            </li>
-        </ul>
-    </div>
-    
-    <div class="section" id="approach" >
-        <h2 data-translate="psychologist_teachers_work_title">Психологтың оқытушылармен жұмысы мыналарды қамтиды:</h2>
-        <ul class="approach-list">
-            <li data-translate="teacher_support"><strong>Педагогты психологиялық қолдау үшін жағдай жасау</strong></li>
-            <li data-translate="client_centered_therapy"><strong>Клиент-центрированная терапия</strong></li>
-            <li data-translate="teacher_stress"><strong>Кажет болған жағдайда мұғалімнің эмоционалды күйзелісі мәселесін шешу;</strong></li>
-            <li data-translate="social_psychology_diagnostics"><strong>Алеуметтік-психологиялық диагностика негізінде студенттерге жеке көзқарасты ұйымдастыру процесінде педагогтарға көмек көрсету;</strong></li>
-        </ul>
-    </div>
-    
-    <div class="section" id="support" >
-        <h2 data-translate="student_work_title">Студенттермен жұмыс мыналарды қамтиды:</h2>
-        <ul class="service-list">
-            <li data-translate="student_research">Студенттердің психологиялық ерекшеліктерін, олардың жеке және интеллектуалдық дамуына ықпал ету мақсатында олардың қызығушылықтарын, ерекшеліктері мен бейімділігін зерттеу;</li>
-            <li data-translate="student_adaptation">Студенттерге оқыту үдерісінде және кәсіби маман болып қалыптасуда олардың табысты бейімделуіне психологиялық көмек көрсету;</li>
-            <li data-translate="special_needs_students">Студентов с особыми образовательными потребностями или ограниченными возможностями здоровья.</li>
-            <li data-translate="behavior_correction">Студенттердің әлеуметтік және деструктивті мінез-құлық өзгерістерінің алдын алу, анықтау және әлеуметтік-психологиялық түзету;</li>
-        </ul>
-    </div>
-    
-    <div class="section" id="contact" >
-        <h2 data-translate="contact_title">Связаться с психологом</h2>
-        <p data-translate="contact_desc">Запишитесь на консультацию или задайте вопрос через форму ниже. Все обращения конфиденциальны.</p>
-        <div class="contact-form">
-            <input type="text" id="name" placeholder="Ваше имя" data-translate="name_placeholder" required>
-            <input type="email" id="email" placeholder="Ваш email" data-translate="email_placeholder" required>
-            <input type="tel" id="phone" placeholder="Ваш телефон (опционально)" data-translate="phone_placeholder">
-            <textarea id="message" placeholder="Ваше сообщение" data-translate="message_placeholder" required></textarea>
-            <button onclick="sendMessage()" data-translate="send_button">Отправить</button>
+        <div class="section" id="services">
+            <h2 data-translate="psychologist_questions_title">Колледждің педагог-психологына жүгінуге болатын және қажет
+                сұрақтар:</h2>
+            <ul class="service-list">
+                <li data-translate="study_difficulties">
+                    <strong>Оқудағы қиындықтар</strong>: Кейбір студенттер өздері қалағандай жақсы оқымайды. Мұның
+                    себептері көп болуы мүмкін. Мысалы, жақсы есте сақтау немесе назардан тыс қалу немесе қалаудың
+                    болмауы емес, мұғаліммен проблемалар туындауы мүмкін және мұның бәрі не үшін қажет екенін түсінбеуі
+                    мүмкін. Кеңес беру кезінде біз оның себебін және оны қалай түзетуге болатынын анықтауға тырысамыз,
+                    басқаша айтқанда, жақсырақ үйрену үшін нені және қалай дамыту керектігін табуға тырысамыз.
+                </li>
+                <li data-translate="group_relations">
+                    <strong>Топтағы қатынастар</strong>: Басқалармен оңай байланыс орнататын, кез-келген, тіпті бейтаныс
+                    компанияда оңай байланысатын адамдар бар. Танысу қиын, жақсы қарым-қатынас орнату, достар табу және
+                    топта оңай және еркін сезіну қиын. Психологтың көмегімен сіз әртүрлі жағдайларда адамдармен
+                    үйлесімді қарым-қатынас орнатудың тәсілдері мен жеке ресурстарын таба аласыз.
+                </li>
+                <li data-translate="parent_relations">
+                    <strong>Ата-аналармен қарым-қатынас</strong>: Кейде біздің ең жақын адамдарымызбен — ата-анамызбен
+                    ортақ тіл мен жылы қарым-қатынас жоғалады. Жанжалдар, жанжалдар, өзара түсіністіктің болмауы —
+                    отбасындағы мұндай жағдай әдетте балаларға да, ата-аналарға да зиян тигізеді. Кейбіреулер шешім
+                    жолдарын табады, ал басқалары үшін бұл өте қиын. Психолог Сізге ата-анаңызбен жаңа қарым-қатынас
+                    орнатуды және оларды түсінуді үйренуді және ата-анаңыздың сізді қалай түсінетінін және қабылдайтынын
+                    үйретеді.
+                </li>
+                <li data-translate="career_choice">
+                    <strong>Өмір жолын таңдау</strong>: Поддержка в выборе профессии, планировании карьеры и подготовке
+                    к собеседованиям.
+                </li>
+                <li data-translate="self_development">
+                    <strong>Өзін-өзі басқару және өзін-өзі дамыту</strong>: Біздің өміріміз соншалықты қызықты және көп
+                    қырлы, ол бізге үнемі көптеген міндеттер қояды. Олардың көпшілігі керемет күш-жігерді және әртүрлі
+                    жеке қасиеттерді, Дағдылар мен дағдыларды дамытуды талап етеді. Көшбасшылық немесе дау-дамай
+                    дағдыларын, логикалық ойлауды немесе шығармашылықты дамытуға болады. Есте сақтау қабілетін, зейінін,
+                    қиялын жақсарту. Сіз өз өміріңізді басқаруды, мақсат қоюды және оларға тиімді қол жеткізуді үйрене
+                    аласыз.
+                </li>
+                <li data-translate="adaptation_programs">
+                    <strong>Программы адаптации</strong>: Помощь первокурсникам в привыкании к новой учебной среде.
+                </li>
+                <li data-translate="preventive_measures">
+                    <strong>Профилактические мероприятия</strong>: Беседы и тренинги по предотвращению буллинга,
+                    дискриминации и киберугроз.
+                </li>
+            </ul>
+        </div>
+
+        <div class="section" id="approach">
+            <h2 data-translate="psychologist_teachers_work_title">Психологтың оқытушылармен жұмысы мыналарды қамтиды:
+            </h2>
+            <ul class="approach-list">
+                <li data-translate="teacher_support"><strong>Педагогты психологиялық қолдау үшін жағдай жасау</strong>
+                </li>
+                <li data-translate="client_centered_therapy"><strong>Клиент-центрированная терапия</strong></li>
+                <li data-translate="teacher_stress"><strong>Кажет болған жағдайда мұғалімнің эмоционалды күйзелісі
+                        мәселесін шешу;</strong></li>
+                <li data-translate="social_psychology_diagnostics"><strong>Алеуметтік-психологиялық диагностика
+                        негізінде студенттерге жеке көзқарасты ұйымдастыру процесінде педагогтарға көмек
+                        көрсету;</strong></li>
+            </ul>
+        </div>
+
+        <div class="section" id="support">
+            <h2 data-translate="student_work_title">Студенттермен жұмыс мыналарды қамтиды:</h2>
+            <ul class="service-list">
+                <li data-translate="student_research">Студенттердің психологиялық ерекшеліктерін, олардың жеке және
+                    интеллектуалдық дамуына ықпал ету мақсатында олардың қызығушылықтарын, ерекшеліктері мен
+                    бейімділігін зерттеу;</li>
+                <li data-translate="student_adaptation">Студенттерге оқыту үдерісінде және кәсіби маман болып
+                    қалыптасуда олардың табысты бейімделуіне психологиялық көмек көрсету;</li>
+                <li data-translate="special_needs_students">Студентов с особыми образовательными потребностями или
+                    ограниченными возможностями здоровья.</li>
+                <li data-translate="behavior_correction">Студенттердің әлеуметтік және деструктивті мінез-құлық
+                    өзгерістерінің алдын алу, анықтау және әлеуметтік-психологиялық түзету;</li>
+            </ul>
+        </div>
+
+        <div class="section" id="contact">
+            <h2 data-translate="contact_title">Связаться с психологом</h2>
+            <p data-translate="contact_desc">Запишитесь на консультацию или задайте вопрос через форму ниже. Все
+                обращения конфиденциальны.</p>
+            <div class="contact-form">
+                <input type="text" id="name" placeholder="Ваше имя" data-translate="name_placeholder" required>
+                <input type="email" id="email" placeholder="Ваш email" data-translate="email_placeholder" required>
+                <input type="tel" id="phone" placeholder="Ваш телефон (опционально)" data-translate="phone_placeholder">
+                <textarea id="message" placeholder="Ваше сообщение" data-translate="message_placeholder"
+                    required></textarea>
+                <button onclick="sendMessage()" data-translate="send_button">Отправить</button>
+            </div>
         </div>
     </div>
-</div>
     <script>
         function sendMessage() {
             const name = document.getElementById('name').value;
@@ -434,132 +277,85 @@
             }
         }
     </script>
-     <!-- Подключение скриптов -->
-<script src="/static/translations.js"></script>
-<script src="/static/languageSwitcher.js"></script>
-<script src="/static/virtualTour.js"></script>
-<script src="/static/online_assistant.js"></script>
-<script src="/static/script.js"></script>
-<script src="/static/particles_config.js"></script>
-<script src="/static/major-body.js"></script>
-<script src="/static/partners-scroll.js"></script>
-<script src="/static/header/main.js"></script>
-<script src="/static/modal-page/js/specialtyPopup.js"></script>
+    <!-- Подключение скриптов -->
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/virtualTour.js"></script>
+    <script src="/static/online_assistant.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/major-body.js"></script>
+    <script src="/static/partners-scroll.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/modal-page/js/specialtyPopup.js"></script>
 
-    <!--CHANGED new line for loadlayout-->
-        <div id="footer-placeholder"></div>
-      
-      <!-- <footer class="footer">
+    <footer class="footer">
         <div class="footer-container">
-          
-          <div class="footer-section">
-            <h3 data-translate="about_site">Сайт туралы</h3>
-            <p id="copyright-year"></p>
-            <script>
-              const currentYear = new Date().getFullYear();
-              document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-            </script>
-            <p data-translate="college_name">
-              Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-            </p>
-      
-            <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                <img src="/static/images/flot/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                <img src="/static/images/flot/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                <img src="/static/images/flot/youtube.png" alt="YouTube" />
-              </a>
-              <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-              </a>
+            <!-- О сайте -->
+            <div class="footer-section">
+                <h3 data-translate="about_site">Сайт туралы</h3>
+                <p id="copyright-year"></p>
+                <script>
+                    const currentYear = new Date().getFullYear();
+                    document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
+                </script>
+                <p data-translate="college_name">
+                    Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
+                </p>
+
+                <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
+                        <img src="/static/images/flot/instagram.png" alt="Instagram" />
+                    </a>
+                    <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
+                        <img src="/static/images/flot/facebook.png" alt="Facebook" />
+                    </a>
+                    <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
+                        <img src="/static/images/flot/youtube.png" alt="YouTube" />
+                    </a>
+                    <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank"
+                        aria-label="TikTok">
+                        <img src="/static/images/flot/tiktok.png" alt="TikTok" />
+                    </a>
+                </div>
             </div>
-          </div>
-      
-          
-          <div class="footer-section">
-            <h3 data-translate="contact_label">Байланыс</h3>
-            <p>
-              <span class="icon">📍</span>
-              <strong data-translate="address_label">Мекенжай:</strong><br />
-              <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-            </p>
-            <p>
-              <span class="icon">📞</span>
-              <strong data-translate="contact_label">Байланыс:</strong><br />
-              <span data-translate="phone">Тел.: 8 727 229 18 32 </span><br />
-          <span data-translate="phone_whatsapp">Whatsapp: 8 707 171 08 00 </span><br />
-              <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-            </p>
-            <p>
-              <span class="icon">✉️</span>
-              <strong data-translate="email_label">Пошта:</strong><br />
-              <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-            </p>
-          </div>
-      
-      
-          <div class="footer-section">
-            <h3 data-translate="developers">Разработчики сайта</h3>
-            <p>
-              <span class="icon">👨‍💻</span>
-              <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-              <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-            </p>
-            
-            <a href="https://t.me/wikipediasoso_bot" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
-          </div>
+
+            <!-- Контакты -->
+            <div class="footer-section">
+                <h3 data-translate="contact_label">Байланыс</h3>
+                <p>
+                    <span class="icon">📍</span>
+                    <strong data-translate="address_label">Мекенжай:</strong><br />
+                    <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
+                </p>
+                <p>
+                    <span class="icon">📞</span>
+                    <strong data-translate="contact_label">Байланыс:</strong><br />
+                    <span data-translate="phone">Тел.: 396 71 39</span><br />
+                    <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
+                </p>
+                <p>
+                    <span class="icon">✉️</span>
+                    <strong data-translate="email_label">Пошта:</strong><br />
+                    <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
+                </p>
+            </div>
+
+            <!-- Разработчики -->
+            <div class="footer-section">
+                <h3 data-translate="developers">Разработчики сайта</h3>
+                <p>
+                    <span class="icon">👨‍💻</span>
+                    <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
+                    <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
+                </p>
+
+                <a href="https://www.instagram.com/polytech_it_hub?igsh=MXFvd3I1enNxeHpoOA==" class="dev-button"
+                    data-translate="contact_developer">Связаться с разработчиком</a>
+            </div>
         </div>
-      </footer>  -->
-
-      <!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-            // Load layout first
-            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
-            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
-
-            // Initialize header dropdown and any custom UI logic
-            initComponents();
-            initDropdownMenus(); // <- this is your custom function from the script you posted
-
-            // Finally, reveal the body
-            document.body.classList.remove('loading');
-        });
-
-        function initDropdownMenus() {
-            const dropdownItems = document.querySelectorAll(".dropdown-item");
-
-            dropdownItems.forEach(item => {
-                const submenu = item.querySelector(".sub-dropdown-menu");
-
-                if (!submenu) return;
-
-                item.addEventListener("mouseenter", () => {
-                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
-
-                    submenu.style.visibility = "hidden";
-                    submenu.style.display = "block";
-
-                    const rect = submenu.getBoundingClientRect();
-                    const isOverflowing = rect.right > window.innerWidth;
-
-                    submenu.style.display = "";
-                    submenu.style.visibility = "";
-
-                    if (isOverflowing) {
-                        submenu.classList.add("sub-dropdown-menu-left");
-                    } else {
-                        submenu.classList.add("sub-dropdown-menu");
-                    }
-                });
-            });
-        }
-        </script>
+    </footer>
 </body>
+
 </html>

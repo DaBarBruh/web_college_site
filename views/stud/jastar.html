@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="kk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЖІК «POLYTECH JASTARY»</title>
+    <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -14,11 +16,6 @@
     <link rel="stylesheet" href="/static/header/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
-        /* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
-            visibility: hidden;
-            }
         body {
             font-family: 'Montserrat', sans-serif;
             background: #0a0a0a;
@@ -27,6 +24,7 @@
             overflow-x: hidden;
             position: relative;
         }
+
         #particles-js {
             position: fixed;
             top: 0;
@@ -35,6 +33,7 @@
             height: 100%;
             z-index: -1;
         }
+
         .hero-section {
             background: linear-gradient(135deg, #7ce1e4d0 0%, #3b83f6bd 50%, #d400f9a1 100%);
             background-size: 200% 200%;
@@ -46,25 +45,26 @@
             justify-content: center;
             overflow: hidden;
         }
+
         .hero-section::before {
-    content: "";
-    background-image: url("/static/images/stud/g6.JPG");
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%) rotate(-0deg);
-    font-size: 6rem;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.1);
-    text-transform: uppercase;
-    white-space: nowrap;
-    z-index: -1;
-}
+            content: "";
+            background-image: url("/static/images/stud/g6.JPG");
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%) rotate(-0deg);
+            font-size: 6rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: -1;
+        }
 
         .hero-content {
             position: relative;
@@ -74,14 +74,28 @@
             animation: fadeInUp 1.5s ease-out 0.5s forwards;
             text-shadow: 0 0 10px rgba(0, 247, 255, 0.7);
         }
+
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
+
         @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
             position: relative;
@@ -93,6 +107,7 @@
             color: transparent;
             text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
         }
+
         .club-card {
             background: rgba(10, 10, 10, 0.85);
             border: 1px solid rgba(0, 247, 255, 0.3);
@@ -102,10 +117,11 @@
             overflow: hidden;
             border-radius: 1rem;
         }
+
         .document-card {
-        width: 550px; 
-        max-width: none; 
-}
+            width: 550px;
+            max-width: none;
+        }
 
 
         .club-card::before {
@@ -118,26 +134,39 @@
             background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.3), transparent);
             transition: 0.6s;
         }
+
         .club-card:hover::before {
             left: 100%;
         }
+
         .club-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 25px rgba(0, 247, 255, 0.6), 0 0 50px rgba(213, 0, 249, 0.4);
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out forwards;
         }
-        .fade-in:nth-child(2) { animation-delay: 0.3s; }
-        .fade-in:nth-child(3) { animation-delay: 0.6s; }
-        .fade-in:nth-child(4) { animation-delay: 0.9s; }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+
         .list-item {
             position: relative;
             padding-left: 1.5rem;
         }
-        
+
         .list-item::before {
             content: '→';
             position: absolute;
@@ -146,25 +175,39 @@
             font-family: 'Orbitron', sans-serif;
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
+
         main {
             background: transparent;
             position: relative;
             z-index: 1;
         }
-        h1, h2, h3 {
+
+        h1,
+        h2,
+        h3 {
             font-family: 'Orbitron', sans-serif;
         }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
             position: relative;
             display: inline-block;
             width: 100%;
-           
+
             margin-bottom: 2rem;
             background: linear-gradient(to right, #00f7ff, #d500f9);
             -webkit-background-clip: text;
@@ -172,7 +215,7 @@
             color: transparent;
             text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
         }
-       
+
         .member-card {
             background: rgba(10, 10, 10, 0.85);
             border: 1px solid rgba(0, 247, 255, 0.3);
@@ -184,6 +227,7 @@
             padding: 1.5rem;
             text-align: center;
         }
+
         .member-card::before {
             content: '';
             position: absolute;
@@ -194,13 +238,16 @@
             background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.3), transparent);
             transition: 0.6s;
         }
+
         .member-card:hover::before {
             left: 100%;
         }
+
         .member-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 25px rgba(0, 247, 255, 0.6), 0 0 50px rgba(213, 0, 249, 0.4);
         }
+
         .member-photo {
             width: 150px;
             height: 150px;
@@ -210,21 +257,26 @@
             margin: 0 auto 1rem;
             box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
         }
+
         .main-member {
             max-width: 400px;
             margin: 0 auto 2rem;
             padding: 2rem;
         }
+
         .main-member .member-photo {
             width: 200px;
             height: 200px;
         }
+
         .main-member .member-name {
             font-size: 2rem;
         }
+
         .main-member .member-role {
             font-size: 1.2rem;
         }
+
         .member-name {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
@@ -232,66 +284,86 @@
             text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
             margin-bottom: 0.5rem;
         }
+
         .member-role {
             font-size: 1rem;
             color: #d500f9;
             margin-bottom: 1rem;
         }
+
         .member-description {
             font-size: 0.9rem;
             color: #d1d5db;
             line-height: 1.5;
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out forwards;
         }
-        .fade-in:nth-child(2) { animation-delay: 0.3s; }
-        .fade-in:nth-child(3) { animation-delay: 0.6s; }
-        .fade-in:nth-child(4) { animation-delay: 0.9s; }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.3s;
         }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         main {
             background: transparent;
             position: relative;
             z-index: 1;
         }
-        .photo-slider {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: #f4f4f4;
-}
 
-.carousel {
+        .photo-slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: #f4f4f4;
+        }
+
+        .carousel {
             max-width: 1800px;
             margin: 20px auto;
             position: relative;
             overflow: hidden;
         }
-        
+
         .carousel-container {
             display: flex;
             transition: transform 0.5s ease;
         }
-        
+
         .carousel-item {
-            flex: 0 0 calc(100% / 3); /* Показываем 3 фото одновременно */
+            flex: 0 0 calc(100% / 3);
+            /* Показываем 3 фото одновременно */
             padding: 0 5px;
             box-sizing: border-box;
-            height: 300px; /* Фиксированная высота */
+            height: 300px;
+            /* Фиксированная высота */
         }
-        
+
         .carousel-item img {
             width: 100%;
             height: 100%;
             border-radius: 8px;
             display: apply;
-           
+
         }
-        
+
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -305,301 +377,91 @@
             z-index: 10;
             border-radius: 50%;
         }
-        
+
         .carousel-btn:hover {
             background: rgba(0, 0, 0, 0.8);
         }
-        
+
         #prevBtn {
             left: 10px;
         }
-        
+
         #nextBtn {
             right: 10px;
         }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 300%;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div id="particles-js"></div>
 
     <div id="header-placeholder"></div>
 
-<!-- <script>
-    fetch('/views/header.html')
-        .then(response => response.text())
-        .then(data => {
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            headerPlaceholder.innerHTML = data;
-
-            // Инициализация динамических элементов после вставки хедера
-            initDateTime();
-            initIPAddress();
-            initLanguageSwitcher();
-        });
-
-    function initDateTime() {
-        const dateElement = document.getElementById('current-date');
-        const timeElement = document.getElementById('current-time');
-        
-        function updateTime() {
-            const now = new Date();
-            const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-            timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-        }
-
-        setInterval(updateTime, 1000);
-        updateTime();
-    }
-
-    function initIPAddress() {
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
+    <script>
+        fetch('/views/header.html')
+            .then(response => response.text())
             .then(data => {
-                document.getElementById('ip-address').textContent = data.ip;
-            })
-            .catch(() => {
-                document.getElementById('ip-address').textContent = 'Не удалось загрузить IP';
-            });
-    }
+                const headerPlaceholder = document.getElementById('header-placeholder');
+                headerPlaceholder.innerHTML = data;
 
-    function initLanguageSwitcher() {
-        const languageSelect = document.getElementById('language-select');
-        if (languageSelect) {
-            languageSelect.addEventListener('change', (event) => {
-                const selectedLanguage = event.target.value;
-                console.log('Selected language:', selectedLanguage);
-                // Добавь логику для смены языка
+                // Инициализация динамических элементов после вставки хедера
+                initDateTime();
+                initIPAddress();
+                initLanguageSwitcher();
             });
-        }
-    }
-</script>	 -->
 
-<!-- <script>
-    // Функция для загрузки и инициализации хедера
-    async function loadHeader() {
-        try {
-            // Загружаем HTML хедера
-            const response = await fetch('/views/header.html');
-            const html = await response.text();
-            
-            // Вставляем HTML в страницу
-            document.getElementById('header-placeholder').innerHTML = html;
-            
-            // Загружаем ВСЕ скрипты из хедера
-            await loadScriptsFromHeader(html);
-            
-            // Инициализируем компоненты
-            initComponents();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки хедера:', error);
-        }
-    }
-    
-    // Функция для извлечения и загрузки скриптов из HTML хедера
-    function loadScriptsFromHeader(html) {
-        return new Promise((resolve) => {
-            const scriptTags = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/gi) || [];
-            let loadedCount = 0;
-            
-            if (scriptTags.length === 0) return resolve();
-    
-            scriptTags.forEach(scriptTag => {
-                const srcMatch = scriptTag.match(/src="([^"]*)"/i);
-                if (srcMatch && srcMatch[1]) {
-                    const script = document.createElement('script');
-                    script.src = srcMatch[1];
-                    script.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === scriptTags.length) resolve();
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    loadedCount++;
-                    if (loadedCount === scriptTags.length) resolve();
-                }
-            });
-        });
-    }
-    
-    // Функция инициализации всех компонентов
-    function initComponents() {
-        // 1. Инициализация даты и времени
         function initDateTime() {
             const dateElement = document.getElementById('current-date');
             const timeElement = document.getElementById('current-time');
-            
+
             function updateTime() {
                 const now = new Date();
                 const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
                 const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (dateElement) dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-                if (timeElement) timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
+                dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
+                timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
             }
-    
+
             setInterval(updateTime, 1000);
             updateTime();
         }
-    
-        // 2. Инициализация IP-адреса
+
         function initIPAddress() {
-            const ipElement = document.getElementById('ip-address');
-            if (!ipElement) return;
-            
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
-                    ipElement.textContent = data.ip;
+                    document.getElementById('ip-address').textContent = data.ip;
                 })
                 .catch(() => {
-                    ipElement.textContent = 'Не удалось загрузить IP';
+                    document.getElementById('ip-address').textContent = 'Не удалось загрузить IP';
                 });
         }
-    
-        // 3. Инициализация переключателя языка
+
         function initLanguageSwitcher() {
             const languageSelect = document.getElementById('language-select');
             if (languageSelect) {
                 languageSelect.addEventListener('change', (event) => {
                     const selectedLanguage = event.target.value;
                     console.log('Selected language:', selectedLanguage);
-                    // Логика для смены языка
+                    // Добавь логику для смены языка
                 });
             }
         }
-    
-        // 4. Инициализация мобильного меню
-        function initMobileMenu() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-    
-            if (menuToggle && mobileMenu && overlay) {
-                // Обработчик клика по бургер-иконке
-                menuToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                });
-    
-                // Обработчик клика по оверлею
-                overlay.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                });
-    
-                // Обработчик клика по пунктам меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-            }
-        }
-    
-        // 5. Инициализация подменю в мобильной версии
-        function initMobileSubmenus() {
-            document.querySelectorAll('.mobile-menu .dropdown-arrow').forEach(arrow => {
-                arrow.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const menuItem = this.closest('.menu-item');
-                    const dropdownMenu = menuItem.querySelector('.dropdown-menu');
-                    
-                    // Закрываем все другие открытые подменю
-                    document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                            menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotated');
-                        }
-                    });
-                    
-                    // Переключаем текущее подменю
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('rotated');
-                });
-            });
-        }
-    
-        // Вызываем все функции инициализации
-        initDateTime();
-        initIPAddress();
-        initLanguageSwitcher();
-        initMobileMenu();
-        initMobileSubmenus();
-    }
-    
-    // Загружаем хедер при полной загрузке DOM
-    document.addEventListener('DOMContentLoaded', loadHeader);
-    
-    // Добавляем стили для мобильного меню
-    const mobileMenuStyles = `
-        .no-scroll {
-            overflow: hidden;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-            z-index: 9999999999999999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .dropdown-arrow.rotated {
-            transform: rotate(180deg);
-        }
-        
-        @media (max-width: 992px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = mobileMenuStyles;
-    document.head.appendChild(styleElement);
-    </script> -->
-
-    <!-- CHANGED -->
-    <!-- now trying to load the header and the content all together -->
-     <script src="/static/loadLayout.js"></script>
+    </script>
 
     <!-- Hero Section -->
     <section class="hero-section text-white">
         <div class="container mx-auto px-4 hero-content text-center max-w-3xl">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight" style="color: #00f7ff; text-shadow: 0 0 15px rgba(0, 247, 255, 0.7);">ЖІК «POLYTECH JASTARY»</h1>
-            <p class="text-lg md:text-2xl leading-relaxed font-medium" style="text-shadow: 0 0 10px rgba(213, 0, 249, 0.5);">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight"
+                style="color: #00f7ff; text-shadow: 0 0 15px rgba(0, 247, 255, 0.7);">ЖІК «POLYTECH JASTARY»</h1>
+            <p class="text-lg md:text-2xl leading-relaxed font-medium"
+                style="text-shadow: 0 0 10px rgba(213, 0, 249, 0.5);">
                 Біз – болашақтың қозғалысы! Жастардың идеяларын жүзеге асырып, шығармашылық пен инновацияны дамытамыз!
             </p>
         </div>
@@ -620,13 +482,16 @@
         <section id="directions" class="mb-16">
             <h2 class="section-title text-4xl font-bold">Даму бағыттары</h2>
             <ul class="list-none text-white space-y-4 max-w-2xl mx-auto fade-in">
-                <li class="list-item">- Жастар рухани, мәдени, білім алып, кәсіби және дене бітімінің толыққанды дамуы, өз бетінше шешімдер қабылдай алуы;
+                <li class="list-item">- Жастар рухани, мәдени, білім алып, кәсіби және дене бітімінің толыққанды дамуы,
+                    өз бетінше шешімдер қабылдай алуы;
                 </li>
                 <li class="list-item">- Білім, ғылым, инновация үштігін, фракциялар қатарына қосылу арқылы дамыту;
                 </li>
-                <li class="list-item">- Колледждің ғылыми, қоғамдық, мәдени және спорттық іс-шараларын қалалық және республикалық деңгейде ұйымдастырып, өзіне жаңа достар тауып, дамушы интеллектуалды ортаға қосылуы;
+                <li class="list-item">- Колледждің ғылыми, қоғамдық, мәдени және спорттық іс-шараларын қалалық және
+                    республикалық деңгейде ұйымдастырып, өзіне жаңа достар тауып, дамушы интеллектуалды ортаға қосылуы;
                 </li>
-                <li class="list-item">- Моральдық, патриоттық және рухани білім алуы және әлеуметтік маңызы бар бастамаларын іске асыруға жәрдемдесу.
+                <li class="list-item">- Моральдық, патриоттық және рухани білім алуы және әлеуметтік маңызы бар
+                    бастамаларын іске асыруға жәрдемдесу.
                 </li>
             </ul>
         </section>
@@ -641,9 +506,12 @@
                 </li>
                 <li class="list-item">- Студент бойында көшбасшылық дағдысын қалыптастырып, ораторлық шеберлігін дамыту;
                 </li>
-                <li class="list-item">-  Колледждің ішкі мәселелерін шешудегі кеңестерге қатысу және ғылыми, кəсіби қызығушылықтарын ескере отырып оны оңтайландыру туралы колледждің басқару органдарына ұсыныстар жасауға мүмкіндік беру;
+                <li class="list-item">- Колледждің ішкі мәселелерін шешудегі кеңестерге қатысу және ғылыми, кəсіби
+                    қызығушылықтарын ескере отырып оны оңтайландыру туралы колледждің басқару органдарына ұсыныстар
+                    жасауға мүмкіндік беру;
                 </li>
-                 <li class="list-item">- студенттер арасындағы ашық алаңдағы ортада өз идеяларын, пікірлерін, ұсыныстарын еркін айтып, оны жүзеге асыруға мүмкіндік жасау.
+                <li class="list-item">- студенттер арасындағы ашық алаңдағы ортада өз идеяларын, пікірлерін, ұсыныстарын
+                    еркін айтып, оны жүзеге асыруға мүмкіндік жасау.
 
                 </li>
             </ul>
@@ -653,34 +521,44 @@
         <section id="clubs" class="mb-16">
             <h2 class="section-title text-4xl font-bold">Клубтар</h2>
             <p class="text-gray-300 mt-4 mb-8">
-                Ұйым жанында «Polytech Ziatkerleri» интеллектуалды пікірсайыс клубы, «POLYTECH ERIKTILERI» еріктілері клубы, «Саналы ұрпақ» еріктілер клубы, «Polytech Jastary» ерікті-патриоттық клубы және Студенттер үйіндегі Студенттік кеңес жұмыс атқарады.
+                Ұйым жанында «Polytech Ziatkerleri» интеллектуалды пікірсайыс клубы, «POLYTECH ERIKTILERI» еріктілері
+                клубы, «Саналы ұрпақ» еріктілер клубы, «Polytech Jastary» ерікті-патриоттық клубы және Студенттер
+                үйіндегі Студенттік кеңес жұмыс атқарады.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="club-card p-6 fade-in">
-                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">Polytech Ziatkerleri</h3>
+                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">
+                        Polytech Ziatkerleri</h3>
                     <p class="text-gray-300">Интеллектуалды пікірсайыс клубы.</p>
                 </div>
                 <div class="club-card p-6 fade-in">
-                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">POLYTECH ERIKTILERI</h3>
+                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">
+                        POLYTECH ERIKTILERI</h3>
                     <p class="text-gray-300">Еріктілер клубы.</p>
                 </div>
                 <div class="club-card p-6 fade-in">
-                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">Sanaly urpaq</h3>
+                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">
+                        Sanaly urpaq</h3>
                     <p class="text-gray-300">Еріктілер клубы.</p>
                 </div>
                 <div class="club-card p-6 fade-in">
-                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">Polytech Jastary</h3>
+                    <h3 class="text-xl font-bold text-white mb-2" style="text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);">
+                        Polytech Jastary</h3>
                     <p class="text-gray-300">Ерікті-патриоттық клуб.</p>
                 </div>
             </div>
         </section>
-        
+
 
         <!-- Events Section -->
         <section id="events" class="mb-16">
             <h2 class="section-title text-4xl font-bold">Іс-шаралар</h2>
             <p class="text-white leading-relaxed max-w-2xl mx-auto fade-in">
-                Қазіргі уақытта жастар ұйымдарының ұйымдастыруымен бірқатар ауқымды іс-шаралар ұйымдастырылып, оған көптеген колледжіміздің студенттері қатысуда. Аптасына бір рет міндетті түрде барлық жастар ұйымдарының жиыны өткізіліп отырады. Сондай-ақ, ұйымның жоспары «Біртұтас тәрбие бағдарламасы» аясында 6 құндылық жоспары негізінде құрылады. Осы жоспарға сәйкес белсенді студенттер бағыттар бойынша қызықты іс-шаралар ұйымдастырады.
+                Қазіргі уақытта жастар ұйымдарының ұйымдастыруымен бірқатар ауқымды іс-шаралар ұйымдастырылып, оған
+                көптеген колледжіміздің студенттері қатысуда. Аптасына бір рет міндетті түрде барлық жастар ұйымдарының
+                жиыны өткізіліп отырады. Сондай-ақ, ұйымның жоспары «Біртұтас тәрбие бағдарламасы» аясында 6 құндылық
+                жоспары негізінде құрылады. Осы жоспарға сәйкес белсенді студенттер бағыттар бойынша қызықты іс-шаралар
+                ұйымдастырады.
 
             </p>
         </section>
@@ -688,13 +566,13 @@
     <main class="container mx-auto py-16 px-4">
         <!-- Club Committee Section -->
         <section id="club-committee" class="mb-16">
-            <h2 class="section-title text-4xl font-bold text-center" data-translate="qurlym" >ҚҰРЫЛЫМЫ</h2>
+            <h2 class="section-title text-4xl font-bold text-center" data-translate="qurlym">ҚҰРЫЛЫМЫ</h2>
             <div class="main-member member-card fade-in">
                 <img src="/static/images/stud/g4.JPG" alt="Кондакбаева Айдана" class="member-photo">
-                <h3 class="member-name">Тұрғанбаева Хадижа Темірланқызы 
+                <h3 class="member-name">Тұрғанбаева Хадижа Темірланқызы
                 </h3>
-                <p class="member-role">«Polytech jastary» ұйымының төрағасы  </p>
-        
+                <p class="member-role">«Polytech jastary» ұйымының төрағасы </p>
+
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="member-card fade-in">
@@ -726,7 +604,7 @@
                 <div class="member-card fade-in">
                     <img src="/static/images/stud/g11.jpg" alt="Маратов Айым" class="member-photo">
                     <h3 class="member-name">Нұрым Мадина</h3>
-                    <p class="member-role">«POLYTECH ZIATKERLERI» интеллектуалды пікірсайыс клубының жетекшісі  
+                    <p class="member-role">«POLYTECH ZIATKERLERI» интеллектуалды пікірсайыс клубының жетекшісі
 
                     </p>
 
@@ -749,16 +627,18 @@
             <div class="document-card p-6 bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all">
                 <h3 class="text-2xl font-bold text-white mb-4">Ұйымның жоспары</h3>
                 <p class="text-gray-300 mb-4">2024-2025жж. Ұйымның жұмыс жоспары</p>
-                <a target="_blank" href="https://disk.yandex.kz/i/-wP8lMYmO8RzuA" download class="download-btn text-white font-semibold py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 transition-all">Скачать</a>
+                <a target="_blank" href="https://disk.yandex.kz/i/-wP8lMYmO8RzuA" download
+                    class="download-btn text-white font-semibold py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 transition-all">Скачать</a>
             </div>
             <div class="document-card p-6 bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all">
                 <h3 class="text-2xl font-bold text-white mb-4">Клуб жоспары</h3>
                 <p class="text-gray-300 mb-4">2024-2025жж. «POLYTECH ZIATKERLERI» ИПК жұмыс жоспары</p>
-                <a target="_blank" href="https://disk.yandex.kz/i/27dKdm-YNsxjIg" download class="download-btn text-white font-semibold py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 transition-all">Скачать</a>
+                <a target="_blank" href="https://disk.yandex.kz/i/27dKdm-YNsxjIg" download
+                    class="download-btn text-white font-semibold py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 transition-all">Скачать</a>
             </div>
         </div>
     </section>
-    
+
     <div class="carousel">
         <div class="carousel-container" id="carouselContainer">
             <div class="carousel-item">
@@ -792,14 +672,14 @@
         <button class="carousel-btn" id="prevBtn">❮</button>
         <button class="carousel-btn" id="nextBtn">❯</button>
     </div>
-   
+
     <script>
         const carouselContainer = document.getElementById('carouselContainer');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         let currentIndex = 0;
         const items = document.querySelectorAll('.carousel-item');
-        const itemsToShow = 3; 
+        const itemsToShow = 3;
         const totalItems = items.length;
 
         function updateCarousel() {
@@ -823,123 +703,68 @@
     </script>
 
     <!-- Footer -->
-    <!--CHANGED new line for loadlayout-->
-        <div id="footer-placeholder"></div>
-      
-      <!-- <footer class="footer">
+    <footer class="footer">
         <div class="footer-container">
-          
-          <div class="footer-section">
-            <h3 data-translate="about_site">Сайт туралы</h3>
-            <p id="copyright-year"></p>
-            <script>
-              const currentYear = new Date().getFullYear();
-              document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-            </script>
-            <p data-translate="college_name">
-              Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-            </p>
-      
-            <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                <img src="/static/images/flot/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                <img src="/static/images/flot/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                <img src="/static/images/flot/youtube.png" alt="YouTube" />
-              </a>
-              <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-              </a>
+            <div class="footer-section">
+                <h3 data-translate="about_site">Сайт туралы</h3>
+                <p id="copyright-year"></p>
+                <script>
+                    const currentYear = new Date().getFullYear();
+                    document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
+                </script>
+                <p data-translate="college_name">
+                    Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
+                </p>
+                <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
+                        <img src="/static/images/flot/instagram.png" alt="Instagram" />
+                    </a>
+                    <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
+                        <img src="/static/images/flot/facebook.png" alt="Facebook" />
+                    </a>
+                    <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
+                        <img src="/static/images/flot/youtube.png" alt="YouTube" />
+                    </a>
+                    <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank"
+                        aria-label="TikTok">
+                        <img src="/static/images/flot/tiktok.png" alt="TikTok" />
+                    </a>
+                </div>
             </div>
-          </div>
-      
-          
-          <div class="footer-section">
-            <h3 data-translate="contact_label">Байланыс</h3>
-            <p>
-              <span class="icon">📍</span>
-              <strong data-translate="address_label">Мекенжай:</strong><br />
-              <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-            </p>
-            <p>
-              <span class="icon">📞</span>
-              <strong data-translate="contact_label">Байланыс:</strong><br />
-              <span data-translate="phone">Тел.: 8 727 229 18 32 </span><br />
-          <span data-translate="phone_whatsapp">Whatsapp: 8 707 171 08 00 </span><br />
-              <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-            </p>
-            <p>
-              <span class="icon">✉️</span>
-              <strong data-translate="email_label">Пошта:</strong><br />
-              <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-            </p>
-          </div>
-      
-      
-          <div class="footer-section">
-            <h3 data-translate="developers">Разработчики сайта</h3>
-            <p>
-              <span class="icon">👨‍💻</span>
-              <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-              <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-            </p>
-            
-            <a href="https://t.me/wikipediasoso_bot" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
-          </div>
+            <div class="footer-section">
+                <h3 data-translate="contact_label">Байланыс</h3>
+                <p>
+                    <span class="icon">📍</span>
+                    <strong data-translate="address_label">Мекенжай:</strong><br />
+                    <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
+                </p>
+                <p>
+                    <span class="icon">📞</span>
+                    <strong data-translate="contact_label">Байланыс:</strong><br />
+                    <span data-translate="phone">Тел.: 396 71 39</span><br />
+                    <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
+                </p>
+                <p>
+                    <span class="icon">✉️</span>
+                    <strong data-translate="email_label">Пошта:</strong><br />
+                    <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="developers">Разработчики сайта</h3>
+                <p>
+                    <span class="icon">👨‍💻</span>
+                    <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
+                    <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
+                </p>
+                <a href="https://www.instagram.com/polytech_it_hub?igsh=MXFvd3I1enNxeHpoOA==" class="dev-button"
+                    data-translate="contact_developer">Связаться с разработчиком</a>
+            </div>
         </div>
-      </footer>  -->
+    </footer>
 
-      <!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
-            // Load layout first
-            await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
-            await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
-
-            // Initialize header dropdown and any custom UI logic
-            initComponents();
-            initDropdownMenus(); // <- this is your custom function from the script you posted
-
-            // Finally, reveal the body
-            document.body.classList.remove('loading');
-        });
-
-        function initDropdownMenus() {
-            const dropdownItems = document.querySelectorAll(".dropdown-item");
-
-            dropdownItems.forEach(item => {
-                const submenu = item.querySelector(".sub-dropdown-menu");
-
-                if (!submenu) return;
-
-                item.addEventListener("mouseenter", () => {
-                    submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
-
-                    submenu.style.visibility = "hidden";
-                    submenu.style.display = "block";
-
-                    const rect = submenu.getBoundingClientRect();
-                    const isOverflowing = rect.right > window.innerWidth;
-
-                    submenu.style.display = "";
-                    submenu.style.visibility = "";
-
-                    if (isOverflowing) {
-                        submenu.classList.add("sub-dropdown-menu-left");
-                    } else {
-                        submenu.classList.add("sub-dropdown-menu");
-                    }
-                });
-            });
-        }
-        </script>
-
-<!-- Scripts -->
+    <!-- Scripts -->
     <script src="/static/translations.js"></script>
     <script src="/static/languageSwitcher.js"></script>
     <script src="/static/virtualTour.js"></script>
@@ -954,15 +779,13 @@
         // Particles.js configuration
         particlesJS('particles-js', {
             particles: {
-                number: { value: 150, density: { enable: true, value_area: 1000 } },
-                color: { value: ['#00f7ff', '#d500f9'] },
+                number: { value: 100, density: { enable: false, value_area: 1000 } },
                 shape: { type: 'circle' },
                 opacity: { value: 0.6, random: true },
                 size: { value: 4, random: true },
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: '#00f7ff',
                     opacity: 0.4,
                     width: 1
                 },
@@ -1001,4 +824,5 @@
         setInterval(updateDateTime, 1000);
     </script>
 </body>
+
 </html>

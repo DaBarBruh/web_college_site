@@ -156,37 +156,37 @@ document.addEventListener("DOMContentLoaded", function () {
     // Слайдер для секции "Мамандықтар"
     const majorsList = document.querySelector('.majors-list');
     const cards = document.querySelectorAll('.major-card');
-    
+
     // определяем, мобильник ли
     const isMobile = window.matchMedia('(max-width: 480px)').matches;
-    
+
     if (!isMobile) {
-      // НЕ мобильный — запускаем анимацию
-      cards.forEach(card => {
-        majorsList.appendChild(card.cloneNode(true));
-      });
-    
-      let animationId, position = 0;
-      const speed = 1;
-      const cardWidth = 300 + 20;
-      const listWidth = cardWidth * cards.length;
-    
-      function animate() {
-        position -= speed;
-        if (Math.abs(position) >= listWidth) position = 0;
-        majorsList.style.transform = `translateX(${position}px)`;
-        animationId = requestAnimationFrame(animate);
-      }
-    
-      animate();
-    
-      majorsList.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
-      majorsList.addEventListener('mouseleave', () => animate());
-    
+        // НЕ мобильный — запускаем анимацию
+        cards.forEach(card => {
+            majorsList.appendChild(card.cloneNode(true));
+        });
+
+        let animationId, position = 0;
+        const speed = 1;
+        const cardWidth = 300 + 20;
+        const listWidth = cardWidth * cards.length;
+
+        function animate() {
+            position -= speed;
+            if (Math.abs(position) >= listWidth) position = 0;
+            majorsList.style.transform = `translateX(${position}px)`;
+            animationId = requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        majorsList.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
+        majorsList.addEventListener('mouseleave', () => animate());
+
     } else {
-      // Мобильник — отключаем клонирование и анимацию, оставляем только CSS-скролл
-      majorsList.style.transform = '';
-      // (твой CSS уже позволит горизонтально скроллить пальцем)
+        // Мобильник — отключаем клонирование и анимацию, оставляем только CSS-скролл
+        majorsList.style.transform = '';
+        // (твой CSS уже позволит горизонтально скроллить пальцем)
     }
 
     // Остановка анимации при наведении
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Возобновление анимации при уходе курсора
-  
+
 
     // Модальное окно
     const specialtyPopup = document.getElementById('specialtyPopup');
@@ -299,6 +299,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateSlider();
         setInterval(nextSlide, 3000);
+
+        // Listen for language changes to update detached original cards
+        window.addEventListener("languageChanged", (e) => {
+            const lang = e.detail.language;
+            if (lang && typeof translations !== 'undefined') {
+                allCards.forEach(card => {
+                    card.querySelectorAll("[data-translate]").forEach(el => {
+                        const key = el.dataset.translate;
+                        if (translations[lang] && translations[lang][key]) {
+                            el.textContent = translations[lang][key];
+                        }
+                    });
+                });
+                updateSlider();
+            }
+        });
     }
 
     // Прокрутка к секции "why-us"

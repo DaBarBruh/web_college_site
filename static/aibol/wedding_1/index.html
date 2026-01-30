@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мобильный сайт</title>
+  <link rel="stylesheet" href="/static/style_aibol.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+  <div class="background">
+
+    <div>
+      <div class="avatar_wrapper">
+        <img src="images/avatar.png" alt="Аватар" class="avatar" />
+        <div class="avatar-overlay"></div>
+      </div>
+
+      <div class="overlay-text">
+        <h1 class="name">Малика</h1>
+        <p class="teg">Қыз ұзату</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="text_2">Құрметті ағайын-туыс,<br>Бауырлар, құда-жекжат,<br>Нағашы-жиен, бөлелер,<br>дос-жарандар, әріптестер,<br>көршілер!</p>
+    </div>
+    <div class="ornament-mask">
+        <img src="images/IMG_0880.PNG.webp.png" alt="Орнамент" class="ornament-rotating">
+    </div>
+
+    <div class="ornament-mask_2">
+        <img src="images/IMG_0880.PNG.webp.png" alt="Орнамент" class="ornament-rotating">
+    </div>
+
+
+    
+    <br><br>
+
+    <p class="text">СІЗДЕРДІ<br>АЯУЛЫ ҚЫЗЫМЫЗ</p><br>
+    <p class="text_bold">Маликаның</p>
+    <p class="text">ҰЗАТУ ТОЙЫНА АРНАЛҒАН<br>САЛТАНАТТЫ<br>АҚ ДАСТАРХАНЫМЫЗДЫҢ<br>ҚАДІРЛІ ҚОНАҒЫ БОЛУҒА<br>ШАҚЫРАМЫЗ!</p>
+
+    <br><br><br>
+
+    <p class="text_bold">Той салтанаты</p>
+    <p class="text" style="font-size: 32px;">08.08.2025<br>Сағат 16:00</p>
+
+    <br><br>
+
+    <div class="calendar-wrapper">
+      <img src="images/kalendar.png" alt="Календарь" class="calendar" />
+      <img src="images/znak.png" alt="Отметка" class="calendar-ring" />
+    </div>
+
+    <img src="images/IMG_0879 copy.png" alt="Орнамент" class="calendar_2" /><br><br>
+
+    <br><br>
+
+    <p class="text_bold">Мекен-жайымыз:</p>
+    <p class="text">Алматы қаласы<br>Қалқаман 2, Айтей Батыр, 88</p><br>
+    <p class="text_bold">"Ильхам"</p>
+    <p class="text">мейрамханасы</p><br><br>
+
+    <img src="images/ornoment.png" alt="Орнамент" class="calendar_1" /><br><br>
+
+    <p class="text">Жетуге ыңғайлы болу үшін<br>төмендегі картаны<br>қолданыңыз</p><br>
+
+    <div id="map" style="height: 300px; margin: 30px auto; max-width: 420px; border-radius: 10px; overflow: hidden;"></div>
+
+    <a href="https://go.2gis.com/s8YSK" target="_blank" class="map-button">Картаны 2ГИС-та ашу</a><br><br><br>
+
+    <p class="text_bold">Той иелері:</p>
+    <p class="text_name">Асқар-Айжан</p><br><br>
+
+    <img src="images/ornoment.png" alt="Орнамент" class="calendar_1" /><br><br>
+        
+    
+    <div>
+            <div class="timeline">
+            <div class="timeline-item">
+                <img src="images/IMG_0882.PNG.webp (Traced).png" class="timeline-icon" />
+
+                <div class="timeline-text">
+                <p class="time">15:00</p>
+                <p>ҚОНАҚТАРДЫҢ ЖИАНЛУЫ</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <img src="images/IMG_0882.PNG.webp (Traced).png" class="timeline-icon" />
+                
+                <div class="timeline-text">
+                <p class="time">15:30</p>
+                <p>ФУРШЕТ</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <img src="images/IMG_0882.PNG.webp (Traced).png" class="timeline-icon" />
+
+                <div class="timeline-text">
+                <p class="time">16:00</p>
+                <p>ТОЙДЫҢ БАСТАЛУЫ</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <img src="images/IMG_0882.PNG.webp (Traced).png" class="timeline-icon" />
+                <div class="timeline-text">
+                <p class="time">22:00</p>
+                <p>ҰЗАТУ РӘСІМІ</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <img src="images/WhatsApp_Image_2025-.jpeg.webp.png" alt="Орнамент" class="calendar_1" /><br><br>
+    
+
+
+
+
+
+            <div class="form-wrapper">
+        <h2 class="text">САУАЛНАМА:</h2>
+        <p class="text">Төмендегі сауалнаманы толтырып,<br>тойға қатысуыңызды растауыңызды сұраймыз</p>
+<!-- Скрытый iframe, чтобы страница не перезагружалась после отправки -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+
+<form 
+  action="https://script.google.com/macros/s/AKfycbzd6eyN67hEm8L_TD6wm4tv_wUZ6CnBjoKXI9vlUtX4qiqaWkn6iykh2eWMd7lXNxdz/exec" 
+  method="GET" 
+  target="hidden_iframe"
+>
+  <label class="form-label">Аты-жөніңіз:</label>
+  <input type="text" class="form-input" name="fullName" required>
+
+  <label class="form-label">Тойға келе аласыз ба?</label>
+
+  <div class="form-radio">
+    <input type="radio" id="opt1" name="attend" value="alone" required>
+    <label for="opt1">Иә, әрине келе аламын</label>
+  </div>
+
+  <div class="form-radio">
+    <input type="radio" id="opt2" name="attend" value="with_spouse">
+    <label for="opt2">Жұбайыммен келемін</label>
+  </div>
+
+  <div class="form-radio">
+    <input type="radio" id="opt3" name="attend" value="cannot">
+    <label for="opt3">Өкінішке орай, келе алмаймын</label>
+  </div>
+
+  <button type="submit" class="form-button">ЖІБЕРУ</button>
+</form>
+
+
+        <p class="text">Тойымыздың қадірлі<br>қонағы болыңыздар</p>
+        </div>
+
+
+    
+
+<div class="countdown-wrapper">
+  <h2 class="countdown-title">ТОЙ САЛТАНАТЫНА ДЕЙІН:</h2>
+  <div class="countdown">
+    <div class="time-block"><span id="days">00</span><p>КҮН</p></div>
+    <div class="colon">:</div>
+    <div class="time-block"><span id="hours">00</span><p>САҒАТ</p></div>
+    <div class="colon">:</div>
+    <div class="time-block"><span id="minutes">00</span><p>МИНУТ</p></div>
+    <div class="colon">:</div>
+    <div class="time-block"><span id="seconds">00</span><p>СЕКУНД</p></div>
+  </div>
+</div>
+
+    
+    
+    <div class="invite-footer">
+  <p class="invite-text">
+    Егер сіз де осындай ерекше шақыру жасағыңыз келсе —
+    <br><strong>бізге WhatsApp арқылы жазыңыз</strong>:
+  </p>
+
+  <a href="https://wa.me/77762694965" target="_blank" class="whatsapp-button">
+    <i class="fa-brands fa-whatsapp"></i> Хабарласу
+  </a>
+</div>
+
+
+  </div>
+<script>
+  // Установи дату той салтанаты
+  const weddingDate = new Date("2025-08-08T16:00:00").getTime();
+
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = days.toString().padStart(2, '0');
+    document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
+    if (distance <= 0) {
+      clearInterval(timer);
+      document.querySelector(".countdown").innerHTML = "<p>Той басталды!</p>";
+    }
+  };
+
+  const timer = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([43.241558, 76.799710], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([43.241558, 76.799710]).addTo(map)
+      .bindPopup('<b>Тойхана "Ильхам"</b><br>Айтей батыр 88, Алматы')
+      .openPopup();
+  </script>
+
+
+
+<script>
+  const form = document.querySelector('form[action^="https://script.google.com/macros"]');
+
+  form.addEventListener('submit', () => {
+    // Даем время отправке через iframe, потом показываем уведомление
+    setTimeout(() => {
+      alert('Вы отправили успешно!');
+    }, 500);
+  });
+</script>
+
+
+<script src="js/animation.js"></script>
+
+</body>
+</html>

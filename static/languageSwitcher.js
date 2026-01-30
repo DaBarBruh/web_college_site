@@ -27,11 +27,14 @@ function initLanguageSwitcher() {
             } else if (lang === "en") {
                 iframeSrc = "en.html";
             }
-            rulesFrame.src = ""; 
+            rulesFrame.src = "";
             setTimeout(() => {
                 rulesFrame.src = iframeSrc;
             }, 100);
         }
+
+        // Dispatch updated event
+        window.dispatchEvent(new CustomEvent("languageChanged", { detail: { language: lang } }));
     };
 
     // Устанавливаем язык из localStorage или по умолчанию "kz"

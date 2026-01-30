@@ -69,6 +69,7 @@
     width: 280px;
     /* Фиксированная ширина карточки */
     scroll-snap-align: start;
+    height: 200px;
 }
 
 .card img {

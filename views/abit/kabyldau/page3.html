@@ -26,7 +26,7 @@
             visibility: hidden;
             }
   .regulations-section {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #00000000;
   color: #fff;
   padding: 30px 20px;
   font-family: 'Segoe UI', sans-serif;
@@ -163,57 +163,6 @@ body {
 .footer {
   margin-top: auto;
 }
-
-.title {
-  font-size: 28px;
-  color: #00bfff;
-  text-align: center;
-  margin-bottom: 40px;
-  text-shadow: 0 0 10px #00bfff;
-}
-
-.document-list {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.document-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  background: rgba(0, 191, 255, 0.1);
-  padding: 20px;
-  border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border-left: 4px solid #00bfff;
-}
-
-.document-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px #00bfff44;
-}
-
-.icon {
-  font-size: 28px;
-  color: #00bfff;
-  min-width: 30px;
-  margin-top: 4px;
-}
-
-.document-info strong {
-  font-size: 18px;
-  color: #ffffff;
-}
-
-.document-info p {
-  margin-top: 6px;
-  font-size: 14px;
-  color: #cccccc;
-}
-
 
   </style>
 </head>
@@ -446,59 +395,24 @@ body {
 
   <!-- Секция "Положения колледжа" -->
 <div class="regulations-section">
-<!-- Подключение иконок FontAwesome (вставь в <head>) -->
-<!-- FontAwesome (вставить в <head>, если ещё не добавлено) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<div class="regulations-section">
-  <div class="content-wrapper">
-    <h1 class="title" data-translate="docs_title">Необходимые документы для поступления</h1>
-
-    <div class="document-list">
-      <!-- Пункт 1 -->
-      <div class="document-item">
-        <div class="icon"><i class="fas fa-file-signature"></i></div>
-        <div class="document-info">
-          <strong data-translate="doc_application">Заявление о приёме документов</strong>
-        </div>
-      </div>
-
-      <!-- Пункт 2 -->
-      <div class="document-item">
-        <div class="icon"><i class="fas fa-certificate"></i></div>
-        <div class="document-info">
-          <strong data-translate="doc_education">Подлинник документа об образовании</strong>
-        </div>
-      </div>
-
-      <!-- Пункт 3 -->
-      <div class="document-item">
-        <div class="icon"><i class="fas fa-image"></i></div>
-        <div class="document-info">
-          <strong data-translate="doc_photo">Фотографии размером 3х4 см</strong>
-        </div>
-      </div>
-
-      <!-- Пункт 4 -->
-      <div class="document-item">
-        <div class="icon"><i class="fas fa-notes-medical"></i></div>
-        <div class="document-info">
-          <strong data-translate="doc_medical">Медицинская справка формы №075-у</strong>
-          <p data-translate="doc_medical_note">Для инвалидов: заключение МСЭ по форме 031-у</p>
-        </div>
-      </div>
-
-      <!-- Пункт 5 -->
-      <div class="document-item">
-        <div class="icon"><i class="fas fa-id-card"></i></div>
-        <div class="document-info">
-          <strong data-translate="doc_id">Документ, удостоверяющий личность</strong>
+    <div class="content-wrapper">
+      <h1 data-translate="document_list_title">Перечень документов (необходимые документы для поступление)</h1>
+  
+      <div class="accordion">
+        <!-- Элемент аккордеона 1 -->
+        <div class="accordion-item">
+          <div class="accordion-header" data-translate="document_list">Перечень документов</div>
+          <div class="accordion-content">
+            <a class="download-btn" href="/static/reports/2023_Q1.pdf" download>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.67v4h6v-4h3.67L12 2z"/>
+              </svg>
+              <span data-translate="download_pdf">Скачать PDF</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
   </div>
   
   <!-- JS для аккордеона -->

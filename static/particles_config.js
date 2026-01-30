@@ -1,14 +1,14 @@
 particlesJS("particle-background", {
-    
+
     particles: {
         number: {
-            value: 60, // Уменьшил количество частиц для более "воздушного" эффекта
+            value: 30, // Уменьшил количество частиц для более "воздушного" эффекта
             density: { enable: true, value_area: 1200 } // Меньшая плотность для элегантности
         },
         color: {
             value: ["#ffccdd", "#ccffdd", "#ddccff", "#ffffff"] // Мягкие пастельные цвета: розовый, мятный, лавандовый, белый
         },
-        
+
         shape: {
             type: "circle", // Оставляем круги для мягкости
             stroke: { width: 0, color: "#ffffff" } // Без обводки
@@ -66,7 +66,7 @@ particlesJS("particle-background", {
                 enable: true,
                 mode: "repulse" // Эффект отталкивания при клике
             },
-            resize: true // Адаптация при изменении размера окна
+            resize: false // Адаптация при изменении размера окна
         },
         modes: {
             grab: {

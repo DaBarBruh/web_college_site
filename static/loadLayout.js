@@ -144,17 +144,79 @@ function initComponents() {
     initLanguageSwitcher();
     initMobileMenu();
     initMobileSubmenus();
+    initScrollUpButton();
+    initDropdownMenus();
 }
 
-// Run once DOM is ready
+window.scrollToTop = function () {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
+
+function initScrollUpButton() {
+
+    let scrollBtn = document.querySelector('.scroll-up-button');
+
+    if (!scrollBtn) {
+        scrollBtn = document.createElement('div');
+        scrollBtn.className = 'scroll-up-button';
+        scrollBtn.innerHTML = '↑';
+        scrollBtn.onclick = window.scrollToTop;
+        document.body.appendChild(scrollBtn);
+    }
+
+    else {
+        scrollBtn.onclick = window.scrollToTop;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+}
+
+function initDropdownMenus() {
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+
+    dropdownItems.forEach(item => {
+        const submenu = item.querySelector(".sub-dropdown-menu");
+
+        if (!submenu) return;
+
+        item.addEventListener("mouseenter", () => {
+            submenu.classList.remove("sub-dropdown-menu-left", "sub-dropdown-menu");
+
+            submenu.style.visibility = "hidden";
+            submenu.style.display = "block";
+
+            const rect = submenu.getBoundingClientRect();
+            const isOverflowing = rect.right > window.innerWidth;
+
+            submenu.style.display = "";
+            submenu.style.visibility = "";
+
+            if (isOverflowing) {
+                submenu.classList.add("sub-dropdown-menu-left");
+            } else {
+                submenu.classList.add("sub-dropdown-menu");
+            }
+        });
+    });
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
     try {
         await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader_v4');
         await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter_v4');
         initComponents();
+        document.body.classList.remove('loading');
     } catch (e) {
         console.error('loadLayout.js failed to initialize:', e);
-        document.body.classList.remove('loading'); // prevent infinite "hidden" body
+        document.body.classList.remove('loading');
     }
 });
-

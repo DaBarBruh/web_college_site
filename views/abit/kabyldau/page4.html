@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,24 +22,17 @@
 
     <style>
         /* CHANGED */
-            /* forcing to load the script buy having an invisible element to be loaded with the content too */
-            body.loading {
+        /* forcing to load the script buy having an invisible element to be loaded with the content too */
+        body.loading {
             visibility: hidden;
-            }
-        /* body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        } */
+        }
+
         h1 {
-            color: #ff0000;
+            color: white;
             text-transform: uppercase;
             font-size: 2.5em;
         }
+
         .content {
             display: flex;
             justify-content: center;
@@ -47,17 +41,20 @@
             max-width: 1000px;
             margin: 40px auto;
         }
+
         .content img {
             width: 30%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
         }
+
         .content video {
-            width: 65%;
+            width: 100%;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
             background: #222;
         }
+
         .faq {
             margin-top: 40px;
             text-align: left;
@@ -65,16 +62,22 @@
             margin-left: auto;
             margin-right: auto;
             padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         .faq h2 {
             color: #ffffff;
             font-size: 2em;
             text-align: center;
             margin-bottom: 20px;
         }
+
         .faq-item {
             background: linear-gradient(90deg, #333, #444);
             padding: 15px;
+            width: 100%;
             border-radius: 8px;
             margin-bottom: 15px;
             cursor: pointer;
@@ -84,16 +87,19 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
         }
+
         .faq-item:hover {
             transform: scale(1.02);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
+
         .faq-item span {
             position: absolute;
             right: 20px;
             font-size: 28px;
             color: #ff0000;
         }
+
         .faq-answer {
             display: none;
             padding-top: 10px;
@@ -101,43 +107,58 @@
             animation: fadeIn 0.3s ease-in-out;
             font-size: 1em;
         }
+
         @media (max-width: 768px) {
             .faq {
                 padding: 5px;
             }
+
             .faq-item {
                 font-size: 1em;
                 padding: 10px;
+                width: 90%;
             }
+
             .faq-item span {
                 font-size: 24px;
             }
+
             .faq-answer {
                 font-size: 0.9em;
             }
+
+            .content video {
+                width: 85%;
+            }
         }
+
         .button {
             display: block;
             margin: 30px auto;
             padding: 18px 30px;
-            background: linear-gradient(90deg, #ff0000, #e63900);
+            background: #1da1f2;
             color: white;
             text-decoration: none;
             font-size: 20px;
             font-weight: bold;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.1s, box-shadow 0.3s;
             text-align: center;
             max-width: 300px;
         }
+
         .button:hover {
+            background: var(--gradient-blue);
             transform: scale(1.05);
+            transition: 1s;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
+
         h1[data-translate="free_edu"] {
             text-align: center;
         }
+
         .fullscreen-img {
             display: none;
             position: fixed;
@@ -150,244 +171,31 @@
             align-items: center;
             z-index: 1000;
         }
+
         .fullscreen-img img {
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
         }
+
         .fullscreen-img.close {
             cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <div id="particle-background"></div>
     <div id="header-placeholder"></div>
 
-    <!-- <script>
-    // Функция для загрузки и инициализации хедера
-    async function loadHeader() {
-        try {
-            // Загружаем HTML хедера
-            const response = await fetch('/views/header.html');
-            const html = await response.text();
-            
-            // Вставляем HTML в страницу
-            document.getElementById('header-placeholder').innerHTML = html;
-            
-            // Загружаем ВСЕ скрипты из хедера
-            await loadScriptsFromHeader(html);
-            
-            // Инициализируем компоненты
-            initComponents();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки хедера:', error);
-        }
-    }
-    
-    // Функция для извлечения и загрузки скриптов из HTML хедера
-    function loadScriptsFromHeader(html) {
-        return new Promise((resolve) => {
-            const scriptTags = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/gi) || [];
-            let loadedCount = 0;
-            
-            if (scriptTags.length === 0) return resolve();
-    
-            scriptTags.forEach(scriptTag => {
-                const srcMatch = scriptTag.match(/src="([^"]*)"/i);
-                if (srcMatch && srcMatch[1]) {
-                    const script = document.createElement('script');
-                    script.src = srcMatch[1];
-                    script.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === scriptTags.length) resolve();
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    loadedCount++;
-                    if (loadedCount === scriptTags.length) resolve();
-                }
-            });
-        });
-    }
-    
-    // Функция инициализации всех компонентов
-    function initComponents() {
-        // 1. Инициализация даты и времени
-        function initDateTime() {
-            const dateElement = document.getElementById('current-date');
-            const timeElement = document.getElementById('current-time');
-            
-            function updateTime() {
-                const now = new Date();
-                const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (dateElement) dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-                if (timeElement) timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-            }
-    
-            setInterval(updateTime, 1000);
-            updateTime();
-        }
-    
-        // 2. Инициализация IP-адреса
-        function initIPAddress() {
-            const ipElement = document.getElementById('ip-address');
-            if (!ipElement) return;
-            
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    ipElement.textContent = data.ip;
-                })
-                .catch(() => {
-                    ipElement.textContent = 'Не удалось загрузить IP';
-                });
-        }
-    
-        // 3. Инициализация переключателя языка
-        function initLanguageSwitcher() {
-            const languageSelect = document.getElementById('language-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', (event) => {
-                    const selectedLanguage = event.target.value;
-                    console.log('Selected language:', selectedLanguage);
-                    // Логика для смены языка
-                });
-            }
-        }
-    
-        // 4. Инициализация мобильного меню
-        function initMobileMenu() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-    
-            if (menuToggle && mobileMenu && overlay) {
-                // Обработчик клика по бургер-иконке
-                menuToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuToggle.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                });
-    
-                // Обработчик клика по оверлею
-                overlay.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                });
-    
-                // Обработчик клика по пунктам меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-            }
-        }
-    
-        // 5. Инициализация подменю в мобильной версии
-        function initMobileSubmenus() {
-            document.querySelectorAll('.mobile-menu .dropdown-arrow').forEach(arrow => {
-                arrow.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const menuItem = this.closest('.menu-item');
-                    const dropdownMenu = menuItem.querySelector('.dropdown-menu');
-                    
-                    // Закрываем все другие открытые подменю
-                    document.querySelectorAll('.mobile-menu .dropdown-menu').forEach(menu => {
-                        if (menu !== dropdownMenu) {
-                            menu.classList.remove('active');
-                            menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotated');
-                        }
-                    });
-                    
-                    // Переключаем текущее подменю
-                    dropdownMenu.classList.toggle('active');
-                    this.classList.toggle('rotated');
-                });
-            });
-        }
-    
-        // Вызываем все функции инициализации
-        initDateTime();
-        initIPAddress();
-        initLanguageSwitcher();
-        initMobileMenu();
-        initMobileSubmenus();
-    }
-    
-    // Загружаем хедер при полной загрузке DOM
-    document.addEventListener('DOMContentLoaded', loadHeader);
-    
-    // Добавляем стили для мобильного меню
-    const mobileMenuStyles = `
-        .no-scroll {
-            overflow: hidden;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-            z-index: 9999999999999999;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .dropdown-arrow.rotated {
-            transform: rotate(180deg);
-        }
-        
-        @media (max-width: 992px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = mobileMenuStyles;
-    document.head.appendChild(styleElement);
-    </script> -->
-
     <!-- CHANGED -->
     <!-- now trying to load the header and the content all together -->
-     <script src="/static/loadLayout.js"></script>
+    <script src="/static/loadLayout.js"></script>
 
 
-    
+
     <h1 data-translate="free_edu">Бесплатное обучение для всех!</h1>
     <div class="content">
-        <img src="https://i.ibb.co/kx40Smz/Whats-App-Image-2022-06-23-at-22-08-42.jpg" alt="Обучение" onclick="openFullscreen(this)">
         <video controls poster>
             <source src="https://gz.bilimalmaty.kz/videos/ru.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
@@ -399,13 +207,22 @@
     <div class="faq">
         <h2 data-translate="faq_title">Часто задаваемые вопросы:</h2>
         <div class="faq-item" onclick="toggleFAQ(this)">
-            <strong data-translate="faq_paid_specialties">По каким специальностям ведется набор в платные группы? Сколько стоит обучение?</strong><span>+</span>
-            <div class="faq-answer" data-translate="faq_paid_specialties_answer">В этом году ведется набор на коммерческой основе очного обучения по специальностям:06130100 Программное обеспечение (по видам)Квалификация: 4S06130103 Разработчик программного обеспечения. Срок обучения: на базе 9 классов 3 года 10 месяцев. 25 мест на государственном и 25 мест на русском языках обучения. Стоимость ОЧНОГО обучения за учебный год составляет 400 000 тенге. Набор на коммерческой основе заочного обучения по специальностям: 06130100 Программное обеспечение (по видам) Квалификация: 4S06130105 Техник информационных систем Срок обучения: на базе 11 классов 2 года 10 месяцев; на базе ТиПО 10 месяцев 30 мест на русском языке обучения. Стоимость ЗАОЧНОГО обучения за учебный год составляет 150 000 тенге.
+            <strong data-translate="faq_paid_specialties">По каким специальностям ведется набор в платные группы?
+                Сколько стоит обучение?</strong><span>+</span>
+            <div class="faq-answer" data-translate="faq_paid_specialties_answer">В этом году ведется набор на
+                коммерческой основе очного обучения по специальностям:06130100 Программное обеспечение (по
+                видам)Квалификация: 4S06130103 Разработчик программного обеспечения. Срок обучения: на базе 9 классов 3
+                года 10 месяцев. 25 мест на государственном и 25 мест на русском языках обучения. Стоимость ОЧНОГО
+                обучения за учебный год составляет 400 000 тенге. Набор на коммерческой основе заочного обучения по
+                специальностям: 06130100 Программное обеспечение (по видам) Квалификация: 4S06130105 Техник
+                информационных систем Срок обучения: на базе 11 классов 2 года 10 месяцев; на базе ТиПО 10 месяцев 30
+                мест на русском языке обучения. Стоимость ЗАОЧНОГО обучения за учебный год составляет 150 000 тенге.
             </div>
         </div>
         <div class="faq-item" onclick="toggleFAQ(this)">
             <strong data-translate="faq_how_to_apply">Как записаться?</strong><span>+</span>
-            <div class="faq-answer" data-translate="faq_how_to_apply_answer">Просто перейдите по ссылке ниже и заполните форму.</div>
+            <div class="faq-answer" data-translate="faq_how_to_apply_answer">Просто перейдите по ссылке ниже и заполните
+                форму.</div>
         </div>
         <div class="faq-item" onclick="toggleFAQ(this)">
             <strong data-translate="faq_cost">Сколько это стоит?</strong><span>+</span>
@@ -439,82 +256,15 @@
         }
     </script>
 
-</div>
+    </div>
 
-<!--CHANGED new line for loadlayout-->
-        <div id="footer-placeholder"></div>
-      
-      <!-- <footer class="footer">
-        <div class="footer-container">
-          
-          <div class="footer-section">
-            <h3 data-translate="about_site">Сайт туралы</h3>
-            <p id="copyright-year"></p>
-            <script>
-              const currentYear = new Date().getFullYear();
-              document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
-            </script>
-            <p data-translate="college_name">
-              Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
-            </p>
-      
-            <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                <img src="/static/images/flot/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                <img src="/static/images/flot/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                <img src="/static/images/flot/youtube.png" alt="YouTube" />
-              </a>
-              <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-              </a>
-            </div>
-          </div>
-      
-          
-          <div class="footer-section">
-            <h3 data-translate="contact_label">Байланыс</h3>
-            <p>
-              <span class="icon">📍</span>
-              <strong data-translate="address_label">Мекенжай:</strong><br />
-              <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
-            </p>
-            <p>
-              <span class="icon">📞</span>
-              <strong data-translate="contact_label">Байланыс:</strong><br />
-              <span data-translate="phone">Тел.: 8 727 229 18 32 </span><br />
-          <span data-translate="phone_whatsapp">Whatsapp: 8 707 171 08 00 </span><br />
-              <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
-            </p>
-            <p>
-              <span class="icon">✉️</span>
-              <strong data-translate="email_label">Пошта:</strong><br />
-              <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
-            </p>
-          </div>
-      
-      
-          <div class="footer-section">
-            <h3 data-translate="developers">Разработчики сайта</h3>
-            <p>
-              <span class="icon">👨‍💻</span>
-              <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-              <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
-            </p>
-            
-            <a href="https://t.me/wikipediasoso_bot" class="dev-button" data-translate="contact_developer">Связаться с разработчиком</a>
-          </div>
-        </div>
-      </footer>  -->
+    <!--CHANGED new line for loadlayout-->
+    <div id="footer-placeholder"></div>
 
-      <!-- CHANGED -->
-        <!-- Unified dom conent loader (does not work no effect) -->
-        <script>
-            document.addEventListener("DOMContentLoaded", async () => {
+    <!-- CHANGED -->
+    <!-- Unified dom conent loader (does not work no effect) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
             // Load layout first
             await loadFragment('/views/header.html', 'header-placeholder', 'cachedHeader');
             await loadFragment('/views/footer.html', 'footer-placeholder', 'cachedFooter');
@@ -555,19 +305,17 @@
                 });
             });
         }
-        </script>
+    </script>
 
-<script src="/static/translations.js"></script>
-<script src="/static/languageSwitcher.js"></script>
-<script src="/static/virtualTour.js"></script>
-<script src="/static/online_assistant.js"></script>
-<script src="/static/script.js"></script>
-<script src="/static/particles_config.js"></script>
-<script src="/static/major-body.js"></script>
-<script src="/static/partners-scroll.js"></script>
-<script src="/static/header/main.js"></script>
-<script src="/static/yearUpdater.js"></script>
-<script src="/static/modal-page/js/specialtyPopup.js"></script>
+    <script src="/static/translations.js"></script>
+    <script src="/static/languageSwitcher.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/particles_config.js"></script>
+    <script src="/static/partners-scroll.js"></script>
+    <script src="/static/header/main.js"></script>
+    <script src="/static/yearUpdater.js"></script>
+    <script src="/static/modal-page/js/specialtyPopup.js"></script>
 
 </body>
+
 </html>

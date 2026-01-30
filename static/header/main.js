@@ -28,44 +28,70 @@ document.querySelectorAll('.language-option').forEach(option => {
     });
 });
 
-// Мобильное меню - Handled by loadLayout.js (initComponents)
 
-document.addEventListener('DOMContentLoaded', function () {
+function initBurgerMenu() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
     const overlay = document.querySelector('.overlay');
     const dropdownArrows = document.querySelectorAll('.dropdown-arrow');
 
-    if (menuToggle) {
+    if (menuToggle && !menuToggle.dataset.initialized) {
         menuToggle.addEventListener('click', function () {
             this.classList.toggle('active');
             mobileMenu.classList.toggle('active');
             overlay.classList.toggle('active');
             document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
         });
+
+        // Тут я пометил что он уже инициализирован если что
+        menuToggle.dataset.initialized = 'true';
     }
 
-    if (overlay) {
+    if (overlay && !overlay.dataset.initialized) {
         overlay.addEventListener('click', function () {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
             menuToggle.classList.remove('active');
             mobileMenu.classList.remove('active');
             this.classList.remove('active');
             document.body.style.overflow = '';
         });
+
+        overlay.dataset.initialized = 'true';
     }
 
     dropdownArrows.forEach(arrow => {
-        arrow.addEventListener('click', function (e) {
-            e.preventDefault();
-            const dropdown = this.closest('.menu-link').nextElementSibling;
-            dropdown.classList.toggle('active');
-            this.classList.toggle('fa-chevron-down');
-            this.classList.toggle('fa-chevron-up');
-        });
+        if (!arrow.dataset.initialized) {
+            arrow.addEventListener('click', function (e) {
+                e.preventDefault();
+                const dropdown = this.closest('.menu-link').nextElementSibling;
+                dropdown.classList.toggle('active');
+                this.classList.toggle('fa-chevron-down');
+                this.classList.toggle('fa-chevron-up');
+            });
+
+            arrow.dataset.initialized = 'true';
+        }
     });
+}
+
+// Запуск при загрузке страницы
+
+document.addEventListener('DOMContentLoaded', initBurgerMenu);
+
+// Смотрит за DOM если header автоматически вставляется в файл
+const observer = new MutationObserver(function (mutations) {
+    // Проверка на за наличие элемента в DOM
+    if (document.querySelector('.mobile-menu-toggle')) {
+        initBurgerMenu();
+    }
 });
 
-
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
 
 
 function initDesktopDropdowns() {
@@ -150,4 +176,5 @@ function initDesktopDropdowns() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 getExternalIP();
-initDesktopDropdowns();
+initBurgerMenu();
+// initDesktopDropdowns(); // Disabled to prevent conflict with CSS hover effects
