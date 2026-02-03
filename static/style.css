@@ -1837,3 +1837,231 @@ button.specialty-btn {
     0 24px 65px rgba(0, 0, 0, 0.7),
     0 0 55px rgba(0, 180, 255, 0.65);
 }
+
+
+/* Кнопки-карточки */
+.od-neon__card-btn{
+  border: 0;
+  cursor: pointer;
+  background: rgba(255,255,255,0.08);
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.od-neon__card-btn:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.12);
+}
+
+/* CTA как карточка */
+.od-neon__card-cta{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(37, 211, 102, 0.14);
+  border: 1px solid rgba(37, 211, 102, 0.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.od-neon__card-cta:hover{
+  transform: translateY(-2px);
+}
+
+/* Соцсети */
+.od-neon__socials{
+  flex-direction: row;
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+.od-neon__social{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+  transition: transform .15s ease, background .15s ease;
+}
+.od-neon__social:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.12);
+}
+.od-neon__social i{
+  font-size: 18px;
+}
+
+/* ===== Модалка с фото ===== */
+.od-media-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+.od-media-modal.is-open{
+  display: block;
+}
+.od-media-modal__overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+}
+.od-media-modal__panel{
+  position: relative;
+  width: min(980px, calc(100% - 28px));
+  margin: 7vh auto 0;
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+  background: rgba(20, 20, 24, 0.92);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  color: #fff;
+}
+.od-media-modal__close{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+}
+.od-media-modal__title{
+  margin: 6px 0 0;
+  font-size: 22px;
+}
+.od-media-modal__subtitle{
+  margin: 6px 0 14px;
+  opacity: 0.85;
+}
+
+.od-media-modal__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.od-media-modal__grid img{
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 760px){
+  .od-media-modal__grid{ grid-template-columns: repeat(2, 1fr); }
+  .od-media-modal__grid img{ height: 150px; }
+}
+
+
+
+/* ===== Slider for Labs (3 per view) ===== */
+.od-slider{
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.od-slider__viewport{
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.od-slider__track{
+  display: flex;
+  gap: 10px;
+  transform: translateX(0);
+  transition: transform .35s ease;
+  will-change: transform;
+  user-select: none;
+  touch-action: pan-y; /* вертикальный скролл страницы не ломаем */
+  padding: 4px;
+}
+
+.od-slide{
+  flex: 0 0 calc((100% - 20px) / 3); /* 3 фото, gap=10 => 2*10 = 20 */
+}
+
+.od-slide img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  background: rgba(255,255,255,0.06);
+}
+
+/* кнопки */
+.od-slider__nav{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .15s ease, background .15s ease;
+}
+.od-slider__nav:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.12);
+}
+.od-slider__nav:disabled{
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* dots */
+.od-slider__dots{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.od-dot{
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.10);
+  cursor: pointer;
+}
+.od-dot.is-active{
+  background: rgba(255,255,255,0.80);
+}
+
+@media (max-width: 760px){
+  .od-slide{ flex-basis: calc((100% - 10px) / 2); } /* 2 фото */
+  .od-slide img{ height: 160px; }
+}
+
+@media (max-width: 480px){
+  .od-slider{ grid-template-columns: 40px 1fr 40px; }
+  .od-slide{ flex-basis: 100%; } /* 1 фото */
+  .od-slide img{ height: 180px; }
+}

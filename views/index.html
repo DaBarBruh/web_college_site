@@ -37,7 +37,7 @@
         <p data-translate="slogan">ӨЗ ЖЕТІСТІГІҢІЗДІ БАҒДАРЛАМАЛАҢЫЗ-ПОЛИТЕХҚА ТҮСІҢІЗ!</p>
 
 
-        <!-- ===== Neon Glass: Open Day (with translations) ===== -->
+<!-- ===== Neon Glass: Open Day (with translations) ===== -->
 <section class="od-neon" id="open-day">
   <div class="od-neon__bg" aria-hidden="true"></div>
 
@@ -57,7 +57,7 @@
       </p>
     </div>
 
-    <!-- 3 фото -->
+    <!-- 3 фото (как было) -->
     <div class="od-neon__gallery">
       <figure class="od-neon__shot">
         <img src="/static/images/open-day/1.jpg" alt="Open Day 1" loading="lazy">
@@ -77,31 +77,113 @@
       </h3>
 
       <div class="od-neon__cards">
-        <div class="od-neon__card">
+        <!-- 1) Скролл к "Наши специальности" -->
+        <button class="od-neon__card od-neon__card-btn" type="button" id="odScrollMajors">
           <i class="fa-solid fa-user-graduate"></i>
           <span data-translate="od_item_1">Презентация специальностей</span>
-        </div>
-        <div class="od-neon__card">
+        </button>
+
+        <!-- 2) Открыть блок с фото (модалка) -->
+        <button class="od-neon__card od-neon__card-btn" type="button" id="odOpenLabs">
           <i class="fa-solid fa-microchip"></i>
           <span data-translate="od_item_2">Демо-зоны и лаборатории</span>
-        </div>
-        <div class="od-neon__card">
-          <i class="fa-solid fa-comments"></i>
-          <span data-translate="od_item_3">Консультация по поступлению</span>
-        </div>
+        </button>
+
+        <!-- 3) Вместо консультации — WhatsApp CTA (номер убран) -->
+        <a class="od-neon__card od-neon__card-cta"
+           href="https://wa.me/77071710800?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%94%D0%B5%D0%BD%D1%8C%20%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8B%D1%85%20%D0%B4%D0%B2%D0%B5%D1%80%D0%B5%D0%B9"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span data-translate="od_cta">Записаться в WhatsApp</span>
+        </a>
       </div>
 
-      <!-- CTA WhatsApp -->
-      <a class="od-neon__cta"
-         href="https://wa.me/77071710800?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%94%D0%B5%D0%BD%D1%8C%20%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8B%D1%85%20%D0%B4%D0%B2%D0%B5%D1%80%D0%B5%D0%B9"
-         target="_blank" rel="noopener">
-        <i class="fa-brands fa-whatsapp"></i>
-        <span data-translate="od_cta">Записаться в WhatsApp</span>
-        <span class="od-neon__cta-sub">+7-707-171-08-00</span>
-      </a>
+      <!-- Соцсети (добавил) -->
+      <div class="od-neon__socials">
+        <a class="od-neon__social" href="https://www.instagram.com/polytechalmaty/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram</span>
+        </a>
+
+        <!-- Поменяй ссылки на реальные -->
+        <a class="od-neon__social" href="https://t.me/+u9n4O3Sc0jgyYWMy" target="_blank" rel="noopener" aria-label="Telegram">
+          <i class="fa-brands fa-telegram"></i>
+          <span>Telegram</span>
+        </a>
+
+        <a class="od-neon__social" href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" rel="noopener" aria-label="TikTok">
+          <i class="fa-brands fa-tiktok"></i>
+          <span>TikTok</span>
+        </a>
+
+        <a class="od-neon__social" href="https://www.youtube.com/@almatypolytechedukz" target="_blank" rel="noopener" aria-label="YouTube">
+          <i class="fa-brands fa-youtube"></i>
+          <span>YouTube</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модалка для "Демо-зоны и лаборатории" -->
+  <div class="od-media-modal" id="odMediaModal" aria-hidden="true">
+    <div class="od-media-modal__overlay" id="odMediaOverlay"></div>
+
+    <div class="od-media-modal__panel" role="dialog" aria-modal="true" aria-label="Демо-зоны и лаборатории">
+      <button class="od-media-modal__close" type="button" id="odMediaClose" aria-label="Закрыть">×</button>
+
+      <h3 class="od-media-modal__title">Демо-зоны и лаборатории</h3>
+      <p class="od-media-modal__subtitle">Фото с площадок и кабинетов</p>
+
+<div class="od-slider" id="odLabsSlider">
+  <button class="od-slider__nav od-slider__prev" type="button" aria-label="Назад">‹</button>
+
+  <div class="od-slider__viewport">
+    <div class="od-slider__track" id="odLabsTrack">
+      <!-- 32 фото -->
+      <div class="od-slide"><img src="/static/images/open-day/labs/1.jpg"  alt="Lab 1"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/2.jpg"  alt="Lab 2"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/3.jpg"  alt="Lab 3"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/4.jpg"  alt="Lab 4"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/5.jpg"  alt="Lab 5"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/6.jpg"  alt="Lab 6"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/7.jpg"  alt="Lab 7"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/8.jpg"  alt="Lab 8"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/9.jpg"  alt="Lab 9"  loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/10.jpg" alt="Lab 10" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/11.jpg" alt="Lab 11" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/12.jpg" alt="Lab 12" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/13.jpg" alt="Lab 13" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/14.jpg" alt="Lab 14" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/15.jpg" alt="Lab 15" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/16.jpg" alt="Lab 16" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/17.jpg" alt="Lab 17" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/18.jpg" alt="Lab 18" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/19.jpg" alt="Lab 19" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/20.jpg" alt="Lab 20" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/21.jpg" alt="Lab 21" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/22.jpg" alt="Lab 22" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/23.jpg" alt="Lab 23" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/24.jpg" alt="Lab 24" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/25.jpg" alt="Lab 25" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/26.jpg" alt="Lab 26" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/27.jpg" alt="Lab 27" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/28.jpg" alt="Lab 28" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/29.jpg" alt="Lab 29" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/30.jpg" alt="Lab 30" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/31.jpg" alt="Lab 31" loading="lazy"></div>
+      <div class="od-slide"><img src="/static/images/open-day/labs/32.jpg" alt="Lab 32" loading="lazy"></div>
+    </div>
+  </div>
+
+  <button class="od-slider__nav od-slider__next" type="button" aria-label="Вперёд">›</button>
+</div>
+
+<div class="od-slider__dots" id="odLabsDots" aria-label="Навигация по слайдам"></div>
+
     </div>
   </div>
 </section>
+
 
         <div class="buttons">
             <button id="scrollToWhyUs" data-translate="why_us">Неге біз?</button>
@@ -130,7 +212,7 @@
     </section>
 
     <!-- Секция с мамандықтар -->
-    <section class="majors">
+    <section class="majors" id="majors">
         <h2 data-translate="our_majors">Біздің мамандықтар</h2>
         <div class="majors-container">
             <div class="majors-list">
@@ -601,6 +683,215 @@
     <script src="/static/header/main.js"></script>
     <script src="/static/modal-page/js/specialtyPopup.js"></script>
     <script src="/static/gallerybuttons.js"></script>
+
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1) Скролл к "Наши специальности"
+    const btnMajors = document.getElementById('odScrollMajors');
+    const majors = document.getElementById('majors') || document.querySelector('.majors');
+
+    if (btnMajors && majors) {
+      btnMajors.addEventListener('click', () => {
+        majors.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // 2) Модалка "Демо-зоны и лаборатории"
+    const btnLabs = document.getElementById('odOpenLabs');
+    const modal = document.getElementById('odMediaModal');
+    const overlay = document.getElementById('odMediaOverlay');
+    const closeBtn = document.getElementById('odMediaClose');
+
+    const openModal = () => {
+      if (!modal) return;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    if (btnLabs) btnLabs.addEventListener('click', openModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  });
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) Скролл к "Наши специальности"
+  const btnMajors = document.getElementById('odScrollMajors');
+  const majors = document.getElementById('majors') || document.querySelector('.majors');
+
+  if (btnMajors && majors) {
+    btnMajors.addEventListener('click', () => {
+      majors.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // 2) Модалка "Демо-зоны и лаборатории"
+  const btnLabs = document.getElementById('odOpenLabs');
+  const modal = document.getElementById('odMediaModal');
+  const overlay = document.getElementById('odMediaOverlay');
+  const closeBtn = document.getElementById('odMediaClose');
+
+  const openModal = () => {
+    if (!modal) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    refreshSlider(); // важно: пересчитать после открытия
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  if (btnLabs) btnLabs.addEventListener('click', openModal);
+  if (overlay) overlay.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ===== 3) Slider (3 фото, влево/вправо, свайп) =====
+  const track = document.getElementById('odLabsTrack');
+  const slider = document.getElementById('odLabsSlider');
+  const prevBtn = slider?.querySelector('.od-slider__prev');
+  const nextBtn = slider?.querySelector('.od-slider__next');
+  const dotsWrap = document.getElementById('odLabsDots');
+
+  if (!track || !slider || !prevBtn || !nextBtn || !dotsWrap) return;
+
+  let index = 0; // "страница" слайдера
+  let perView = 3;
+  let pages = 1;
+
+  function calcPerView(){
+    const w = slider.clientWidth;
+    if (w <= 480) return 1;
+    if (w <= 760) return 2;
+    return 3;
+  }
+
+  function calcPages(){
+    const total = track.children.length;
+    return Math.max(1, Math.ceil(total / perView));
+  }
+
+  function setNavState(){
+    prevBtn.disabled = index <= 0;
+    nextBtn.disabled = index >= pages - 1;
+
+    [...dotsWrap.children].forEach((d, i) => {
+      d.classList.toggle('is-active', i === index);
+    });
+  }
+
+  function renderDots(){
+    dotsWrap.innerHTML = '';
+    for(let i=0; i<pages; i++){
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'od-dot' + (i===index ? ' is-active' : '');
+      dot.addEventListener('click', () => {
+        index = i;
+        update();
+      });
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function update(){
+    const viewport = slider.querySelector('.od-slider__viewport');
+    const viewportW = viewport.clientWidth;
+
+    // Шаг = ширина страницы (вьюпорта)
+    const offset = index * viewportW;
+    track.style.transform = `translateX(${-offset}px)`;
+    setNavState();
+  }
+
+  function refreshSlider(){
+    perView = calcPerView();
+    pages = calcPages();
+    index = Math.min(index, pages - 1);
+    renderDots();
+    // reset transition just in case
+    track.style.transition = 'transform .35s ease';
+    update();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    index = Math.max(0, index - 1);
+    update();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    index = Math.min(pages - 1, index + 1);
+    update();
+  });
+
+  // Drag / Swipe
+  let isDown = false;
+  let startX = 0;
+  let startTranslate = 0;
+
+  function getCurrentTranslate(){
+    const m = track.style.transform.match(/-?\d+(\.\d+)?/);
+    return m ? Number(m[0]) : 0;
+  }
+
+  const viewportEl = slider.querySelector('.od-slider__viewport');
+
+  viewportEl.addEventListener('pointerdown', (e) => {
+    isDown = true;
+    viewportEl.setPointerCapture(e.pointerId);
+    startX = e.clientX;
+    startTranslate = getCurrentTranslate();
+    track.style.transition = 'none';
+  });
+
+  viewportEl.addEventListener('pointermove', (e) => {
+    if(!isDown) return;
+    const dx = e.clientX - startX;
+    track.style.transform = `translateX(${startTranslate + dx}px)`;
+  });
+
+  viewportEl.addEventListener('pointerup', (e) => {
+    if(!isDown) return;
+    isDown = false;
+    track.style.transition = 'transform .35s ease';
+
+    const dx = e.clientX - startX;
+    const threshold = 60; // чувствительность
+    if (dx > threshold) index = Math.max(0, index - 1);
+    else if (dx < -threshold) index = Math.min(pages - 1, index + 1);
+
+    update();
+  });
+
+  window.addEventListener('resize', refreshSlider);
+
+  // Первый расчёт
+  refreshSlider();
+});
+</script>
+
 
 </body>
 
