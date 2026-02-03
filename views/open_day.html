@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>День открытых дверей</title>
+
+  <!-- Ваши общие стили -->
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="/static/header/styles.css" />
+  <link rel="icon" href="/static/images/header/icon_site_logo.svg" type="image/x-icon">
+
+  <!-- Стили этой страницы -->
+  <link rel="stylesheet" href="/static/open_day.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Header -->
+  <div id="header-placeholder"></div>
+  <script src="/static/loadLayout.js"></script>
+
+  <main class="open-day-page">
+    <!-- HERO -->
+    <section class="od-hero">
+      <div class="od-hero__bg"></div>
+      <div class="od-hero__content">
+        <div class="od-badge">
+          <i class="fa-solid fa-star"></i>
+          <span>ALMATY POLYTECHNIC COLLEGE</span>
+        </div>
+
+        <h1 class="od-title">День открытых дверей</h1>
+        <p class="od-subtitle">
+          Приходи познакомиться с колледжем, специальностями, преподавателями и атмосферой Политеха.
+        </p>
+
+        <div class="od-actions">
+          <a class="od-btn od-btn--primary" href="#od-register">
+            <i class="fa-solid fa-pen-to-square"></i> Записаться
+          </a>
+          <a class="od-btn od-btn--ghost" href="#od-program">
+            <i class="fa-solid fa-list-check"></i> Программа
+          </a>
+          <a class="od-btn od-btn--ghost" href="#od-map">
+            <i class="fa-solid fa-location-dot"></i> Как нас найти
+          </a>
+        </div>
+
+        <div class="od-stats">
+          <div class="od-stat">
+            <div class="od-stat__num"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="od-stat__text">Презентация специальностей</div>
+          </div>
+          <div class="od-stat">
+            <div class="od-stat__num"><i class="fa-solid fa-microchip"></i></div>
+            <div class="od-stat__text">Демо-зоны и лаборатории</div>
+          </div>
+          <div class="od-stat">
+            <div class="od-stat__num"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="od-stat__text">Консультация по поступлению</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO CARDS -->
+    <section class="od-section od-grid">
+      <div class="od-card">
+        <h2><i class="fa-solid fa-calendar-days"></i> Дата и время</h2>
+        <p>Укажи дату/время проведения или добавь несколько слотов.</p>
+        <div class="od-note">Пример: <b>15 февраля, 12:00</b></div>
+      </div>
+
+      <div class="od-card">
+        <h2><i class="fa-solid fa-users"></i> Для кого</h2>
+        <p>Школьники 8–11 классов, родители, абитуриенты и все, кто хочет узнать больше о колледже.</p>
+        <div class="od-note">Вход свободный</div>
+      </div>
+
+      <div class="od-card">
+        <h2><i class="fa-solid fa-circle-info"></i> Что будет</h2>
+        <p>Экскурсия по корпусам, знакомство со специальностями, ответы на вопросы и помощь с документами.</p>
+        <div class="od-note">Можно прийти с друзьями</div>
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section id="od-program" class="od-section">
+      <div class="od-head">
+        <h2 class="od-h2">Программа мероприятия</h2>
+        <p class="od-desc">Можно отредактировать пункты под ваш реальный тайминг.</p>
+      </div>
+
+      <div class="od-timeline">
+        <div class="od-step">
+          <div class="od-time">12:00</div>
+          <div class="od-step__body">
+            <h3>Регистрация гостей</h3>
+            <p>Встреча, навигация, знакомство с площадками.</p>
+          </div>
+        </div>
+
+        <div class="od-step">
+          <div class="od-time">12:20</div>
+          <div class="od-step__body">
+            <h3>Презентация колледжа</h3>
+            <p>Обучение, практика, проекты, партнёры и возможности для студентов.</p>
+          </div>
+        </div>
+
+        <div class="od-step">
+          <div class="od-time">12:45</div>
+          <div class="od-step__body">
+            <h3>Экскурсия по лабораториям</h3>
+            <p>Покажем кабинеты, оборудование, проекты и студенческие работы.</p>
+          </div>
+        </div>
+
+        <div class="od-step">
+          <div class="od-time">13:20</div>
+          <div class="od-step__body">
+            <h3>Консультации по поступлению</h3>
+            <p>Документы, сроки, гранты/льготы, специальности и ответы на вопросы.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="od-register" class="od-section">
+      <div class="od-cta">
+        <div class="od-cta__left">
+          <h2 class="od-h2">Запишитесь на День открытых дверей</h2>
+          <p class="od-desc">Нажмите кнопку — откроется WhatsApp и вы сможете быстро оставить заявку.</p>
+        </div>
+        <div class="od-cta__right">
+          <a class="od-btn od-btn--primary od-btn--big"
+             href="https://wa.me/77071710800?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%94%D0%B5%D0%BD%D1%8C%20%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8B%D1%85%20%D0%B4%D0%B2%D0%B5%D1%80%D0%B5%D0%B9."
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> Записаться в WhatsApp
+          </a>
+
+          <a class="od-btn od-btn--ghost od-btn--big" href="/apply">
+            <i class="fa-solid fa-arrow-right"></i> Поступление онлайн
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="od-map" class="od-section">
+      <div class="od-head">
+        <h2 class="od-h2">Как нас найти</h2>
+        <p class="od-desc">Приходите — мы подскажем, где вход и куда идти.</p>
+      </div>
+
+      <div class="od-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13430.918379679084!2d76.8432397472676!3d43.246454808350855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3883699af1c02faf%3A0xc474ee44a1baa11c!2sPolytechnic%20College!5e0!3m2!1sru!2skz!4v1744026887068!5m2!1sru!2skz"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Ваши скрипты (если нужны глобально) -->
+  <script src="/static/header/main.js"></script>
+</body>
+
+</html>
