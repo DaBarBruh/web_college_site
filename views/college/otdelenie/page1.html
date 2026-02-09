@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="kk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,11 @@
             overflow-x: hidden;
             position: relative;
         }
+
+        .logo img {
+            max-width: none !important;
+        }
+
         #particles-js {
             position: fixed;
             top: 0;
@@ -33,6 +39,7 @@
             height: 100%;
             z-index: -1;
         }
+
         .hero-section {
             background: linear-gradient(135deg, #7ce1e4d0 0%, #3b83f6bd 50%, #d400f9a1 100%);
             background-size: 200% 200%;
@@ -44,25 +51,26 @@
             justify-content: center;
             overflow: hidden;
         }
+
         .hero-section::before {
-    content: "";
-    background-image: url("/static/images/stud/g6.JPG");
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%) rotate(-0deg);
-    font-size: 6rem;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.1);
-    text-transform: uppercase;
-    white-space: nowrap;
-    z-index: -1;
-}
+            content: "";
+            background-image: url("/static/images/stud/g6.JPG");
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%) rotate(-0deg);
+            font-size: 6rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: -1;
+        }
 
         .hero-content {
             position: relative;
@@ -72,14 +80,28 @@
             animation: fadeInUp 1.5s ease-out 0.5s forwards;
             text-shadow: 0 0 10px rgba(0, 247, 255, 0.7);
         }
+
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
+
         @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
             position: relative;
@@ -91,6 +113,7 @@
             color: transparent;
             text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
         }
+
         .club-card {
             background: rgba(10, 10, 10, 0.85);
             border: 1px solid rgba(0, 247, 255, 0.3);
@@ -100,10 +123,11 @@
             overflow: hidden;
             border-radius: 1rem;
         }
+
         .document-card {
-        width: 550px; 
-        max-width: none; 
-}
+            width: 550px;
+            max-width: none;
+        }
 
 
         .club-card::before {
@@ -116,26 +140,39 @@
             background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.3), transparent);
             transition: 0.6s;
         }
+
         .club-card:hover::before {
             left: 100%;
         }
+
         .club-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 25px rgba(0, 247, 255, 0.6), 0 0 50px rgba(213, 0, 249, 0.4);
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out forwards;
         }
-        .fade-in:nth-child(2) { animation-delay: 0.3s; }
-        .fade-in:nth-child(3) { animation-delay: 0.6s; }
-        .fade-in:nth-child(4) { animation-delay: 0.9s; }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+
         .list-item {
             position: relative;
             padding-left: 1.5rem;
         }
-        
+
         .list-item::before {
             content: '→';
             position: absolute;
@@ -144,25 +181,39 @@
             font-family: 'Orbitron', sans-serif;
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
+
         main {
             background: transparent;
             position: relative;
             z-index: 1;
         }
-        h1, h2, h3 {
+
+        h1,
+        h2,
+        h3 {
             font-family: 'Orbitron', sans-serif;
         }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
             position: relative;
             display: inline-block;
             width: 100%;
-           
+
             margin-bottom: 2rem;
             background: linear-gradient(to right, #00f7ff, #d500f9);
             -webkit-background-clip: text;
@@ -170,7 +221,7 @@
             color: transparent;
             text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
         }
-       
+
         .member-card {
             background: rgba(10, 10, 10, 0.85);
             border: 1px solid rgba(0, 247, 255, 0.3);
@@ -182,6 +233,7 @@
             padding: 1.5rem;
             text-align: center;
         }
+
         .member-card::before {
             content: '';
             position: absolute;
@@ -192,13 +244,16 @@
             background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.3), transparent);
             transition: 0.6s;
         }
+
         .member-card:hover::before {
             left: 100%;
         }
+
         .member-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 25px rgba(0, 247, 255, 0.6), 0 0 50px rgba(213, 0, 249, 0.4);
         }
+
         .member-photo {
             width: 150px;
             height: 150px;
@@ -208,21 +263,26 @@
             margin: 0 auto 1rem;
             box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
         }
+
         .main-member {
             max-width: 400px;
             margin: 0 auto 2rem;
             padding: 2rem;
         }
+
         .main-member .member-photo {
             width: 200px;
             height: 200px;
         }
+
         .main-member .member-name {
             font-size: 2rem;
         }
+
         .main-member .member-role {
             font-size: 1.2rem;
         }
+
         .member-name {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
@@ -230,66 +290,86 @@
             text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
             margin-bottom: 0.5rem;
         }
+
         .member-role {
             font-size: 1rem;
             color: #d500f9;
             margin-bottom: 1rem;
         }
+
         .member-description {
             font-size: 0.9rem;
             color: #d1d5db;
             line-height: 1.5;
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease-out forwards;
         }
-        .fade-in:nth-child(2) { animation-delay: 0.3s; }
-        .fade-in:nth-child(3) { animation-delay: 0.6s; }
-        .fade-in:nth-child(4) { animation-delay: 0.9s; }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.3s;
         }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         main {
             background: transparent;
             position: relative;
             z-index: 1;
         }
-        .photo-slider {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: #f4f4f4;
-}
 
-.carousel {
+        .photo-slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: #f4f4f4;
+        }
+
+        .carousel {
             max-width: 1800px;
             margin: 20px auto;
             position: relative;
             overflow: hidden;
         }
-        
+
         .carousel-container {
             display: flex;
             transition: transform 0.5s ease;
         }
-        
+
         .carousel-item {
-            flex: 0 0 calc(100% / 3); /* Показываем 3 фото одновременно */
+            flex: 0 0 calc(100% / 3);
+            /* Показываем 3 фото одновременно */
             padding: 0 5px;
             box-sizing: border-box;
-            height: 300px; /* Фиксированная высота */
+            height: 300px;
+            /* Фиксированная высота */
         }
-        
+
         .carousel-item img {
             width: 100%;
             height: 100%;
             border-radius: 8px;
             display: apply;
-           
+
         }
-        
+
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -303,86 +383,87 @@
             z-index: 10;
             border-radius: 50%;
         }
-        
+
         .carousel-btn:hover {
             background: rgba(0, 0, 0, 0.8);
         }
-        
+
         #prevBtn {
             left: 10px;
         }
-        
+
         #nextBtn {
             right: 10px;
         }
     </style>
 </head>
+
 <body>
     <div id="particles-js"></div>
 
     <div id="header-placeholder"></div>
 
-<script>
-    fetch('/views/header.html')
-        .then(response => response.text())
-        .then(data => {
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            headerPlaceholder.innerHTML = data;
-
-            // Инициализация динамических элементов после вставки хедера
-            initDateTime();
-            initIPAddress();
-            initLanguageSwitcher();
-        });
-
-    function initDateTime() {
-        const dateElement = document.getElementById('current-date');
-        const timeElement = document.getElementById('current-time');
-        
-        function updateTime() {
-            const now = new Date();
-            const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
-            timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
-        }
-
-        setInterval(updateTime, 1000);
-        updateTime();
-    }
-
-    function initIPAddress() {
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
+    <script>
+        fetch('/views/header.html')
+            .then(response => response.text())
             .then(data => {
-                document.getElementById('ip-address').textContent = data.ip;
-            })
-            .catch(() => {
-                document.getElementById('ip-address').textContent = 'Не удалось загрузить IP';
-            });
-    }
+                const headerPlaceholder = document.getElementById('header-placeholder');
+                headerPlaceholder.innerHTML = data;
 
-    function initLanguageSwitcher() {
-        const languageSelect = document.getElementById('language-select');
-        if (languageSelect) {
-            languageSelect.addEventListener('change', (event) => {
-                const selectedLanguage = event.target.value;
-                console.log('Selected language:', selectedLanguage);
-                // Добавь логику для смены языка
-            });а
+                // Инициализация динамических элементов после вставки хедера
+                initDateTime();
+                initIPAddress();
+                initLanguageSwitcher();
+            });
+
+        function initDateTime() {
+            const dateElement = document.getElementById('current-date');
+            const timeElement = document.getElementById('current-time');
+
+            function updateTime() {
+                const now = new Date();
+                const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                dateElement.textContent = now.toLocaleDateString('ru-RU', optionsDate).toUpperCase();
+                timeElement.textContent = now.toLocaleTimeString('ru-RU', optionsTime);
+            }
+
+            setInterval(updateTime, 1000);
+            updateTime();
         }
-    }
-</script>
+
+        function initIPAddress() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-address').textContent = data.ip;
+                })
+                .catch(() => {
+                    document.getElementById('ip-address').textContent = 'Не удалось загрузить IP';
+                });
+        }
+
+        function initLanguageSwitcher() {
+            const languageSelect = document.getElementById('language-select');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', (event) => {
+                    const selectedLanguage = event.target.value;
+                    console.log('Selected language:', selectedLanguage);
+                    // Добавь логику для смены языка
+                }); а
+            }
+        }
+    </script>
     <main class="container mx-auto py-16 px-4">
         <!-- Club Committee Section -->
         <section id="club-committee" class="mb-16">
-            <h2 class="section-title text-4xl font-bold text-center" data-translate="qurlym" >ҚҰРЫЛЫМЫ</h2>
+            <h2 class="section-title text-4xl font-bold text-center" data-translate="qurlym">ҚҰРЫЛЫМЫ</h2>
             <div class="main-member member-card fade-in">
                 <img src="/static/images/photo_otdelenie/img1.jpg" alt="Кондакбаева Айдана" class="member-photo">
                 <h3 class="member-name">Саурбек Улжан Болатханқызы
                 </h3>
                 <p class="member-role" data-translate="zav_1">Бөлім меңгерушісі </p>
-        
+
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="member-card fade-in">
@@ -420,97 +501,94 @@
                     <h3 class="member-name">Ермекхан Жансая Маратқызы</h3>
                     <p class="member-role">Арнайы пәндер оқытушысы</p>
                 </div>
-                    </p>
-                </div>
+                </p>
+            </div>
             </div>
         </section>
     </main>
 
 
 
-            <footer class="footer">
-            <div class="footer-container">
-              <!-- О сайте -->
-              <div class="footer-section">
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- О сайте -->
+            <div class="footer-section">
                 <h3 data-translate="about_site">Сайт туралы</h3>
                 <p id="copyright-year"></p>
                 <script>
-                  const currentYear = new Date().getFullYear();
-                  document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
+                    const currentYear = new Date().getFullYear();
+                    document.getElementById("copyright-year").textContent = `©1940–${currentYear}`;
                 </script>
                 <p data-translate="college_name">
-                  Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
+                    Алматы қаласы Білім басқармасының «ALMATY POLYTECHNIC COLLEGE» КМҚК
                 </p>
-          
+
                 <h3 data-translate="social_networks">Әлеуметтік желілер</h3>
                 <div class="social-icons">
-                  <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
-                    <img src="/static/images/flot/instagram.png" alt="Instagram" />
-                  </a>
-                  <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
-                    <img src="/static/images/flot/facebook.png" alt="Facebook" />
-                  </a>
-                  <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
-                    <img src="/static/images/flot/youtube.png" alt="YouTube" />
-                  </a>
-                  <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank" aria-label="TikTok">
-                    <img src="/static/images/flot/tiktok.png" alt="TikTok" />
-                  </a>
+                    <a href="https://www.instagram.com/polytechalmaty/#" target="_blank" aria-label="Instagram">
+                        <img src="/static/images/flot/instagram.png" alt="Instagram" />
+                    </a>
+                    <a href="https://www.facebook.com/people/..." target="_blank" aria-label="Facebook">
+                        <img src="/static/images/flot/facebook.png" alt="Facebook" />
+                    </a>
+                    <a href="https://www.youtube.com/@almatypolytechedukz" target="_blank" aria-label="YouTube">
+                        <img src="/static/images/flot/youtube.png" alt="YouTube" />
+                    </a>
+                    <a href="https://www.tiktok.com/@polytech_college?_t=8ji5qQRP3v3&_r=1" target="_blank"
+                        aria-label="TikTok">
+                        <img src="/static/images/flot/tiktok.png" alt="TikTok" />
+                    </a>
                 </div>
-              </div>
-          
-              <!-- Контакты -->
-              <div class="footer-section">
+            </div>
+
+            <!-- Контакты -->
+            <div class="footer-section">
                 <h3 data-translate="contact_label">Байланыс</h3>
                 <p>
-                  <span class="icon">📍</span>
-                  <strong data-translate="address_label">Мекенжай:</strong><br />
-                  <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
+                    <span class="icon">📍</span>
+                    <strong data-translate="address_label">Мекенжай:</strong><br />
+                    <span data-translate="address">Қазақстан, Алматы қ., Тастақ-1 шағын ауданы, 1B</span>
                 </p>
                 <p>
-                  <span class="icon">📞</span>
-                  <strong data-translate="contact_label">Байланыс:</strong><br />
-                  <span data-translate="phone">Тел.: 229 18 32/span><br />
-                  <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
+                    <span class="icon">📞</span>
+                    <strong data-translate="contact_label">Байланыс:</strong><br />
+                    <span data-translate="phone">Тел.: 229 18 32/span><br />
+                        <span data-translate="admission_phone">Қабылдау комиссиясы: 8 707 171 0800</span>
                 </p>
                 <p>
-                  <span class="icon">✉️</span>
-                  <strong data-translate="email_label">Пошта:</strong><br />
-                  <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
+                    <span class="icon">✉️</span>
+                    <strong data-translate="email_label">Пошта:</strong><br />
+                    <a href="mailto:polytech@aspc.kz">polytech@aspc.kz</a>
                 </p>
-              </div>
-          
-              <!-- Разработчики -->
-              <div class="footer-section">
+            </div>
+
+            <!-- Разработчики -->
+            <div class="footer-section">
                 <h3 data-translate="developers">Разработчики сайта</h3>
                 <p>
-                  <span class="icon">👨‍💻</span>
-                  <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
-                  <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
+                    <span class="icon">👨‍💻</span>
+                    <strong data-translate="developer_name">Жобаны жасаған:</strong><br />
+                    <span data-translate="developer_info">Колледж студенттері мен оқытушылары</span>
                 </p>
-                
-                <a href="https://t.me/CollegeSupportBot "class="dev-button" data-translate="contact_developer" target="_blank" >Связаться с разработчиком</a>
-              </div>
+
+                <a href="https://t.me/CollegeSupportBot " class="dev-button" data-translate="contact_developer"
+                    target="_blank">Связаться с разработчиком</a>
             </div>
-          </footer>
+        </div>
+    </footer>
 
 
     <!-- Scripts -->
     <script src="/static/translations.js"></script>
     <script src="/static/languageSwitcher.js"></script>
-    <script src="/static/virtualTour.js"></script>
-    <script src="/static/online_assistant.js"></script>
     <script src="/static/script.js"></script>
     <script src="/static/particles_config.js"></script>
-    <script src="/static/major-body.js"></script>
-    <script src="/static/partners-scroll.js"></script>
     <script src="/static/header/main.js"></script>
-    <script src="/static/modal-page/js/specialtyPopup.js"></script>
     <script>
         // Particles.js configuration
         particlesJS('particles-js', {
             particles: {
-                number: { value: 150, density: { enable: true, value_area: 1000 } },
+                number: { value: 20, density: { enable: false, value_area: 100 } },
                 color: { value: ['#00f7ff', '#d500f9'] },
                 shape: { type: 'circle' },
                 opacity: { value: 0.6, random: true },
@@ -544,7 +622,7 @@
                     push: { particles_nb: 4 }
                 }
             },
-            retina_detect: true
+            retina_detect: false
         });
 
         // Dynamic date and time
@@ -555,4 +633,4 @@
         }
         updateDateTime();
         setInterval(updateDateTime, 1000);
-    </script>                // Добавь логику для смены языка
+    </script>

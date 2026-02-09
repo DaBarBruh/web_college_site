@@ -383,7 +383,6 @@ nav ul li a:hover {
     animation: marquee 60s linear infinite;
     width: calc(300px * 12);
     overflow: visible;
-    /* Добавлено */
 }
 
 .majors-list:hover {
@@ -460,12 +459,10 @@ button.specialty-btn {
 
 .majors-list {
     animation: none;
-    /* Отключаем CSS-анимацию */
 }
 
 .majors-list .major-card .specialty-btn {
     background: var(--bs-danger);
-    /* Теперь фиолетовый */
     color: var(--light);
     border: none;
     padding: 10px 20px;
@@ -486,7 +483,6 @@ button.specialty-btn {
 }
 
 
-/* Модальное окно специальностей */
 .specialtyPopup {
     display: none;
     position: fixed;
@@ -528,7 +524,6 @@ button.specialty-btn {
 
 .specialtyPopup-header {
     border-left: 4px solid var(--bs-danger);
-    /* Теперь фиолетовый */
     padding-left: 15px;
     margin-bottom: 20px;
 }
@@ -582,7 +577,6 @@ button.specialty-btn {
 
 .detail-item i {
     color: var(--bs-danger);
-    /* Теперь фиолетовый */
     font-size: 1.2rem;
 }
 
@@ -597,7 +591,6 @@ button.specialty-btn {
     color: var(--neon);
 }
 
-/* Герой секция */
 .hero {
     text-align: center;
     margin-top: 120px;
@@ -607,7 +600,6 @@ button.specialty-btn {
 .hero h1 {
     font-size: 42px;
     color: var(--bright-purple);
-    /* Обновлено */
     margin-bottom: 10px;
     text-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff, 0 0 30px #00bfff;
 }
@@ -623,7 +615,6 @@ button.specialty-btn {
     margin-bottom: -30px;
 }
 
-/* Герой изображение */
 .hero_img {
     padding-top: 1%;
     padding-right: 2%;
@@ -636,10 +627,8 @@ button.specialty-btn {
     margin: 0 auto;
     box-sizing: border-box;
     flex-wrap: wrap;
-    /* позволяет содержимому переходить на новую строку при необходимости */
 }
 
-/* Адаптация под устройства шириной 768px и меньше (обычные планшеты и телефоны) */
 @media (max-width: 768px) {
     .hero_img {
         flex-direction: column;
@@ -648,7 +637,6 @@ button.specialty-btn {
 }
 
 
-/* Кнопки */
 .buttons {
     display: flex;
     justify-content: center;
@@ -659,7 +647,6 @@ button.specialty-btn {
     margin: 15px;
     padding: 30px 80px;
     border: 2px solid var(--bright-purple);
-    /* Обновлено */
     background: transparent;
     color: var(--bs-white);
     font-size: 28px;
@@ -724,7 +711,6 @@ button.specialty-btn {
     transform: scale(1.08);
 }
 
-/* Тур по колледжу */
 .college-tour {
     display: flex;
     align-items: center;
@@ -787,7 +773,6 @@ button.specialty-btn {
     animation: fadeInScale 1s ease-out 0.6s forwards;
 }
 
-/* Партнеры */
 .partners {
     text-align: center;
     padding: 60px 10%;
@@ -854,7 +839,6 @@ button.specialty-btn {
     transform: scale(1.1);
 }
 
-/* Карта */
 .map-section {
     text-align: center;
     color: var(--bs-white);
@@ -893,7 +877,6 @@ button.specialty-btn {
     border: none;
 }
 
-/* Футер */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .footer {
@@ -982,7 +965,6 @@ button.specialty-btn {
     display: none;
 }
 
-/* Анимации */
 @keyframes fadeInUp {
     to {
         opacity: 1;
@@ -997,9 +979,6 @@ button.specialty-btn {
     }
 }
 
-/* Медиа-запросы - reorganized and improved */
-
-/* Large screens (1400px+) - Full layout */
 @media (max-width: 1400px) {
     .hero {
         margin: 150px auto 0;
@@ -1017,7 +996,6 @@ button.specialty-btn {
     }
 }
 
-/* Desktop (1024px - 1400px) */
 @media (max-width: 1024px) {
     .hero {
         margin: 100px auto 0;
@@ -1054,7 +1032,6 @@ button.specialty-btn {
     }
 }
 
-/* Tablet (768px - 1024px) */
 @media (max-width: 768px) {
     body {
         background: var(--bs-black);
@@ -1136,7 +1113,6 @@ button.specialty-btn {
     }
 }
 
-/* Mobile (480px - 768px) */
 @media (max-width: 480px) {
     .hero {
         margin: 60px auto 0;
@@ -1206,18 +1182,14 @@ button.specialty-btn {
     }
 }
 
-/* Адаптация для мобильных устройств */
 @media (max-width: 480px) {
     .hero_img {
         display: none;
-        /* Скрываем элемент на мобильных устройствах */
     }
 }
 
-/* ========== MOBILE ADAPTATION (<=480px) ========== */
 @media (max-width: 480px) {
 
-    /* Упрощаем header/Nav */
     header {
         padding: 10px;
         height: auto;
@@ -1237,7 +1209,6 @@ button.specialty-btn {
         display: flex;
     }
 
-    /* Герой */
     .hero {
         margin-top: 40px;
         padding: 10px;
@@ -1253,7 +1224,6 @@ button.specialty-btn {
         font-size: 14px;
     }
 
-    /* Кнопки */
     .buttons {
         flex-direction: column;
         gap: 12px;
@@ -1267,7 +1237,6 @@ button.specialty-btn {
         font-size: 16px;
     }
 
-    /* Список специальностей — делаем вертикальный скролл */
     /* .majors-container {
       overflow: visible;
     }
@@ -1282,7 +1251,6 @@ button.specialty-btn {
       width: 100%;
     }
    */
-    /* Новости */
     .news {
         padding: 15px;
         margin-bottom: 20px;
@@ -1296,7 +1264,6 @@ button.specialty-btn {
         max-height: 180px;
     }
 
-    /* Партнёры — горизонтальный скролл */
     .partners-track {
         gap: 20px;
         overflow-x: auto;
@@ -1308,7 +1275,6 @@ button.specialty-btn {
         margin-right: 10px;
     }
 
-    /* Карта */
     .map-container {
         height: 250px;
     }
@@ -1317,7 +1283,6 @@ button.specialty-btn {
         height: 100%;
     }
 
-    /* Футер */
     .footer-container {
         flex-direction: column;
         gap: 20px;
@@ -1329,7 +1294,6 @@ button.specialty-btn {
     }
 }
 
-/* ========== EXTRA SMALL (<=360px) ========== */
 @media (max-width: 360px) {
     .hero h1 {
         font-size: 20px;
@@ -1350,7 +1314,6 @@ button.specialty-btn {
 
 @media (max-width: 480px) {
 
-    /* Контейнер — включаем только горизонтальный скролл */
     .majors-container {
         overflow-x: auto !important;
         overflow-y: hidden !important;
@@ -1359,13 +1322,11 @@ button.specialty-btn {
         max-width: 100%;
     }
 
-    /* Hide fade masks on mobile */
     .majors-container::before,
     .majors-container::after {
         display: none;
     }
 
-    /* Сама лента — flex по строке, без анимации */
     .majors-list {
         display: flex;
         flex-wrap: nowrap;
@@ -1375,7 +1336,6 @@ button.specialty-btn {
         overflow: visible;
     }
 
-    /* Карточки фиксированной ширины, чтобы было удобно скроллить */
     .majors-list .major-card {
         flex: 0 0 auto;
         width: 300px;
@@ -1395,7 +1355,6 @@ button.specialty-btn {
     }
 }
 
-/* Scroll Up Button */
 .scroll-up-button {
     position: fixed;
     bottom: 30px;
@@ -1403,7 +1362,6 @@ button.specialty-btn {
     width: 50px;
     height: 50px;
     background-color: var(--neon);
-    /* Using project variable */
     color: var(--dark);
     border-radius: 50%;
     display: flex;
@@ -1437,631 +1395,647 @@ button.specialty-btn {
 
 
 
-/* ===========================
-   FINAL: ALMATY POLYTECHNIC (Neon Blue)
-   ВСТАВИТЬ В САМЫЙ КОНЕЦ CSS
-   =========================== */
-
-/* 1) фоновые пятна — только синий (без зелёного) */
-.od-neon__bg{
-  background:
-    radial-gradient(420px 240px at 18% 22%, rgba(var(--neon-rgb), 0.26), transparent 62%),
-    radial-gradient(520px 300px at 78% 28%, rgba(13, 110, 253, 0.22), transparent 64%), /* --bs-blue */
-    radial-gradient(520px 320px at 50% 78%, rgba(0, 102, 255, 0.16), transparent 66%)  /* --electric-blue */
-    !important;
-  filter: blur(12px) !important;
-  opacity: 0.92 !important;
-}
-
-/* 2) стекло плотнее, не ломаем padding */
-.od-neon__wrap{
-  background: rgba(10, 16, 28, 0.84) !important; /* меньше прозрачности */
-  border: 1px solid rgba(var(--neon-rgb), 0.22) !important;
-  box-shadow:
-    0 30px 90px rgba(0,0,0,0.68),
-    0 0 0 1px rgba(var(--neon-rgb), 0.08) inset !important;
-}
-
-/* 3) неоновая рамка — синий */
-.od-neon__wrap::before{
-  background: linear-gradient(90deg,
-    rgba(var(--neon-rgb), 0.95),
-    rgba(255, 255, 255, 0.22),
-    rgba(0, 102, 255, 0.92)
-  ) !important;
-  opacity: .9 !important;
-}
-
-/* 4) Заголовок секции — "горит" */
-.od-neon__title{
-  color: rgba(255,255,255,0.98) !important;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  line-height: 1.15;
-  text-shadow:
-    0 0 10px rgba(var(--neon-rgb), 0.75),
-    0 0 22px rgba(var(--neon-rgb), 0.55),
-    0 0 40px rgba(0, 102, 255, 0.45) !important;
-}
-
-/* если хочешь, чтобы строка "ҚОШ КЕЛДІҢІЗ!" была ярче — можно выделить <span class="od-neon__accent"> */
-.od-neon__accent{
-  color: var(--bright-purple) !important;
-  text-shadow:
-    0 0 10px rgba(0, 234, 255, 0.85),
-    0 0 26px rgba(0, 102, 255, 0.55) !important;
-}
-
-/* 5) Бейдж */
-.od-neon__badge{
-  border-color: rgba(var(--neon-rgb), 0.30) !important;
-  box-shadow: 0 0 26px rgba(var(--neon-rgb), 0.35) !important;
-}
-
-/* 6) Фото и карточки — синяя подсветка */
-.od-neon__shot{
-  border-color: rgba(var(--neon-rgb), 0.18) !important;
-  box-shadow:
-    0 18px 48px rgba(0,0,0,0.55),
-    0 0 26px rgba(var(--neon-rgb), 0.22) !important;
-}
-
-.od-neon__card{
-  background: rgba(15, 22, 38, 0.78) !important;
-  border-color: rgba(var(--neon-rgb), 0.18) !important;
-  box-shadow:
-    0 16px 40px rgba(0,0,0,0.55),
-    0 0 22px rgba(var(--neon-rgb), 0.16) !important;
-}
-
-.od-neon__card i{
-  color: rgba(var(--neon-rgb), 0.95) !important;
-  text-shadow: 0 0 16px rgba(var(--neon-rgb), 0.55) !important;
-}
-
-/* 7) CTA кнопка */
-.od-neon__cta{
-  background: rgba(12, 20, 38, 0.92) !important;
-  border-color: rgba(var(--neon-rgb), 0.45) !important;
-  box-shadow:
-    0 18px 55px rgba(0,0,0,0.62),
-    0 0 40px rgba(var(--neon-rgb), 0.32) !important;
-}
-.od-neon__cta:hover{
-  background: rgba(18, 30, 56, 0.97) !important;
-  box-shadow:
-    0 24px 65px rgba(0,0,0,0.72),
-    0 0 60px rgba(var(--neon-rgb), 0.45) !important;
-}
-
-
-
-/* ===== Neon Glass Open Day ===== */
-.od-neon {
-  position: relative;
-  max-width: 1200px;
-  margin: 90px auto;
-  padding: 18px;
-}
 
 .od-neon__bg {
-  position: absolute;
-  inset: 0;
-  border-radius: 28px;
-  background: 
-    radial-gradient(420px 240px at 18% 22%, rgba(0, 255, 255, 0.18), transparent 60%),
-    radial-gradient(520px 300px at 78% 28%, rgba(255, 255, 255, 0.10), transparent 62%),
-    radial-gradient(520px 320px at 50% 78%, rgba(0, 255, 170, 0.10), transparent 65%);
-  filter: blur(14px);
-  opacity: 0.95;
-  z-index: 0;
+    background:
+        radial-gradient(420px 240px at 18% 22%, rgba(var(--neon-rgb), 0.26), transparent 62%),
+        radial-gradient(520px 300px at 78% 28%, rgba(13, 110, 253, 0.22), transparent 64%),
+        /* --bs-blue */
+        radial-gradient(520px 320px at 50% 78%, rgba(0, 102, 255, 0.16), transparent 66%)
+        /* --electric-blue */
+        !important;
+    filter: blur(12px) !important;
+    opacity: 0.92 !important;
 }
 
 .od-neon__wrap {
-  position: relative;
-  z-index: 1;
-  border-radius: 28px;
-  padding: 54px 34px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 
-    0 28px 90px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
-  overflow: hidden;
+    background: rgba(10, 16, 28, 0.84) !important;
+    border: 1px solid rgba(var(--neon-rgb), 0.22) !important;
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.68),
+        0 0 0 1px rgba(var(--neon-rgb), 0.08) inset !important;
 }
 
 .od-neon__wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 28px;
-  padding: 1px;
-  background: linear-gradient(90deg, 
-    rgba(0, 255, 255, 0.55), 
-    rgba(255, 255, 255, 0.20), 
-    rgba(0, 255, 170, 0.45));
-  -webkit-mask: 
-    linear-gradient(#000 0 0) content-box, 
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: .75;
+    background: linear-gradient(90deg,
+            rgba(var(--neon-rgb), 0.95),
+            rgba(255, 255, 255, 0.22),
+            rgba(0, 102, 255, 0.92)) !important;
+    opacity: .9 !important;
+}
+
+.od-neon__title {
+    color: rgba(255, 255, 255, 0.98) !important;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    line-height: 1.15;
+    text-shadow:
+        0 0 10px rgba(var(--neon-rgb), 0.75),
+        0 0 22px rgba(var(--neon-rgb), 0.55),
+        0 0 40px rgba(0, 102, 255, 0.45) !important;
+}
+
+.od-neon__accent {
+    color: var(--bright-purple) !important;
+    text-shadow:
+        0 0 10px rgba(0, 234, 255, 0.85),
+        0 0 26px rgba(0, 102, 255, 0.55) !important;
+}
+
+.od-neon__badge {
+    border-color: rgba(var(--neon-rgb), 0.30) !important;
+    box-shadow: 0 0 26px rgba(var(--neon-rgb), 0.35) !important;
+}
+
+.od-neon__shot {
+    border-color: rgba(var(--neon-rgb), 0.18) !important;
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.55),
+        0 0 26px rgba(var(--neon-rgb), 0.22) !important;
+}
+
+.od-neon__card {
+    background: rgba(15, 22, 38, 0.78) !important;
+    border-color: rgba(var(--neon-rgb), 0.18) !important;
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(var(--neon-rgb), 0.16) !important;
+}
+
+.od-neon__card i {
+    color: rgba(var(--neon-rgb), 0.95) !important;
+    text-shadow: 0 0 16px rgba(var(--neon-rgb), 0.55) !important;
+}
+
+.od-neon__cta {
+    background: rgba(12, 20, 38, 0.92) !important;
+    border-color: rgba(var(--neon-rgb), 0.45) !important;
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, 0.62),
+        0 0 40px rgba(var(--neon-rgb), 0.32) !important;
+}
+
+.od-neon__cta:hover {
+    background: rgba(18, 30, 56, 0.97) !important;
+    box-shadow:
+        0 24px 65px rgba(0, 0, 0, 0.72),
+        0 0 60px rgba(var(--neon-rgb), 0.45) !important;
+}
+
+
+
+.od-neon {
+    position: relative;
+    max-width: 1200px;
+    margin: 90px auto;
+    padding: 18px;
+}
+
+.od-neon__bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background:
+        radial-gradient(420px 240px at 18% 22%, rgba(0, 255, 255, 0.18), transparent 60%),
+        radial-gradient(520px 300px at 78% 28%, rgba(255, 255, 255, 0.10), transparent 62%),
+        radial-gradient(520px 320px at 50% 78%, rgba(0, 255, 170, 0.10), transparent 65%);
+    filter: blur(14px);
+    opacity: 0.95;
+    z-index: 0;
+}
+
+.od-neon__wrap {
+    position: relative;
+    z-index: 1;
+    border-radius: 28px;
+    padding: 54px 34px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+        0 28px 90px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    overflow: hidden;
+}
+
+.od-neon__wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 1px;
+    background: linear-gradient(90deg,
+            rgba(0, 255, 255, 0.55),
+            rgba(255, 255, 255, 0.20),
+            rgba(0, 255, 170, 0.45));
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: .75;
 }
 
 .od-neon__wrap::after {
-  content: "";
-  position: absolute;
-  inset: -40px;
-  background: 
-    radial-gradient(220px 160px at 20% 10%, rgba(255, 255, 255, 0.10), transparent 60%),
-    radial-gradient(260px 180px at 80% 0%, rgba(255, 255, 255, 0.08), transparent 62%),
-    radial-gradient(240px 160px at 50% 100%, rgba(255, 255, 255, 0.07), transparent 60%);
-  filter: blur(10px);
-  opacity: .9;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: -40px;
+    background:
+        radial-gradient(220px 160px at 20% 10%, rgba(255, 255, 255, 0.10), transparent 60%),
+        radial-gradient(260px 180px at 80% 0%, rgba(255, 255, 255, 0.08), transparent 62%),
+        radial-gradient(240px 160px at 50% 100%, rgba(255, 255, 255, 0.07), transparent 60%);
+    filter: blur(10px);
+    opacity: .9;
+    pointer-events: none;
 }
 
 .od-neon__head {
-  text-align: center;
-  position: relative;
+    text-align: center;
+    position: relative;
 }
 
 .od-neon__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  color: rgba(255, 255, 255, 0.92);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 0 28px rgba(0, 255, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 0 28px rgba(0, 255, 255, 0.18);
 }
 
 .od-neon__title {
-  margin: 14px 0 10px;
-  font-size: clamp(30px, 4.8vw, 52px);
-  font-weight: 650;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 
-    0 0 18px rgba(0, 255, 255, 0.22),
-    0 0 30px rgba(0, 255, 170, 0.14);
+    margin: 14px 0 10px;
+    font-size: clamp(30px, 4.8vw, 52px);
+    font-weight: 650;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow:
+        0 0 18px rgba(0, 255, 255, 0.22),
+        0 0 30px rgba(0, 255, 170, 0.14);
 }
 
 .od-neon__subtitle {
-  margin: 0 auto 36px;
-  max-width: 820px;
-  color: rgba(255, 255, 255, 0.70);
-  font-size: 16px;
-  line-height: 1.6;
+    margin: 0 auto 36px;
+    max-width: 820px;
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-/* Gallery */
 .od-neon__gallery {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 6px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 6px;
 }
 
 .od-neon__shot {
-  margin: 0;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 
-    0 18px 48px rgba(0, 0, 0, 0.45),
-    0 0 24px rgba(0, 255, 255, 0.10);
-  transform: translateY(0);
-  transition: transform .22s ease, box-shadow .22s ease;
+    margin: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.45),
+        0 0 24px rgba(0, 255, 255, 0.10);
+    transform: translateY(0);
+    transition: transform .22s ease, box-shadow .22s ease;
 }
 
 .od-neon__shot:hover {
-  transform: translateY(-8px);
-  box-shadow: 
-    0 26px 70px rgba(0, 0, 0, 0.55),
-    0 0 34px rgba(0, 255, 255, 0.18);
+    transform: translateY(-8px);
+    box-shadow:
+        0 26px 70px rgba(0, 0, 0, 0.55),
+        0 0 34px rgba(0, 255, 255, 0.18);
 }
 
 .od-neon__shot img {
-  width: 100%;
-  height: 230px;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
 }
 
-/* What Section */
 .od-neon__what {
-  margin-top: 44px;
-  text-align: center;
-  position: relative;
+    margin-top: 44px;
+    text-align: center;
+    position: relative;
 }
 
 .od-neon__h3 {
-  font-size: 26px;
-  margin: 0 0 18px;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 0 18px rgba(0, 255, 255, 0.16);
+    font-size: 26px;
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 18px rgba(0, 255, 255, 0.16);
 }
 
 .od-neon__cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
 }
 
 .od-neon__card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 18px 14px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 
-    0 16px 40px rgba(0, 0, 0, 0.42),
-    0 0 22px rgba(0, 255, 255, 0.10);
-  color: rgba(255, 255, 255, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.42),
+        0 0 22px rgba(0, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.92);
 }
 
 .od-neon__card i {
-  color: rgba(0, 255, 255, 0.90);
-  text-shadow: 0 0 18px rgba(0, 255, 255, 0.35);
+    color: rgba(0, 255, 255, 0.90);
+    text-shadow: 0 0 18px rgba(0, 255, 255, 0.35);
 }
 
-/* CTA Button */
 .od-neon__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 26px;
-  padding: 14px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 255, 255, 0.30);
-  box-shadow: 
-    0 18px 50px rgba(0, 0, 0, 0.45),
-    0 0 34px rgba(0, 255, 255, 0.22);
-  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 26px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 255, 255, 0.30);
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.45),
+        0 0 34px rgba(0, 255, 255, 0.22);
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
 }
 
 .od-neon__cta:hover {
-  transform: translateY(-3px) scale(1.02);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 
-    0 22px 60px rgba(0, 0, 0, 0.52),
-    0 0 44px rgba(0, 255, 255, 0.30);
+    transform: translateY(-3px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.52),
+        0 0 44px rgba(0, 255, 255, 0.30);
 }
 
 .od-neon__cta-sub {
-  opacity: .8;
-  font-size: 13px;
-  padding-left: 6px;
-  border-left: 1px solid rgba(255, 255, 255, 0.18);
+    opacity: .8;
+    font-size: 13px;
+    padding-left: 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
-  .od-neon__wrap {
-    padding: 44px 18px;
-  }
-  
-  .od-neon__gallery {
-    grid-template-columns: 1fr;
-  }
-  
-  .od-neon__shot img {
-    height: 200px;
-  }
-  
-  .od-neon__cards {
-    grid-template-columns: 1fr;
-  }
+    .od-neon__wrap {
+        padding: 44px 18px;
+    }
+
+    .od-neon__gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .od-neon__shot img {
+        height: 200px;
+    }
+
+    .od-neon__cards {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* ===== Neon Blue Theme Override ===== */
 .od-neon__bg {
-  background: 
-    radial-gradient(420px 240px at 18% 22%, rgba(0, 180, 255, 0.35), transparent 60%),
-    radial-gradient(520px 300px at 78% 28%, rgba(0, 140, 255, 0.22), transparent 62%),
-    radial-gradient(520px 320px at 50% 78%, rgba(0, 200, 255, 0.18), transparent 65%);
+    background:
+        radial-gradient(420px 240px at 18% 22%, rgba(0, 180, 255, 0.35), transparent 60%),
+        radial-gradient(520px 300px at 78% 28%, rgba(0, 140, 255, 0.22), transparent 62%),
+        radial-gradient(520px 320px at 50% 78%, rgba(0, 200, 255, 0.18), transparent 65%);
 }
 
 .od-neon__wrap {
-  background: rgba(20, 28, 40, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(120, 190, 255, 0.28);
-  box-shadow: 
-    0 30px 90px rgba(0, 0, 0, 0.65),
-    0 0 0 1px rgba(120, 190, 255, 0.08) inset;
+    background: rgba(20, 28, 40, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(120, 190, 255, 0.28);
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(120, 190, 255, 0.08) inset;
 }
 
 .od-neon__wrap::before {
-  background: linear-gradient(90deg, 
-    rgba(0, 180, 255, 0.9), 
-    rgba(255, 255, 255, 0.25), 
-    rgba(0, 140, 255, 0.85));
-  opacity: .85;
+    background: linear-gradient(90deg,
+            rgba(0, 180, 255, 0.9),
+            rgba(255, 255, 255, 0.25),
+            rgba(0, 140, 255, 0.85));
+    opacity: .85;
 }
 
 .od-neon__title {
-  text-shadow: 
-    0 0 18px rgba(0, 180, 255, 0.55),
-    0 0 34px rgba(0, 140, 255, 0.35);
+    text-shadow:
+        0 0 18px rgba(0, 180, 255, 0.55),
+        0 0 34px rgba(0, 140, 255, 0.35);
 }
 
 .od-neon__badge {
-  box-shadow: 0 0 26px rgba(0, 170, 255, 0.45);
-  border-color: rgba(120, 190, 255, 0.35);
+    box-shadow: 0 0 26px rgba(0, 170, 255, 0.45);
+    border-color: rgba(120, 190, 255, 0.35);
 }
 
 .od-neon__shot {
-  box-shadow: 
-    0 18px 48px rgba(0, 0, 0, 0.55),
-    0 0 26px rgba(0, 160, 255, 0.28);
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.55),
+        0 0 26px rgba(0, 160, 255, 0.28);
 }
 
 .od-neon__card {
-  background: rgba(25, 35, 55, 0.78);
-  border-color: rgba(120, 190, 255, 0.25);
-  box-shadow: 
-    0 16px 40px rgba(0, 0, 0, 0.55),
-    0 0 22px rgba(0, 160, 255, 0.25);
+    background: rgba(25, 35, 55, 0.78);
+    border-color: rgba(120, 190, 255, 0.25);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(0, 160, 255, 0.25);
 }
 
 .od-neon__card i {
-  color: rgb(80, 190, 255);
-  text-shadow: 0 0 18px rgba(80, 190, 255, 0.8);
+    color: rgb(80, 190, 255);
+    text-shadow: 0 0 18px rgba(80, 190, 255, 0.8);
 }
 
 .od-neon__cta {
-  background: rgba(20, 35, 60, 0.85);
-  border-color: rgba(0, 170, 255, 0.55);
-  box-shadow: 
-    0 18px 55px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(0, 160, 255, 0.45);
+    background: rgba(20, 35, 60, 0.85);
+    border-color: rgba(0, 170, 255, 0.55);
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 160, 255, 0.45);
 }
 
 .od-neon__cta:hover {
-  background: rgba(30, 50, 85, 0.95);
-  box-shadow: 
-    0 24px 65px rgba(0, 0, 0, 0.7),
-    0 0 55px rgba(0, 180, 255, 0.65);
+    background: rgba(30, 50, 85, 0.95);
+    box-shadow:
+        0 24px 65px rgba(0, 0, 0, 0.7),
+        0 0 55px rgba(0, 180, 255, 0.65);
 }
 
 
-/* Кнопки-карточки */
-.od-neon__card-btn{
-  border: 0;
-  cursor: pointer;
-  background: rgba(255,255,255,0.08);
-  color: inherit;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-}
-.od-neon__card-btn:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.12);
+.od-neon__card-btn {
+    border: 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
 }
 
-/* CTA как карточка */
-.od-neon__card-cta{
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: rgba(37, 211, 102, 0.14);
-  border: 1px solid rgba(37, 211, 102, 0.25);
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.od-neon__card-cta:hover{
-  transform: translateY(-2px);
+.od-neon__card-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
 }
 
-/* Соцсети */
-.od-neon__socials{
-  flex-direction: row;
-  margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-evenly;
-}
-.od-neon__social{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  text-decoration: none;
-  color: inherit;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.10);
-  transition: transform .15s ease, background .15s ease;
-}
-.od-neon__social:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.12);
-}
-.od-neon__social i{
-  font-size: 18px;
+.od-neon__card-cta {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(37, 211, 102, 0.14);
+    border: 1px solid rgba(37, 211, 102, 0.25);
+    transition: transform .15s ease, box-shadow .15s ease;
 }
 
-/* ===== Модалка с фото ===== */
-.od-media-modal{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-}
-.od-media-modal.is-open{
-  display: block;
-}
-.od-media-modal__overlay{
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(6px);
-}
-.od-media-modal__panel{
-  position: relative;
-  width: min(980px, calc(100% - 28px));
-  margin: 7vh auto 0;
-  border-radius: 20px;
-  padding: 18px 18px 20px;
-  background: rgba(20, 20, 24, 0.92);
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-  color: #fff;
-}
-.od-media-modal__close{
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: 0;
-  cursor: pointer;
-  background: rgba(255,255,255,0.10);
-  color: #fff;
-  font-size: 26px;
-  line-height: 1;
-}
-.od-media-modal__title{
-  margin: 6px 0 0;
-  font-size: 22px;
-}
-.od-media-modal__subtitle{
-  margin: 6px 0 14px;
-  opacity: 0.85;
+.od-neon__card-cta:hover {
+    transform: translateY(-2px);
 }
 
-.od-media-modal__grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.od-media-modal__grid img{
-  width: 100%;
-  height: 170px;
-  object-fit: cover;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.06);
+.od-neon__socials {
+    flex-direction: row;
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-evenly;
 }
 
-@media (max-width: 760px){
-  .od-media-modal__grid{ grid-template-columns: repeat(2, 1fr); }
-  .od-media-modal__grid img{ height: 150px; }
+.od-neon__social {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    transition: transform .15s ease, background .15s ease;
+}
+
+.od-neon__social:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.od-neon__social i {
+    font-size: 18px;
+}
+
+.od-media-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+}
+
+.od-media-modal.is-open {
+    display: block;
+}
+
+.od-media-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+}
+
+.od-media-modal__panel {
+    position: relative;
+    width: min(980px, calc(100% - 28px));
+    margin: 7vh auto 0;
+    border-radius: 20px;
+    padding: 18px 18px 20px;
+    background: rgba(20, 20, 24, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    color: #fff;
+}
+
+.od-media-modal__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+}
+
+.od-media-modal__title {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+
+.od-media-modal__subtitle {
+    margin: 6px 0 14px;
+    opacity: 0.85;
+}
+
+.od-media-modal__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.od-media-modal__grid img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 760px) {
+    .od-media-modal__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .od-media-modal__grid img {
+        height: 150px;
+    }
 }
 
 
-
-/* ===== Slider for Labs (3 per view) ===== */
-.od-slider{
-  position: relative;
-  display: grid;
-  grid-template-columns: 44px 1fr 44px;
-  gap: 10px;
-  align-items: center;
-  margin-top: 8px;
+.od-slider {
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px;
 }
 
-.od-slider__viewport{
-  overflow: hidden;
-  border-radius: 16px;
+.od-slider__viewport {
+    overflow: hidden;
+    border-radius: 16px;
 }
 
-.od-slider__track{
-  display: flex;
-  gap: 10px;
-  transform: translateX(0);
-  transition: transform .35s ease;
-  will-change: transform;
-  user-select: none;
-  touch-action: pan-y; /* вертикальный скролл страницы не ломаем */
-  padding: 4px;
+.od-slider__track {
+    display: flex;
+    gap: 10px;
+    transform: translateX(0);
+    transition: transform .35s ease;
+    will-change: transform;
+    user-select: none;
+    touch-action: pan-y;
+    padding: 4px;
 }
 
-.od-slide{
-  flex: 0 0 calc((100% - 20px) / 3); /* 3 фото, gap=10 => 2*10 = 20 */
+.od-slide {
+    flex: 0 0 calc((100% - 20px) / 3);
 }
 
-.od-slide img{
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 14px;
-  display: block;
-  background: rgba(255,255,255,0.06);
+.od-slide img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    background: rgba(255, 255, 255, 0.06);
 }
 
-/* кнопки */
-.od-slider__nav{
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  font-size: 28px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: transform .15s ease, background .15s ease;
+.od-slider__nav {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform .15s ease, background .15s ease;
 }
-.od-slider__nav:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.12);
+
+.od-slider__nav:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
 }
-.od-slider__nav:disabled{
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: none;
+
+.od-slider__nav:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* dots */
-.od-slider__dots{
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-.od-dot{
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.10);
-  cursor: pointer;
-}
-.od-dot.is-active{
-  background: rgba(255,255,255,0.80);
+.od-slider__dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+    flex-wrap: wrap;
 }
 
-@media (max-width: 760px){
-  .od-slide{ flex-basis: calc((100% - 10px) / 2); } /* 2 фото */
-  .od-slide img{ height: 160px; }
+.od-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.10);
+    cursor: pointer;
 }
 
-@media (max-width: 480px){
-  .od-slider{ grid-template-columns: 40px 1fr 40px; }
-  .od-slide{ flex-basis: 100%; } /* 1 фото */
-  .od-slide img{ height: 180px; }
+.od-dot.is-active {
+    background: rgba(255, 255, 255, 0.80);
+}
+
+@media (max-width: 760px) {
+    .od-slide {
+        flex-basis: calc((100% - 10px) / 2);
+    }
+
+    /* 2 фото */
+    .od-slide img {
+        height: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .od-slider {
+        grid-template-columns: 40px 1fr 40px;
+    }
+
+    .od-slide {
+        flex-basis: 100%;
+    }
+
+    /* 1 фото */
+    .od-slide img {
+        height: 180px;
+    }
 }
